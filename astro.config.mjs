@@ -2,7 +2,7 @@ import { defineConfig } from 'astro/config';
 import tailwind from '@astrojs/tailwind';
 
 export default defineConfig({
-  site: 'https://jadericdawson.com',
+  site: 'https://k2ai.shop',
   integrations: [tailwind()],
   compressHTML: true,
   build: {
