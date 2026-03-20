@@ -7,76 +7,76 @@ const breadcrumb = [{ label: 'FPV Drones', href: '/fpv/' }];
 
 const partsList = [
   {
-    title: 'JHEMCU F745 Stack (FC + 45A ESC)',
-    asin: 'B0C7PCQHVF',
+    title: 'JHEMCU F745 NOXE Stack (FC + 60A BL32 ESC)',
+    asin: 'B0DSJZXSC9',
     price: '~$89',
     rating: '4.4/5',
-    description: 'H7 processor, 45A 4-in-1 ESC. What we run on our 4" build. Solid UART count for GPS + companion + RC simultaneously. 30×30 stack.',
+    description: 'H7 processor flight controller + 60A 4-in-1 ESC stack. Solid UART count for GPS + companion + RC + telemetry simultaneously. 30×30mm.',
     badge: 'We Fly This',
   },
   {
-    title: 'iFlight Xing2 2809 1250KV Motors (×4)',
-    asin: 'B09FXK6MHY',
+    title: 'iFlight Xing2 2809 1250KV Motors (4-Pack)',
+    asin: 'B09XTR2KFX',
     price: '~$68',
     rating: '4.5/5',
-    description: 'Our motors. Cinelifter-grade 2809 stators in a 4" form factor. Smooth, quiet, efficient on 6S. Handles 4" × 4.5" tri-blade props.',
+    description: 'Our motors. Cinelifter-grade 2809 stators. Smooth, quiet, efficient on 6S. Handles 4" × 4.5" tri-blade props well.',
     badge: 'We Use These',
   },
   {
-    title: 'iFlight iH4 4" True-X Frame',
-    asin: 'B09PCXBCML',
-    price: '~$29',
-    rating: '4.4/5',
-    description: '30×30 stack mount, 4" prop clearance, includes hardware. Stiff, light, easy to build on. Replaceable arms.',
-    badge: null,
-  },
-  {
-    title: 'SparkFun GPS-RTK2 (ZED-F9P)',
-    asin: 'B07MCVT1L2',
+    title: 'SparkFun GPS-RTK2 Board (ZED-F9P)',
+    asin: 'B07NBPNWNZ',
     price: '~$245',
     rating: '4.6/5',
-    description: 'RTK GPS with 1cm accuracy when paired with base station. What we use for precision landing and autonomous waypoint missions. UART interface to FC.',
+    description: 'RTK GPS with centimeter-level accuracy. UART interface to FC SERIAL3. ArduPilot GPS_TYPE=17. Essential for precision auto-landing testing.',
     badge: 'Our GPS',
   },
   {
-    title: 'RadioMaster RP3 ELRS Receiver',
-    asin: 'B0C8Y36L73',
+    title: 'RadioMaster RP3 ELRS 2.4GHz Receiver',
+    asin: 'B0BGL73623',
     price: '~$19',
     rating: '4.7/5',
-    description: 'The exact receiver on our build. 2.4GHz ELRS diversity nano, UFL antennas. Binds with SERIAL7_PROTOCOL=23. Confirmed working.',
+    description: 'The exact receiver on our build. Diversity nano, UFL antennas. Binds with SERIAL7_PROTOCOL=23, RC_PROTOCOLS=512 (ELRS). Confirmed working.',
     badge: 'We Use This',
   },
   {
-    title: 'Foxeer Racer Micro FPV Camera',
-    asin: 'B0BVWNWHQB',
-    price: '~$27',
-    rating: '4.3/5',
-    description: 'Wide dynamic range, low latency analog cam. Good for proximity flying with analog goggles. Use the DJI cam for digital.',
-    badge: null,
-  },
-  {
-    title: 'HQProp 4×4.5×3 Tri-Blade Props (8-pack)',
-    asin: 'B08B3LDR3X',
-    price: '~$12',
-    rating: '4.5/5',
-    description: 'Efficient tri-blade 4" props. Match to 2809 1250KV motors on 6S. Buy two sets — you will break props.',
-    badge: null,
-  },
-  {
-    title: 'Tattu R-Line 6S 1300mAh 130C (2-pack)',
-    asin: 'B09TM14BCP',
-    price: '~$65',
+    title: 'Matek Systems H743-Slim V3 Flight Controller',
+    asin: 'B0C69X1G41',
+    price: '~$75',
     rating: '4.6/5',
-    description: 'Premium 6S packs with consistent IR. Our choice for the 4" build. ~6 min flight time at 50% throttle.',
+    description: 'Alternative FC option — our 7" build runs this. STM32H743, 8 UARTs, 30×30. More UARTs than JHEMCU if you need extra serial ports.',
     badge: null,
+  },
+  {
+    title: 'DJI O3 Air Unit',
+    asin: 'B0BBQT3TTS',
+    price: '~$229',
+    rating: '4.5/5',
+    description: 'HD digital FPV — 1080p/60fps, ultra-low latency, on-board video storage. Pairs with DJI Goggles 2. Step up from analog.',
+    badge: null,
+  },
+  {
+    title: 'Tattu R-Line V4.0 6S 1300mAh 130C (2-Pack)',
+    asin: 'B099F921DM',
+    price: '~$64',
+    rating: '4.6/5',
+    description: 'Premium 6S packs with consistent IR. Our choice for the 4" build. ~6 min flight time at 50% throttle. Buy two packs minimum.',
+    badge: null,
+  },
+  {
+    title: 'Tenergy LiPo Safe Bags (2-Pack)',
+    asin: 'B09BDJQK53',
+    price: '~$14',
+    rating: '4.6/5',
+    description: 'Always charge and store 6S packs in fire-retardant bags. Non-negotiable. A thermal event on a 6S pack is catastrophic without containment.',
+    badge: 'Safety Essential',
   },
 ];
 
 const stackComparison = [
-  { title: 'JHEMCU F745 Stack', asin: 'B0C7PCQHVF', price: '~$89', highlight: 'H7, 45A, 30×30', badge: 'Our Pick' },
-  { title: 'Matek H743-Slim V3', asin: 'B09FXK6MHY', price: '~$75', highlight: 'H743, 30×30, many UARTs', badge: null },
-  { title: 'Holybro Kakute H7 Mini', asin: 'B09PCXBCML', price: '~$59', highlight: 'H7, compact, 20×20', badge: null },
-  { title: 'SpeedyBee F405 V4 Stack', asin: 'B0BVWNWHQB', price: '~$79', highlight: 'F405, BT config, budget', badge: null },
+  { title: 'JHEMCU F745 NOXE Stack', asin: 'B0DSJZXSC9', price: '~$89', highlight: 'H7, 60A, 30×30', badge: 'Our Pick' },
+  { title: 'Matek H743-Slim V3', asin: 'B0C69X1G41', price: '~$75', highlight: 'H743, 8 UARTs, 30×30', badge: null },
+  { title: 'SparkFun ZED-F9P RTK GPS', asin: 'B07NBPNWNZ', price: '~$245', highlight: '1cm accuracy, UART', badge: 'RTK GPS' },
+  { title: 'RadioMaster RP3 ELRS RX', asin: 'B0BGL73623', price: '~$19', highlight: 'Diversity nano, 2.4GHz', badge: null },
 ];
 ---
 <ArticleLayout
@@ -103,10 +103,7 @@ const stackComparison = [
 
     <h2 class="text-2xl font-bold text-white">Why This Build</h2>
     <p>
-      The 4" build is our testbed for new flight controller firmware, ArduPilot params, and ELRS configurations before committing to the 7" autonomous platform. It's compact enough for indoor tuning but has enough payload capacity to carry a companion computer (Raspberry Pi Zero W) for lightweight autonomy experiments.
-    </p>
-    <p>
-      The JHEMCU F745 runs <strong class="text-white">ArduPilot Copter 4.6.2</strong> — same firmware as our 7" build. That means everything we tune here transfers directly. The F9P RTK GPS gives us sub-centimeter positioning accuracy for precision landing tests.
+      The 4" build is our testbed for new flight controller firmware, ArduPilot params, and ELRS configurations before committing to the 7" autonomous platform. The JHEMCU F745 runs <strong class="text-white">ArduPilot Copter 4.6.2</strong> — same firmware as our 7" build. Everything tuned here transfers directly.
     </p>
 
     <h2 class="text-2xl font-bold text-white pt-4">Parts List</h2>
@@ -116,28 +113,25 @@ const stackComparison = [
       ))}
     </div>
 
-    <h2 class="text-2xl font-bold text-white pt-4">Flight Controller Stack Comparison</h2>
-    <ProductTable
-      caption="H7 FC Stack Options for 4-inch Builds"
-      products={stackComparison}
-    />
+    <h2 class="text-2xl font-bold text-white pt-4">Key Components at a Glance</h2>
+    <ProductTable caption="4-Inch Build Core Components" products={stackComparison} />
 
     <h2 class="text-2xl font-bold text-white pt-4">Key Wiring Notes</h2>
     <ul class="list-disc list-inside space-y-2 text-sm">
-      <li><strong class="text-white">SERIAL7 (T6/R6 pads):</strong> RadioMaster RP3 receiver — SERIAL7_PROTOCOL=23, RC_PROTOCOLS=512 (ELRS)</li>
-      <li><strong class="text-white">SERIAL3 (TX2/RX2):</strong> ZED-F9P GPS — SERIAL3_PROTOCOL=5, SERIAL3_BAUD=38, GPS_TYPE=17</li>
-      <li><strong class="text-white">ESC signal:</strong> S1–S4 pads → AM32 ESC. S2 is 3.3V tolerant only.</li>
-      <li><strong class="text-white">Power:</strong> Foxeer Reaper 65A ESC has no BEC — use FC 4V5 pad for GPS and receiver power</li>
-      <li><strong class="text-white">USB power:</strong> Motors will NOT spin on USB alone — always verify battery voltage &gt; 10V before motor tests</li>
+      <li><strong class="text-white">SERIAL7 (T6/R6 pads):</strong> RadioMaster RP3 — SERIAL7_PROTOCOL=23, RC_PROTOCOLS=512 (ELRS, NOT 1024)</li>
+      <li><strong class="text-white">SERIAL3 (TX2/RX2):</strong> ZED-F9P UART1 — SERIAL3_PROTOCOL=5, SERIAL3_BAUD=38, GPS_TYPE=17</li>
+      <li><strong class="text-white">ESC signal:</strong> S1–S4 pads → AM32 ESC. S2 is 3.3V tolerant only</li>
+      <li><strong class="text-white">Power:</strong> No BEC on ESC — use FC 4V5 pad for GPS and receiver power</li>
+      <li><strong class="text-white">USB power:</strong> Motors will NOT spin on USB alone — battery must be connected (&gt;10V)</li>
     </ul>
 
     <div class="bg-amber-900/20 border border-amber-500/30 rounded-xl p-5 text-sm">
-      <strong class="text-amber-400">⚠ Motor Mapping (non-obvious):</strong> On the JHEMCU F745, S1 (Front Left) is motor idx=4 in MAVLink, NOT idx=0. See our <a href="/fpv/7-inch-build/" class="text-orange-400 hover:underline">7" build guide</a> for the complete ArduPilot motor mapping table.
+      <strong class="text-amber-400">⚠ Motor Mapping (non-obvious):</strong> S1 (Front Left) is MAVLink motor idx=4, NOT idx=0. Confirmed empirically 2026-03-20. See the <a href="/fpv/7-inch-build/" class="text-orange-400 hover:underline">7" build guide</a> for the complete ArduPilot motor mapping table.
     </div>
 
     <h2 class="text-2xl font-bold text-white pt-4">Next Step</h2>
     <p>
-      Once this build is tuned and flying autonomously, step up to the <a href="/fpv/7-inch-build/" class="text-orange-400 hover:underline">7" autonomous guard drone</a> — the flagship platform with Jetson Orin Nano, full ROS2 stack, and auto-landing capability.
+      Once this is tuned and flying autonomously, step up to the <a href="/fpv/7-inch-build/" class="text-orange-400 hover:underline">7" autonomous guard drone</a> — the flagship platform with Jetson Orin Nano, full ROS2 stack, and auto-landing.
     </p>
   </div>
 </ArticleLayout>

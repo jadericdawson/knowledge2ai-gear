@@ -8,31 +8,23 @@ const breadcrumb = [{ label: 'SBIR Tools', href: '/sbir-tools/' }];
 const sbirProducts = [
   {
     title: 'Lenovo ThinkPad X1 Carbon Gen 12',
-    asin: 'B0CMT3SKPJ',
+    asin: 'B0D1D5J1J1',
     price: '~$1,299',
     rating: '4.6/5',
-    description: 'The SBIR proposal laptop. Business-class reliability, US keyboard, 3-year warranty, MIL-SPEC tested. What proposal writers and technical directors actually use.',
+    description: 'The SBIR proposal laptop. Business-class reliability, 3-year warranty, MIL-SPEC tested. What proposal writers and technical directors actually use for long-haul writing sessions.',
     badge: 'Top Pick',
   },
   {
-    title: 'Canon DR-C230 Document Scanner',
-    asin: 'B07JFDKTTM',
+    title: 'Canon imageFORMULA DR-C230 Document Scanner',
+    asin: 'B07CP2C3H5',
     price: '~$229',
     rating: '4.5/5',
-    description: '30ppm duplex scanner. Federal proposals require scanned signatures, forms, and supporting documents. This is the fastest sub-$300 scanner available.',
+    description: '30ppm duplex scanner. Federal proposals require scanned signatures, forms, and supporting documents. Fastest sub-$300 scanner for proposal work.',
     badge: 'We Use This',
   },
   {
-    title: 'LG 27" 4K UHD USB-C Monitor (27UK850-W)',
-    asin: 'B078GVTD9H',
-    price: '~$349',
-    rating: '4.6/5',
-    description: 'External monitor for proposal drafting. 4K lets you have a full SAM.gov proposal form + reference document open side-by-side without scrolling. USB-C powers the laptop.',
-    badge: null,
-  },
-  {
-    title: 'APC 1500VA UPS (BX1500M)',
-    asin: 'B00429N19W',
+    title: 'APC BX1500M 1500VA UPS Battery Backup',
+    asin: 'B06VY6FXMM',
     price: '~$229',
     rating: '4.7/5',
     description: 'Battery backup for workstation. SBIR proposals are due at a specific time — a power blip at 4:57pm on submission day is catastrophic. This prevents that.',
@@ -40,10 +32,10 @@ const sbirProducts = [
   },
   {
     title: 'Seagate IronWolf Pro 4TB NAS Drive',
-    asin: 'B07H3TQ7HG',
+    asin: 'B07SY4T6F5',
     price: '~$89',
     rating: '4.5/5',
-    description: 'NAS storage for proposal archives. CUI (Controlled Unclassified Information) requirements mean you should not store proposal data in consumer cloud. Local NAS + encryption is the compliant path.',
+    description: 'NAS storage for proposal archives. CUI requirements mean you should not store proposal data in consumer cloud. Local NAS + encryption is the compliant path.',
     badge: null,
   },
   {
@@ -51,32 +43,40 @@ const sbirProducts = [
     asin: 'B07HBD71HL',
     price: '~$50',
     rating: '4.7/5',
-    description: 'Hardware MFA for SAM.gov, grants.gov, and DoD portals. Required for CMMC compliance track. Tap-to-auth with NFC on phones and USB on desktop.',
+    description: 'Hardware MFA for SAM.gov, grants.gov, and DoD portals. Required for CMMC compliance track. Tap-to-auth with NFC on phone and USB-A on desktop.',
     badge: 'Compliance',
   },
   {
     title: 'Logitech MX Master 3S Mouse',
-    asin: 'B09HM94VDS',
+    asin: 'B0BS9VVQPD',
     price: '~$99',
     rating: '4.8/5',
-    description: 'Precision mouse for long document editing sessions. Quiet clicks (important for late-night proposal sessions), 8K DPI sensor, multi-device Bluetooth.',
+    description: 'Precision mouse for long document editing sessions. Quiet clicks for late-night proposal sessions, 8K DPI sensor, multi-device Bluetooth.',
     badge: null,
   },
   {
-    title: 'Jabra Evolve2 55 Wireless Headset',
-    asin: 'B08PHJ5P72',
+    title: 'Samsung 970 EVO Plus 1TB NVMe SSD',
+    asin: 'B07MFZY2F2',
+    price: '~$79',
+    rating: '4.8/5',
+    description: 'Fast NVMe storage for workstation or laptop secondary drive. Keep proposal archives, reference documents, and project data on fast local storage.',
+    badge: null,
+  },
+  {
+    title: 'Jabra Evolve2 55 Wireless Headset UC',
+    asin: 'B0BS77T2R1',
     price: '~$279',
     rating: '4.6/5',
-    description: 'Enterprise headset for SBIR technical meetings and proposal calls. Noise-canceling mic, meets UC-certified standards, 50hr battery.',
+    description: 'Enterprise headset for SBIR technical meetings and proposal calls. Noise-canceling mic, UC-certified, 50hr battery. Keeps you sounding professional on agency calls.',
     badge: null,
   },
 ];
 
 const laptopComparison = [
-  { title: 'ThinkPad X1 Carbon Gen 12', asin: 'B0CMT3SKPJ', price: '~$1,299', highlight: '3yr warranty, MIL-SPEC', badge: 'Top Pick' },
-  { title: 'Dell Latitude 5540', asin: 'B0CMT3SKPJ', price: '~$999', highlight: 'Business class, no fuss', badge: null },
-  { title: 'MacBook Pro 14" M4', asin: 'B0CL5KNB9M', price: '~$1,599', highlight: 'Best battery, macOS', badge: null },
-  { title: 'Framework 13 AMD', asin: 'B0CMT3SKPJ', price: '~$849', highlight: 'Repairable, modular', badge: null },
+  { title: 'ThinkPad X1 Carbon Gen 12', asin: 'B0D1D5J1J1', price: '~$1,299', highlight: '3yr warranty, MIL-SPEC', badge: 'Top Pick' },
+  { title: 'Canon DR-C230 Scanner', asin: 'B07CP2C3H5', price: '~$229', highlight: '30ppm duplex, USB', badge: null },
+  { title: 'APC BX1500M UPS', asin: 'B06VY6FXMM', price: '~$229', highlight: '1500VA, 10 outlets', badge: null },
+  { title: 'YubiKey 5 NFC', asin: 'B07HBD71HL', price: '~$50', highlight: 'Hardware MFA, USB+NFC', badge: 'Compliance' },
 ];
 ---
 <ArticleLayout
@@ -88,7 +88,7 @@ const laptopComparison = [
   <div class="space-y-6 text-slate-300">
     <div class="bg-slate-900 border border-orange-500/20 rounded-xl p-5">
       <p class="text-sm leading-relaxed">
-        <strong class="text-white">Context:</strong> KnowlEdge2 AI is a KnowlEdge2 AI LLC entity that has submitted SBIR proposals and built tools for the federal contracting ecosystem. This page covers the physical setup for a compliant, reliable home office for proposal work, BAA tracking, and technical reporting. See our <a href="https://sbirassistant.com" target="_blank" rel="noopener" class="text-orange-400 hover:underline">SBIR Assistant tool ↗</a> for proposal search and analysis.
+        <strong class="text-white">Context:</strong> KnowlEdge2 AI has submitted SBIR proposals and built tools for the federal contracting ecosystem. This page covers the physical setup for a compliant, reliable home office for proposal work, BAA tracking, and technical reporting. See our <a href="https://sbirassistant.com" target="_blank" rel="noopener" class="text-orange-400 hover:underline">SBIR Assistant ↗</a> for AI-powered proposal search and analysis.
       </p>
     </div>
 
@@ -99,16 +99,14 @@ const laptopComparison = [
       ))}
     </div>
 
-    <h2 class="text-2xl font-bold text-white pt-4">Laptop Comparison for Federal Contractors</h2>
-    <p class="text-sm">Business-class laptops only. Consumer laptops lack warranty support and MIL-SPEC certification often required for CMMC environments.</p>
-    <ProductTable caption="Business Laptops for Federal Contractors" products={laptopComparison} />
+    <h2 class="text-2xl font-bold text-white pt-4">Essential Contractor Gear at a Glance</h2>
+    <ProductTable caption="SBIR Contractor Setup — Core Items" products={laptopComparison} />
 
     <h2 class="text-2xl font-bold text-white pt-4">Compliance Notes</h2>
     <ul class="list-disc list-inside space-y-2 text-sm">
       <li><strong class="text-white">CUI storage:</strong> Use encrypted local NAS (IronWolf + QNAP/Synology + BitLocker/VeraCrypt), not iCloud or Google Drive, for proposal-related documents.</li>
       <li><strong class="text-white">MFA:</strong> YubiKey hardware token for SAM.gov, grants.gov, and any DoD portal. Authenticator apps are acceptable for SBIR portals; hard tokens are better practice.</li>
-      <li><strong class="text-white">Software:</strong> Microsoft 365 Government plans are required for CUI handling in CMMC Level 2 environments.</li>
-      <li><strong class="text-white">VPN:</strong> NordLayer or Cisco Secure Client for connecting to agency systems. Consumer VPNs are not appropriate for federal work.</li>
+      <li><strong class="text-white">Software:</strong> Microsoft 365 Government plans required for CUI handling in CMMC Level 2 environments.</li>
     </ul>
 
     <div class="mt-6 p-4 bg-slate-800 rounded-xl text-sm">

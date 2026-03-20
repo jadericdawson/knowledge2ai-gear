@@ -22,6 +22,9 @@ const {
 } = Astro.props;
 
 const affiliateUrl = `https://www.amazon.com/dp/${asin}?tag=${tag}`;
+// Amazon Associates SiteStripe image URL — fetches the real product image for any valid ASIN
+const amazonImage = `https://ws-na.amazon-adsystem.com/widgets/q?_encoding=UTF8&MarketPlace=US&ASIN=${asin}&ServiceVersion=20070822&ID=AsinImage&WS=1&Format=_SL250_&tag=${tag}`;
+const imgSrc = image || amazonImage;
 ---
 <div class="bg-slate-900 border border-slate-700 rounded-xl overflow-hidden hover:border-orange-500/50 transition-colors group">
   {badge && (
@@ -32,17 +35,9 @@ const affiliateUrl = `https://www.amazon.com/dp/${asin}?tag=${tag}`;
 
   <div class="p-5">
     <div class="flex gap-4 mb-4">
-      {image ? (
-        <div class="flex-shrink-0 w-24 h-24 bg-slate-800 rounded-lg overflow-hidden">
-          <img src={image} alt={title} class="w-full h-full object-contain p-2" loading="lazy" />
-        </div>
-      ) : (
-        <div class="flex-shrink-0 w-24 h-24 bg-slate-800 rounded-lg flex items-center justify-center">
-          <svg class="w-10 h-10 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
-          </svg>
-        </div>
-      )}
+      <div class="flex-shrink-0 w-24 h-24 bg-slate-800 rounded-lg overflow-hidden">
+        <img src={imgSrc} alt={title} class="w-full h-full object-contain p-2" loading="lazy" />
+      </div>
 
       <div class="flex-1 min-w-0">
         <h3 class="font-semibold text-white text-sm leading-snug mb-1 group-hover:text-orange-300 transition-colors">

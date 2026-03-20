@@ -8,10 +8,10 @@ const breadcrumb = [{ label: 'FPV Drones', href: '/fpv/' }];
 const tools = [
   {
     title: 'Pinecil Smart Soldering Iron V2',
-    asin: 'B096X7SB6R',
+    asin: 'B096X6SG13',
     price: '~$26',
     rating: '4.8/5',
-    description: 'RISC-V processor, USB-C PD power, reaches temp in 6 seconds. Better than irons costing 4× more. Best value purchase for any builder.',
+    description: 'RISC-V processor, USB-C PD power, reaches working temp in 6 seconds. Better than irons costing 4× more. Best value purchase for any builder.',
     badge: 'Best Buy',
   },
   {
@@ -19,80 +19,72 @@ const tools = [
     asin: 'B00ANZRT4M',
     price: '~$99',
     rating: '4.8/5',
-    description: 'The professional bench standard. Analog feel with digital temp control. If you solder daily, get this. If you solder occasionally, get the Pinecil.',
+    description: 'The professional bench standard. Analog feel with precise digital temp control. If you solder daily, get this. If occasionally, get the Pinecil.',
     badge: 'Best Station',
   },
   {
     title: 'HOTA D6 Pro AC/DC LiPo Charger',
-    asin: 'B09BGL6RLK',
+    asin: 'B0CF9F8N94',
     price: '~$152',
     rating: '4.7/5',
-    description: '300W dual output, 1S–6S, AC power direct (no separate PSU). Displays cell IR. The only LiPo charger worth owning. We have two.',
+    description: 'AC direct dual-port charger, 1S–6S, displays cell IR. The only LiPo charger worth owning. We have two on our build bench.',
     badge: 'We Use This',
   },
   {
-    title: 'Klein Tools MM400 Digital Multimeter',
-    asin: 'B0051G9F5K',
+    title: 'Klein Tools MM400 Auto-Ranging Multimeter',
+    asin: 'B018EXZO8M',
     price: '~$40',
     rating: '4.7/5',
     description: 'Auto-ranging, True RMS, CAT III 600V rated. Use it to trace shorts, verify voltage rails, and check motor continuity before first spinup.',
     badge: null,
   },
   {
-    title: 'FPV Smoke Stopper / Current Limiter',
-    asin: 'B07TZGWGMH',
-    price: '~$15',
+    title: 'iFlight Smoke Stopper / Current Limiter',
+    asin: 'B08MT4YKJY',
+    price: '~$12',
     rating: '4.4/5',
-    description: 'In-line power limiter — current limits at ~10A if there\'s a short. Saved us from a fried ESC at least twice. Wire this between battery and build on first powerup.',
+    description: 'In-line power limiter — cuts current if there\'s a short. Saved us from a fried ESC at least twice. Wire this between battery and build on first powerup.',
     badge: 'Safety Essential',
   },
   {
-    title: 'MG Chemicals 835 No-Clean Flux Paste',
-    asin: 'B00425FUW2',
-    price: '~$12',
+    title: 'MG Chemicals 835 No-Clean Flux',
+    asin: 'B008UH4DT4',
+    price: '~$10',
     rating: '4.7/5',
-    description: 'Flux paste for motor wires to ESC pads. Makes soldering thick gauge wire dramatically easier. Tiny tube lasts a year.',
+    description: 'No-clean rosin flux for motor wires to ESC pads. Makes soldering thick gauge wire dramatically easier. Tiny bottle lasts a long time.',
     badge: null,
   },
   {
-    title: 'SEQURE Helping Hands / PCB Vise',
-    asin: 'B01GZFVFFU',
-    price: '~$18',
-    rating: '4.3/5',
-    description: 'Third-hand for holding boards and connectors while soldering. The bendy-arm type works fine. Essential for ESC pad soldering.',
-    badge: null,
-  },
-  {
-    title: 'Kaisi Heat Shrink Tubing Kit',
-    asin: 'B08K3X2JZC',
+    title: 'KOOWIN Heat Shrink Tubing Kit (720-pc)',
+    asin: 'B098LB9LTJ',
     price: '~$10',
     rating: '4.5/5',
-    description: '3:1 dual-wall shrink tubing in multiple diameters. Use on battery leads, motor wires, and XT60 connectors. Buy once, use for years.',
+    description: '3:1 dual-wall shrink tubing in multiple diameters. Use on battery leads, motor wires, and XT60 connectors. Massive kit, buy once.',
     badge: null,
   },
   {
-    title: 'SkyRC B6 Mini V2 LiPo Battery Checker',
-    asin: 'B00BAXFWGE',
+    title: 'Tenergy LiPo Safe Charging Bags (2-Pack)',
+    asin: 'B09BDJQK53',
     price: '~$14',
-    rating: '4.5/5',
-    description: 'Per-cell voltage display and buzzer alarm. Wire this on your bench LiPo to catch any cell imbalance before it becomes a fire.',
-    badge: null,
-  },
-  {
-    title: 'LiPo Safe Fire-Retardant Charging Bags (3-pack)',
-    asin: 'B07CLTD9TR',
-    price: '~$16',
     rating: '4.6/5',
     description: 'Always charge LiPos in these. Always store LiPos in these. A thermal event in a 6S pack will burn your house down. This is not optional.',
     badge: 'Safety Essential',
   },
+  {
+    title: 'SkyRC B6 Mini V2 Balance Charger',
+    asin: 'B0822RM9VJ',
+    price: '~$35',
+    rating: '4.5/5',
+    description: 'Compact 60W balance charger for 1S–6S. Good secondary charger or portable field option. Requires 12V DC input (car adapter or bench PSU).',
+    badge: null,
+  },
 ];
 
 const chargerComparison = [
-  { title: 'HOTA D6 Pro', asin: 'B09BGL6RLK', price: '~$152', highlight: '300W, dual, AC direct', badge: 'Our Pick' },
-  { title: 'ISDT Q8 Plus', asin: 'B09NXMK4VD', price: '~$55', highlight: '500W, needs PSU', badge: null },
-  { title: 'Toolkit RC M6D', asin: 'B08B3LDR3X', price: '~$69', highlight: '30W×2, AC direct, budget', badge: 'Budget Pick' },
-  { title: 'Junsi iCharger 4010 Duo', asin: 'B07TZGWGMH', price: '~$319', highlight: 'Pro-grade, 1000W', badge: null },
+  { title: 'HOTA D6 Pro', asin: 'B0CF9F8N94', price: '~$152', highlight: 'AC direct, dual, IR display', badge: 'Our Pick' },
+  { title: 'SkyRC B6 Mini V2', asin: 'B0822RM9VJ', price: '~$35', highlight: '60W, DC only, portable', badge: 'Budget/Field' },
+  { title: 'ISDT Q8 Max', searchQuery: 'ISDT Q8 Max LiPo charger 500W', price: '~$79', highlight: '500W, needs PSU', badge: null },
+  { title: 'Junsi iCharger 4010 Duo', searchQuery: 'Junsi iCharger 4010 Duo', price: '~$319', highlight: '1000W dual, pro-grade', badge: null },
 ];
 ---
 <ArticleLayout
@@ -116,15 +108,15 @@ const chargerComparison = [
     </div>
 
     <h2 class="text-2xl font-bold text-white pt-4">LiPo Charger Comparison</h2>
-    <p class="text-sm">The HOTA D6 Pro is the buy-once option. The Toolkit RC is fine if you're budget-constrained and only need to charge 1-2 packs at a time.</p>
+    <p class="text-sm">The HOTA D6 Pro is the buy-once option. The SkyRC is fine if you're budget-constrained and only charge 1-2 packs at a time in the field.</p>
     <ProductTable caption="LiPo Charger Comparison (2026)" products={chargerComparison} />
 
     <h2 class="text-2xl font-bold text-white pt-4">What You Don't Need</h2>
     <ul class="list-disc list-inside space-y-2 text-sm">
-      <li><strong class="text-white">Hot air rework station</strong> — useful but not required for first 10 builds. Drag soldering works for surface-mount work.</li>
+      <li><strong class="text-white">Hot air rework station</strong> — useful but not required for first 10 builds.</li>
       <li><strong class="text-white">Oscilloscope</strong> — not needed for drone builds. MAVLink telemetry gives you all the diagnostics you need.</li>
       <li><strong class="text-white">$200+ soldering station</strong> — the Pinecil does 95% of what the Hakko does at 25% the cost.</li>
-      <li><strong class="text-white">Lab power supply</strong> — only needed for high-current ESC testing. Use the smoke stopper instead.</li>
+      <li><strong class="text-white">Lab power supply</strong> — use the smoke stopper instead for first powerup testing.</li>
     </ul>
 
     <h2 class="text-2xl font-bold text-white pt-4">Build With These</h2>

@@ -1,10 +1,11 @@
 ---
 export interface Product {
   title: string;
-  asin: string;
+  asin?: string;         // ASIN for direct product link
+  searchQuery?: string;  // fallback: Amazon search query when no ASIN
   price?: string;
   rating?: string;
-  highlight?: string;  // key spec or differentiator
+  highlight?: string;    // key spec or differentiator
   badge?: string;
 }
 
@@ -48,7 +49,7 @@ const { products, caption, tag = 'knowledge2ai-20' } = Astro.props;
           <td class="px-4 py-3 text-right font-semibold text-orange-400">{product.price || '—'}</td>
           <td class="px-4 py-3 text-right">
             <a
-              href={`https://www.amazon.com/dp/${product.asin}?tag=${tag}`}
+              href={product.asin ? `https://www.amazon.com/dp/${product.asin}?tag=${tag}` : `https://www.amazon.com/s?k=${encodeURIComponent(product.searchQuery || product.title)}&tag=${tag}`}
               target="_blank"
               rel="noopener nofollow"
               class="inline-flex items-center gap-1 bg-orange-500 hover:bg-orange-400 text-white text-xs font-semibold px-3 py-1.5 rounded-lg transition-colors whitespace-nowrap"
