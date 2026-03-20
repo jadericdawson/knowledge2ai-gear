@@ -1,4 +1,6 @@
 ---
+import { getAmazonImage } from '../data/amazonImages';
+
 export interface Props {
   title: string;
   asin: string;
@@ -20,8 +22,8 @@ const {
 } = Astro.props;
 
 const affiliateUrl = `https://www.amazon.com/dp/${asin}?tag=${tag}`;
-const amazonImage = `https://ws-na.amazon-adsystem.com/widgets/q?_encoding=UTF8&MarketPlace=US&ASIN=${asin}&ServiceVersion=20070822&ID=AsinImage&WS=1&Format=_SL250_&tag=${tag}`;
-const imgSrc = image || amazonImage;
+// Use explicit image prop, then cached CDN lookup, then null (shows fallback)
+const imgSrc = image || getAmazonImage(asin);
 ---
 <div class="product-card group relative flex flex-col rounded-2xl border border-k2-border bg-k2-card overflow-hidden
             hover:border-k2-primary/50 hover:-translate-y-1.5
@@ -35,15 +37,32 @@ const imgSrc = image || amazonImage;
   )}
 
   <!-- Product image — full width -->
-  <a href={affiliateUrl} target="_blank" rel="noopener nofollow" class="block overflow-hidden bg-white">
-    <div class="h-48 sm:h-52 flex items-center justify-center p-4 bg-white overflow-hidden">
-      <img
-        src={imgSrc}
-        alt={title}
-        class="max-h-full max-w-full object-contain group-hover:scale-105 transition-transform duration-500"
-        loading="lazy"
-      />
-    </div>
+  <a href={affiliateUrl} target="_blank" rel="noopener nofollow" class="block overflow-hidden">
+    {imgSrc ? (
+      <div class="h-48 sm:h-52 flex items-center justify-center p-4 bg-white overflow-hidden relative">
+        <img
+          src={imgSrc}
+          alt={title}
+          class="max-h-full max-w-full object-contain group-hover:scale-105 transition-transform duration-500"
+          loading="lazy"
+          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+        />
+        <!-- Fallback if CDN image fails -->
+        <div style="display:none; flex-direction:column; align-items:center; gap:10px; width:100%; height:100%; background:#0d1124; position:absolute; inset:0; justify-content:center;">
+          <svg xmlns="http://www.w3.org/2000/svg" style="width:40px;height:40px;color:#06b6d4;" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/>
+          </svg>
+          <span style="font-size:11px;color:#94a3b8;font-family:sans-serif;">View on Amazon →</span>
+        </div>
+      </div>
+    ) : (
+      <div class="h-48 sm:h-52 flex flex-col items-center justify-center gap-3 bg-k2-card">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 text-k2-primary/60" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/>
+        </svg>
+        <span class="text-xs text-slate-500">View on Amazon →</span>
+      </div>
+    )}
   </a>
 
   <!-- Content -->
