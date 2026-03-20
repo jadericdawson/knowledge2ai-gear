@@ -1,6 +1,6 @@
 # Azure Static Web Apps CI/CD
 # Security: No untrusted GitHub event data is used in run: commands.
-# Only trusted secrets and hardcoded npm commands are used.
+# SWA action handles build via Oryx — detects Astro, runs npm run build, deploys from dist/.
 
 name: Azure Static Web Apps CI/CD
 
@@ -24,18 +24,6 @@ jobs:
           submodules: true
           lfs: false
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-          cache: 'npm'
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Build site
-        run: npm run build
-
       - name: Deploy to Azure Static Web Apps
         uses: Azure/static-web-apps-deploy@v1
         with:
@@ -44,7 +32,6 @@ jobs:
           action: 'upload'
           app_location: '/'
           output_location: 'dist'
-          skip_app_build: true
 
   close_pull_request:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
