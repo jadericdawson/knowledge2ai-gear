@@ -12,9 +12,9 @@ const currentPath = Astro.url.pathname;
 <header class="border-b border-k2-border bg-k2-bg/95 backdrop-blur-sm sticky top-0 z-50">
   <nav class="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
     <!-- Logo -->
-    <a href="/" class="flex items-center gap-2 text-white font-bold text-lg hover:text-k2-light transition-colors">
-      <img src="/favicon.svg" alt="" width="24" height="24" />
-      KnowlEdge2 AI
+    <a href="/" class="flex items-center gap-2 hover:opacity-85 transition-opacity">
+      <img src="/k2-symbol.png" alt="KnowlEdge2 AI" width="32" height="32" class="w-8 h-8 object-contain" />
+      <span class="font-bold text-white text-base leading-tight hidden sm:block">KnowlEdge2 AI<span class="block text-xs font-normal text-k2-light">Gear Guides</span></span>
     </a>
 
     <!-- Desktop nav -->
@@ -34,6 +34,17 @@ const currentPath = Astro.url.pathname;
         </li>
       ))}
     </ul>
+
+    <!-- K2AI app link -->
+    <a
+      href="https://knowledge2-ai.com"
+      target="_blank"
+      rel="noopener"
+      class="hidden md:inline-flex items-center gap-1.5 text-xs font-semibold text-k2-light border border-k2-border hover:border-k2-primary/60 hover:bg-k2-card px-3 py-1.5 rounded-lg transition-colors"
+    >
+      <img src="/k2-symbol.png" alt="" width="14" height="14" class="w-3.5 h-3.5 object-contain" />
+      knowledge2-ai.com ↗
+    </a>
 
     <!-- Mobile menu toggle -->
     <label for="mobile-menu-toggle" class="md:hidden cursor-pointer p-2 text-slate-300 hover:text-white">

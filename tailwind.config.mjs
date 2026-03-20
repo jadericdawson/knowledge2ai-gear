@@ -9,9 +9,9 @@ export default {
           card:    '#0d1124',  // card/panel background
           panel:   '#111827',  // lighter panel
           border:  '#1e2d4d',  // border color
-          primary: '#7c3aed',  // violet brand — theme-color of K2AI
-          hover:   '#6d28d9',  // primary hover
-          light:   '#a78bfa',  // primary light / text links
+          primary: '#06b6d4',  // teal/cyan — actual K2AI brand color
+          hover:   '#0891b2',  // primary hover (cyan-600)
+          light:   '#22d3ee',  // primary light / text links (cyan-400)
           blue:    '#3b82f6',  // secondary blue
           bluelt:  '#60a5fa',  // secondary blue light
         },
