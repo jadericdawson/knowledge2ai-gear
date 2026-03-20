@@ -1,0 +1,232 @@
+---
+import Base from '../../layouts/Base.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+import AffiliateCard from '../../components/AffiliateCard.astro';
+
+const motorSizes = [
+  { size: '1408', stator: '14mm × 8mm', kv: '3600–4500KV', props: '3″',  cells: '3–4S', use: 'Micro / Toothpick',  highlight: false },
+  { size: '2207', stator: '22mm × 7mm', kv: '1750–2400KV', props: '5″',  cells: '4–6S', use: 'Racing / Freestyle', highlight: false },
+  { size: '2306', stator: '23mm × 6mm', kv: '1700–2500KV', props: '4–5″',cells: '4–6S', use: 'Freestyle / Urban',  highlight: false },
+  { size: '2809', stator: '28mm × 9mm', kv: '1050–1400KV', props: '6–7″',cells: '6S',   use: 'Heavy Lift / AI Drone', highlight: true },
+  { size: '3115', stator: '31mm × 15mm',kv: '900–1100KV',  props: '7–8″',cells: '6–8S', use: 'Cinelifter / Cargo', highlight: false },
+];
+
+const kvCells = [
+  { cells: '3S', voltage: '11.1V', typical_kv: '2400–3600KV', prop: '5″ 3-blade',  note: 'Entry-level racing builds' },
+  { cells: '4S', voltage: '14.8V', typical_kv: '1750–2400KV', prop: '5″ bi-blade',  note: 'Freestyle sweet spot' },
+  { cells: '6S', voltage: '22.2V', typical_kv: '1050–1400KV', prop: '6–7″ tri-blade', note: 'Heavy lift / AI payloads', highlight: true },
+];
+
+const ourMotors = [
+  { title: 'iFlight Xing2 2809 1250KV Motors (4-Pack)', asin: 'B09XTR2KFX', rating: '4.5/5',
+    description: 'Our exact motors. 2809 stator, 1250KV, rated for 6S. Handles 7" props + Jetson Orin payload at 2.5:1 thrust-to-weight. Buy 5 — one spare is mandatory on a build this complex.',
+    badge: 'We Fly These' },
+  { title: 'Tattu R-Line V4.0 6S 1300mAh 130C (2-Pack)', asin: 'B099F921DM', rating: '4.6/5',
+    description: 'Matched to our 2809 motors. 6S, 1300mAh, 130C — at 40A average draw, we see 8–12 min patrol flight times. The cell count has to match your motor KV.',
+    badge: null },
+];
+---
+<Base title="Motor Selection Guide — FPV KV, Stator Size & Thrust" description="How to size FPV motors correctly. Stator notation, KV vs cell count, thrust-to-weight math, and the exact motors on our 7-inch AI guard drone.">
+  <Nav />
+
+  <!-- Hero -->
+  <section class="relative min-h-[55vh] flex items-center overflow-hidden border-b border-k2-border">
+    <div class="absolute inset-0 bg-k2-bg"></div>
+    <div class="orb orb-a"></div>
+    <div class="orb orb-b"></div>
+    <div class="hero-grid absolute inset-0"></div>
+
+    <div class="relative max-w-5xl mx-auto px-5 sm:px-8 py-20 w-full">
+      <a href="/fpv/" class="fade-up inline-flex items-center gap-1.5 text-xs text-slate-500 hover:text-k2-light transition-colors mb-6">
+        ← FPV Drones
+      </a>
+      <div class="fade-up text-xs font-bold text-k2-primary uppercase tracking-widest mb-4" style="animation-delay:40ms">Component Guide</div>
+      <h1 class="fade-up text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white leading-tight mb-5" style="animation-delay:80ms">
+        Pick the right<br/><span class="gradient-text">motor.</span>
+      </h1>
+      <p class="fade-up text-lg text-slate-400 max-w-xl leading-relaxed" style="animation-delay:130ms">
+        The motor is the first domino. Get it wrong and nothing else works — wrong KV for your cell count, wrong stator for your payload, wrong prop match for your frame. Here's how we think through it.
+      </p>
+      <!-- Stat strip -->
+      <div class="fade-up flex flex-wrap gap-6 mt-8" style="animation-delay:180ms">
+        {[['2809','Our stator size'],['1250KV','On 6S cells'],['2.5:1','Thrust-to-weight'],['7″','Prop diameter']].map(([v,l]) => (
+          <div>
+            <div class="text-xl font-extrabold text-k2-light">{v}</div>
+            <div class="text-xs text-slate-500">{l}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <main class="max-w-5xl mx-auto px-5 sm:px-8 py-14 space-y-16">
+
+    <!-- Section 1: Stator notation -->
+    <section>
+      <div class="text-xs font-bold text-k2-primary uppercase tracking-widest mb-2">The Basics</div>
+      <h2 class="text-3xl font-extrabold text-white mb-6">What XXYY means</h2>
+      <div class="grid md:grid-cols-2 gap-8 items-start">
+        <div class="space-y-4 text-slate-400 leading-relaxed">
+          <p>Every FPV motor has a 4-digit designation like <strong class="text-white">2809</strong>. The first two digits are the stator <strong class="text-white">diameter in mm</strong>. The last two are the stator <strong class="text-white">height in mm</strong>.</p>
+          <p>Bigger stator = more copper = more torque = can swing a bigger prop. For a 7" drone carrying a Jetson Orin companion computer, you need a large stator that generates enough torque to push a 7" prop at reasonable RPM without overheating.</p>
+          <p>The <strong class="text-k2-light">2809</strong> is a cinelifter-grade stator — 28mm wide, 9mm tall. It was designed for camera drones with heavy payloads. That's exactly what our AI guard drone is.</p>
+        </div>
+        <!-- Visual: stator size diagram -->
+        <div class="rounded-2xl border border-k2-border bg-k2-card p-6">
+          <div class="text-xs font-bold text-slate-500 uppercase tracking-widest mb-5">Stator Size Breakdown</div>
+          <div class="flex items-end justify-center gap-2 mb-4" style="height:120px">
+            {[
+              { label:'1408', w:28, h:40, dim:'14×8' },
+              { label:'2207', w:44, h:70, dim:'22×7' },
+              { label:'2306', w:46, h:60, dim:'23×6' },
+              { label:'2809', w:56, h:90, dim:'28×9', highlight:true },
+              { label:'3115', w:62, h:100, dim:'31×15' },
+            ].map(m => (
+              <div class="flex flex-col items-center gap-1.5" style={`width:${m.w}px`}>
+                <div
+                  class={`w-full rounded-t-lg transition-all ${m.highlight ? 'bg-k2-primary/80 shadow-[0_0_20px_rgba(6,182,212,0.4)]' : 'bg-slate-700/60'}`}
+                  style={`height:${m.h}px`}
+                ></div>
+                <span class={`text-[9px] font-bold ${m.highlight ? 'text-k2-light' : 'text-slate-500'}`}>{m.dim}</span>
+              </div>
+            ))}
+          </div>
+          <div class="text-center text-xs text-slate-600 mt-2">Width = diameter · Height = stator height</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 2: Motor comparison table -->
+    <section>
+      <div class="text-xs font-bold text-k2-primary uppercase tracking-widest mb-2">Comparison</div>
+      <h2 class="text-3xl font-extrabold text-white mb-6">Motor size reference</h2>
+      <div class="rounded-2xl border border-k2-border bg-k2-card overflow-hidden">
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="border-b border-k2-border">
+                <th class="text-left text-xs font-bold text-slate-500 uppercase tracking-wider px-5 py-3">Motor</th>
+                <th class="text-left text-xs font-bold text-slate-500 uppercase tracking-wider px-4 py-3">Stator</th>
+                <th class="text-left text-xs font-bold text-slate-500 uppercase tracking-wider px-4 py-3">KV Range</th>
+                <th class="text-left text-xs font-bold text-slate-500 uppercase tracking-wider px-4 py-3">Props</th>
+                <th class="text-left text-xs font-bold text-slate-500 uppercase tracking-wider px-4 py-3">Cells</th>
+                <th class="text-left text-xs font-bold text-slate-500 uppercase tracking-wider px-4 py-3">Best for</th>
+              </tr>
+            </thead>
+            <tbody>
+              {motorSizes.map(m => (
+                <tr class={`border-b border-k2-border/50 transition-colors ${m.highlight ? 'bg-k2-primary/8' : 'hover:bg-k2-panel/50'}`}>
+                  <td class="px-5 py-3 font-mono font-bold text-white">
+                    {m.size}
+                    {m.highlight && <span class="ml-2 text-[9px] font-bold bg-k2-primary text-white px-1.5 py-0.5 rounded">Our Pick</span>}
+                  </td>
+                  <td class="px-4 py-3 text-slate-400 font-mono text-xs">{m.stator}</td>
+                  <td class="px-4 py-3 text-slate-300">{m.kv}</td>
+                  <td class="px-4 py-3 text-slate-400">{m.props}</td>
+                  <td class={`px-4 py-3 font-semibold ${m.highlight ? 'text-k2-light' : 'text-slate-400'}`}>{m.cells}</td>
+                  <td class="px-4 py-3 text-slate-400">{m.use}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 3: KV vs cell count -->
+    <section>
+      <div class="text-xs font-bold text-k2-primary uppercase tracking-widest mb-2">KV Explained</div>
+      <h2 class="text-3xl font-extrabold text-white mb-3">KV is RPM per volt — match it to your cells</h2>
+      <p class="text-slate-400 mb-8 leading-relaxed max-w-3xl">KV means the motor spins at that many RPM for every volt applied. Higher KV on more voltage = faster RPM = smaller props needed. Lower KV on lower voltage = slower RPM = bigger props = more torque. The rule: <strong class="text-white">lower cell count → higher KV, higher cell count → lower KV.</strong></p>
+      <div class="grid sm:grid-cols-3 gap-4">
+        {kvCells.map((c, i) => (
+          <div class={`rounded-2xl border p-6 transition-all fade-up ${c.highlight ? 'border-k2-primary/50 bg-gradient-to-br from-k2-primary/10 to-k2-card shadow-[0_0_30px_rgba(6,182,212,0.12)]' : 'border-k2-border bg-k2-card'}`}
+               style={`animation-delay:${i*80}ms`}>
+            <div class={`text-3xl font-extrabold mb-1 ${c.highlight ? 'text-k2-light' : 'text-white'}`}>{c.cells}</div>
+            <div class="text-xs text-slate-500 mb-4">{c.voltage} nominal</div>
+            <div class="space-y-2 text-sm">
+              <div class="flex justify-between"><span class="text-slate-500">KV range</span><span class="text-white font-semibold">{c.typical_kv}</span></div>
+              <div class="flex justify-between"><span class="text-slate-500">Typical prop</span><span class="text-white font-semibold">{c.prop}</span></div>
+            </div>
+            <div class={`mt-4 text-xs leading-relaxed ${c.highlight ? 'text-k2-light/80' : 'text-slate-500'}`}>{c.note}</div>
+            {c.highlight && <div class="mt-3 text-[9px] font-bold bg-k2-primary text-white px-2 py-1 rounded-lg inline-block">Our setup</div>}
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- Section 4: Thrust-to-weight -->
+    <section class="rounded-2xl border border-k2-primary/20 bg-k2-card overflow-hidden">
+      <div class="h-1 bg-gradient-to-r from-k2-primary to-k2-blue"></div>
+      <div class="p-7 sm:p-10">
+        <div class="text-xs font-bold text-k2-primary uppercase tracking-widest mb-3">The Math</div>
+        <h2 class="text-2xl font-bold text-white mb-5">Thrust-to-weight ratio</h2>
+        <div class="grid sm:grid-cols-2 gap-8">
+          <div class="space-y-4 text-slate-400 text-sm leading-relaxed">
+            <p>T:W ratio is total thrust divided by all-up weight. Minimum viable is <strong class="text-white">2:1</strong> — the drone can hover at 50% throttle. For autonomous flight with GPS and a companion computer, aim for <strong class="text-white">2.5:1 or higher</strong> to handle payload variance and wind.</p>
+            <p>Our 7" guard drone fully loaded (frame + FC + ESC + Jetson + GPS + battery) is roughly <strong class="text-k2-light">1.8–2.0 kg</strong>. The four 2809 motors at full throttle produce approximately <strong class="text-k2-light">4.8–5.2 kg total thrust</strong> on 7" props at 6S. That's <strong class="text-k2-light">~2.5:1</strong> — solid for autonomous patrol.</p>
+          </div>
+          <div class="space-y-3">
+            {[
+              { ratio: '1.5:1', label: 'Minimum', desc: 'Sluggish, struggles in wind', color: 'text-red-400 border-red-500/20 bg-red-900/10' },
+              { ratio: '2:1',   label: 'Standard', desc: 'Hover at 50% throttle', color: 'text-amber-400 border-amber-500/20 bg-amber-900/10' },
+              { ratio: '2.5:1', label: 'Our Target', desc: 'Autonomous patrol, AI payload', color: 'text-k2-light border-k2-primary/30 bg-k2-primary/10' },
+              { ratio: '3:1+',  label: 'Racing', desc: 'Max agility, short flights', color: 'text-slate-400 border-k2-border bg-k2-panel' },
+            ].map(r => (
+              <div class={`flex items-center justify-between rounded-xl border px-4 py-3 ${r.color}`}>
+                <div>
+                  <div class="font-bold text-sm">{r.ratio}</div>
+                  <div class="text-xs opacity-70">{r.desc}</div>
+                </div>
+                <div class="text-xs font-semibold">{r.label}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 5: Our picks -->
+    <section>
+      <div class="text-xs font-bold text-k2-primary uppercase tracking-widest mb-2">What We Run</div>
+      <h2 class="text-3xl font-extrabold text-white mb-6">Our motor choice for the 7″ guard drone</h2>
+      <div class="grid sm:grid-cols-2 gap-5">
+        {ourMotors.map(p => <AffiliateCard {...p} />)}
+      </div>
+    </section>
+
+    <!-- Related builds -->
+    <div class="grid sm:grid-cols-2 gap-4">
+      <a href="/fpv/7-inch-build/" class="group rounded-2xl border border-k2-primary/25 bg-k2-card p-6 hover:border-k2-primary/50 hover:-translate-y-1 transition-all duration-300">
+        <div class="text-xs font-bold text-k2-primary uppercase tracking-widest mb-2">See it in context</div>
+        <div class="font-bold text-white group-hover:text-k2-light transition-colors">7″ Autonomous Guard Drone →</div>
+        <div class="text-sm text-slate-500 mt-1">The full build where these motors live</div>
+      </a>
+      <a href="/fpv/battery-guide/" class="group rounded-2xl border border-k2-border bg-k2-card p-6 hover:border-k2-primary/40 hover:-translate-y-1 transition-all duration-300">
+        <div class="text-xs font-bold text-slate-500 uppercase tracking-widest mb-2">Next guide</div>
+        <div class="font-bold text-white group-hover:text-k2-light transition-colors">Battery Selection Guide →</div>
+        <div class="text-sm text-slate-500 mt-1">Size your pack to match these motors</div>
+      </a>
+    </div>
+
+    <!-- Disclosure -->
+    <div class="p-5 bg-k2-card border border-k2-border rounded-xl text-sm text-slate-400">
+      <strong class="text-slate-300">Affiliate disclosure:</strong> As an Amazon Associate, KnowlEdge2 AI earns from qualifying purchases.
+      <a href="/about#disclosure" class="text-k2-light hover:underline ml-1">Full disclosure →</a>
+    </div>
+  </main>
+
+  <Footer />
+</Base>
+
+<style>
+.orb { position:absolute; border-radius:50%; filter:blur(70px); animation:orbFloat 9s ease-in-out infinite; pointer-events:none; }
+.orb-a { width:420px; height:420px; background:radial-gradient(circle,rgba(6,182,212,0.10) 0%,transparent 70%); top:-80px; right:-60px; }
+.orb-b { width:280px; height:280px; background:radial-gradient(circle,rgba(59,130,246,0.07) 0%,transparent 70%); bottom:20px; left:15%; animation-delay:-4s; }
+@keyframes orbFloat { 0%,100%{transform:translate(0,0)} 50%{transform:translate(15px,-12px)} }
+.hero-grid { background-image:linear-gradient(rgba(6,182,212,1) 1px,transparent 1px),linear-gradient(90deg,rgba(6,182,212,1) 1px,transparent 1px); background-size:60px 60px; opacity:0.025; }
+.gradient-text { background:linear-gradient(135deg,#22d3ee 0%,#3b82f6 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+.fade-up { animation:fadeInUp 0.7s cubic-bezier(0.16,1,0.3,1) both; }
+@keyframes fadeInUp { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
+</style>

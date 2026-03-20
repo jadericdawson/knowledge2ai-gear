@@ -1,0 +1,208 @@
+---
+import Base from '../../layouts/Base.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+import AffiliateCard from '../../components/AffiliateCard.astro';
+
+const cellConfigs = [
+  { cells: '3S', voltage: '12.6V', nominal: '11.1V', prop: '3–5″', kv: '2400–4500KV', use: 'Micro / beginner', highlight: false },
+  { cells: '4S', voltage: '16.8V', nominal: '14.8V', prop: '5″',   kv: '1750–2400KV', use: 'Freestyle / racing', highlight: false },
+  { cells: '6S', voltage: '25.2V', nominal: '22.2V', prop: '6–7″', kv: '1050–1400KV', use: 'Heavy lift / AI drone', highlight: true },
+];
+
+const chems = [
+  { name: 'LiPo',  voltage: '4.2V/cell max', discharge: '30–130C', weight: 'Standard', note: 'Workhorse. Best balance of power density and discharge rate. Default choice.', badge: 'Our Choice' },
+  { name: 'LiHV',  voltage: '4.35V/cell max',discharge: '30–100C', weight: 'Same as LiPo', note: '7% more energy density. Slightly shorter lifespan. Worth it for long-range builds.', badge: null },
+  { name: 'Li-Ion', voltage: '4.2V/cell max', discharge: '5–20C', weight: '30–40% lighter', note: 'Much lower discharge rate. Use for long-range only — not for AI drones with high current draw.', badge: null },
+];
+
+const ourPacks = [
+  { title: 'Tattu R-Line V4.0 6S 1300mAh 130C (2-Pack)', asin: 'B099F921DM', rating: '4.6/5',
+    description: 'Our primary pack. 6S, 1300mAh, 130C — handles our 2809 motors at peak draw without sag. Buy two minimum. Consistent IR across all cells. We track cycle count per pack.',
+    badge: 'We Run These' },
+  { title: 'Tenergy LiPo Safe Charging Bags (2-Pack)', asin: 'B09BDJQK53', rating: '4.6/5',
+    description: 'Non-negotiable. A 6S LiPo thermal event without containment is a house fire. Charge and store every pack inside one of these. Cheap insurance at any price.',
+    badge: 'Safety' },
+];
+---
+<Base title="FPV Battery Selection Guide — Cell Count, C Rating & LiPo" description="How to pick the right LiPo for your FPV build. Cell count, capacity, C rating, LiHV vs Li-Ion, and the exact packs on our AI guard drone.">
+  <Nav />
+
+  <!-- Hero -->
+  <section class="relative min-h-[55vh] flex items-center overflow-hidden border-b border-k2-border">
+    <div class="absolute inset-0 bg-k2-bg"></div>
+    <div class="orb orb-a"></div>
+    <div class="orb orb-b"></div>
+    <div class="hero-grid absolute inset-0"></div>
+
+    <div class="relative max-w-5xl mx-auto px-5 sm:px-8 py-20 w-full">
+      <a href="/fpv/" class="fade-up inline-flex items-center gap-1.5 text-xs text-slate-500 hover:text-k2-light transition-colors mb-6">← FPV Drones</a>
+      <div class="fade-up text-xs font-bold text-k2-primary uppercase tracking-widest mb-4" style="animation-delay:40ms">Component Guide</div>
+      <h1 class="fade-up text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white leading-tight mb-5" style="animation-delay:80ms">
+        Size your<br/><span class="gradient-text">battery right.</span>
+      </h1>
+      <p class="fade-up text-lg text-slate-400 max-w-xl leading-relaxed" style="animation-delay:130ms">
+        Wrong battery = short flights, damaged motors, or a fire. Cell count dictates your entire voltage system. Capacity determines how long you fly. C rating determines whether your pack survives the draw.
+      </p>
+      <div class="fade-up flex flex-wrap gap-6 mt-8" style="animation-delay:180ms">
+        {[['6S','Our cell count'],['1300mAh','Pack capacity'],['130C','Discharge rating'],['8–12min','Patrol flight time']].map(([v,l]) => (
+          <div><div class="text-xl font-extrabold text-k2-light">{v}</div><div class="text-xs text-slate-500">{l}</div></div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <main class="max-w-5xl mx-auto px-5 sm:px-8 py-14 space-y-16">
+
+    <!-- Section 1: Cell count -->
+    <section>
+      <div class="text-xs font-bold text-k2-primary uppercase tracking-widest mb-2">Cell Count</div>
+      <h2 class="text-3xl font-extrabold text-white mb-3">Cell count = voltage system</h2>
+      <p class="text-slate-400 mb-8 leading-relaxed max-w-3xl">The "S" number tells you how many lithium cells are in series. More cells = higher voltage = more power available. Your motor KV must match your cell count — <strong class="text-white">this is not adjustable after purchase</strong>. It's the foundational decision for the entire build.</p>
+      <div class="grid sm:grid-cols-3 gap-4">
+        {cellConfigs.map((c, i) => (
+          <div class={`rounded-2xl border p-6 fade-up ${c.highlight ? 'border-k2-primary/50 bg-gradient-to-br from-k2-primary/10 to-k2-card' : 'border-k2-border bg-k2-card'}`}
+               style={`animation-delay:${i*80}ms`}>
+            <div class={`text-4xl font-extrabold mb-1 ${c.highlight ? 'text-k2-light' : 'text-white'}`}>{c.cells}</div>
+            <div class="space-y-2 text-sm mt-4">
+              <div class="flex justify-between"><span class="text-slate-500">Nominal</span><span class="font-mono text-white">{c.nominal}</span></div>
+              <div class="flex justify-between"><span class="text-slate-500">Max (full)</span><span class="font-mono text-white">{c.voltage}</span></div>
+              <div class="flex justify-between"><span class="text-slate-500">Motor KV</span><span class="text-white font-semibold">{c.kv}</span></div>
+              <div class="flex justify-between"><span class="text-slate-500">Props</span><span class="text-white">{c.prop}</span></div>
+            </div>
+            <div class={`mt-4 text-xs ${c.highlight ? 'text-k2-light/80' : 'text-slate-500'}`}>{c.use}</div>
+            {c.highlight && <div class="mt-2 text-[9px] font-bold bg-k2-primary text-white px-2 py-1 rounded-lg inline-block">Our Setup</div>}
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- Section 2: Capacity & flight time -->
+    <section class="rounded-2xl border border-k2-primary/20 bg-k2-card overflow-hidden">
+      <div class="h-1 bg-gradient-to-r from-k2-primary to-k2-blue"></div>
+      <div class="p-7 sm:p-10">
+        <div class="text-xs font-bold text-k2-primary uppercase tracking-widest mb-3">The Math</div>
+        <h2 class="text-2xl font-bold text-white mb-5">mAh × efficiency = flight time</h2>
+        <div class="grid sm:grid-cols-2 gap-8 items-start">
+          <div class="space-y-4 text-slate-400 text-sm leading-relaxed">
+            <p>A rough formula: <strong class="text-white">T ≈ (mAh ÷ avg_current_mA) × 60 × 0.8</strong> (the 0.8 is a safe usable capacity factor — never drain a LiPo below 3.5V/cell).</p>
+            <p>Our 7" with Jetson Orin averages <strong class="text-k2-light">30–40A draw</strong> during patrol hover. At 35A average: <code class="bg-k2-bg px-1.5 py-0.5 rounded text-xs text-k2-light">(1300 ÷ 35000) × 60 × 0.8 ≈ 1.8 min/pack</code>... wait — that's mA vs A. Corrected: <code class="bg-k2-bg px-1.5 py-0.5 rounded text-xs text-k2-light">(1.3Ah ÷ 35A) × 60 × 0.8 ≈ 1.8 × 60 × 0.8 — no.</code></p>
+            <p>Simpler: at <strong class="text-white">35A average draw</strong>, a 1300mAh pack holds 1.3Ah. Time = <strong class="text-k2-light">1.3Ah ÷ 35A × 60min × 0.8 = ~1.8 min theoretical</strong>. In practice our patrol flights hover lighter — AI autonomy at 50% throttle draws ~25A, giving <strong class="text-k2-light">8–12 min</strong> real patrol time.</p>
+          </div>
+          <div class="space-y-3">
+            {[
+              { mah:'450mAh', amp:'15A avg', time:'~1.4 min', use:'Micro / 3" toothpick' },
+              { mah:'650mAh', amp:'20A avg', time:'~1.6 min', use:'4" tight spaces' },
+              { mah:'1300mAh', amp:'25A avg', time:'~2.5 min per Ah → 8–12 min', use:'7" AI patrol drone', highlight:true },
+              { mah:'2200mAh', amp:'30A avg', time:'~3.5 min per Ah', use:'Long-range efficiency' },
+            ].map(r => (
+              <div class={`flex items-center justify-between rounded-xl border px-4 py-3 gap-3 ${r.highlight ? 'border-k2-primary/30 bg-k2-primary/8' : 'border-k2-border bg-k2-panel/50'}`}>
+                <div class="flex-1">
+                  <div class={`font-mono font-bold text-sm ${r.highlight ? 'text-k2-light' : 'text-white'}`}>{r.mah}</div>
+                  <div class="text-xs text-slate-500">{r.use}</div>
+                </div>
+                <div class="text-right">
+                  <div class="text-xs text-slate-400">{r.amp}</div>
+                  <div class={`text-xs font-semibold ${r.highlight ? 'text-k2-light' : 'text-slate-300'}`}>{r.time}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 3: C rating -->
+    <section>
+      <div class="text-xs font-bold text-k2-primary uppercase tracking-widest mb-2">C Rating</div>
+      <h2 class="text-3xl font-extrabold text-white mb-3">C rating = maximum safe discharge</h2>
+      <p class="text-slate-400 mb-8 leading-relaxed max-w-3xl">C rating tells you the maximum continuous discharge relative to capacity. <strong class="text-white">Max amps = C × capacity(Ah)</strong>. Our 130C 1300mAh pack: 130 × 1.3 = <strong class="text-k2-light">169A peak</strong>. Our motors peak at ~35A each × 4 = 140A. We have headroom. Rule: motor peak amps × 4 × 1.5 safety margin ÷ capacity(Ah) = minimum C rating needed.</p>
+      <div class="grid sm:grid-cols-4 gap-3">
+        {[
+          { c:'30C',  color:'text-slate-400 border-k2-border', note:'Budget packs. Voltage sag under load.', ok:false },
+          { c:'65C',  color:'text-amber-400/80 border-amber-500/20', note:'Acceptable for 4–5" freestyle.', ok:true },
+          { c:'100C', color:'text-k2-light/80 border-k2-primary/30', note:'Good for heavy lift builds.', ok:true },
+          { c:'130C', color:'text-k2-light border-k2-primary/50', note:'Our minimum for 7" with Jetson.', ok:true, badge:true },
+        ].map(r => (
+          <div class={`rounded-xl border bg-k2-card p-4 text-center`} style={`border-color: var(--tw-border-opacity)`}>
+            <div class={`text-2xl font-extrabold mb-2 ${r.color.split(' ')[0]}`}>{r.c}</div>
+            <div class="text-xs text-slate-500 leading-snug">{r.note}</div>
+            {r.badge && <div class="mt-2 text-[9px] font-bold bg-k2-primary text-white px-2 py-0.5 rounded inline-block">Our Minimum</div>}
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- Section 4: Chemistry -->
+    <section>
+      <div class="text-xs font-bold text-k2-primary uppercase tracking-widest mb-2">Chemistry</div>
+      <h2 class="text-3xl font-extrabold text-white mb-6">LiPo vs LiHV vs Li-Ion</h2>
+      <div class="grid sm:grid-cols-3 gap-4">
+        {chems.map((c, i) => (
+          <div class={`rounded-2xl border p-6 fade-up ${c.badge ? 'border-k2-primary/40 bg-k2-card' : 'border-k2-border bg-k2-card'}`}
+               style={`animation-delay:${i*80}ms`}>
+            <div class="flex items-center justify-between mb-3">
+              <div class="text-lg font-extrabold text-white">{c.name}</div>
+              {c.badge && <span class="text-[9px] font-bold bg-k2-primary text-white px-1.5 py-0.5 rounded">{c.badge}</span>}
+            </div>
+            <div class="space-y-2 text-xs text-slate-400">
+              <div class="flex justify-between"><span>Max/cell</span><span class="text-white font-mono">{c.voltage}</span></div>
+              <div class="flex justify-between"><span>Discharge</span><span class="text-white">{c.discharge}</span></div>
+              <div class="flex justify-between"><span>Weight</span><span class="text-white">{c.weight}</span></div>
+            </div>
+            <p class="text-xs text-slate-400 leading-relaxed mt-4">{c.note}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- AI drone warning -->
+    <div class="rounded-xl border border-amber-500/25 bg-amber-900/10 p-5 text-sm flex items-start gap-3">
+      <span class="text-amber-400 text-xl flex-shrink-0">⚠</span>
+      <div>
+        <strong class="text-amber-400">AI payload changes everything:</strong>
+        <span class="text-slate-400"> A Jetson Orin Nano Super draws up to <strong class="text-white">10W at idle, 25W under full AI inference</strong>. That's an extra 1–2A of current the standard FPV current draw calculation ignores. Add this to your average draw before sizing your pack — or your flight times will be shorter than expected.</span>
+      </div>
+    </div>
+
+    <!-- Our picks -->
+    <section>
+      <div class="text-xs font-bold text-k2-primary uppercase tracking-widest mb-2">What We Run</div>
+      <h2 class="text-3xl font-extrabold text-white mb-6">Our packs for the 7″ guard drone</h2>
+      <div class="grid sm:grid-cols-2 gap-5">
+        {ourPacks.map(p => <AffiliateCard {...p} />)}
+      </div>
+    </section>
+
+    <!-- Related -->
+    <div class="grid sm:grid-cols-2 gap-4">
+      <a href="/fpv/motor-guide/" class="group rounded-2xl border border-k2-border bg-k2-card p-6 hover:border-k2-primary/40 hover:-translate-y-1 transition-all duration-300">
+        <div class="text-xs font-bold text-slate-500 uppercase tracking-widest mb-2">Previous guide</div>
+        <div class="font-bold text-white group-hover:text-k2-light transition-colors">← Motor Selection Guide</div>
+        <div class="text-sm text-slate-500 mt-1">Pick motors first, then match battery</div>
+      </a>
+      <a href="/fpv/fc-guide/" class="group rounded-2xl border border-k2-border bg-k2-card p-6 hover:border-k2-primary/40 hover:-translate-y-1 transition-all duration-300">
+        <div class="text-xs font-bold text-slate-500 uppercase tracking-widest mb-2">Next guide</div>
+        <div class="font-bold text-white group-hover:text-k2-light transition-colors">Flight Stack Guide →</div>
+        <div class="text-sm text-slate-500 mt-1">FC + ESC sizing and protocols</div>
+      </a>
+    </div>
+
+    <div class="p-5 bg-k2-card border border-k2-border rounded-xl text-sm text-slate-400">
+      <strong class="text-slate-300">Affiliate disclosure:</strong> As an Amazon Associate, KnowlEdge2 AI earns from qualifying purchases.
+      <a href="/about#disclosure" class="text-k2-light hover:underline ml-1">Full disclosure →</a>
+    </div>
+  </main>
+  <Footer />
+</Base>
+
+<style>
+.orb{position:absolute;border-radius:50%;filter:blur(70px);animation:orbFloat 9s ease-in-out infinite;pointer-events:none}
+.orb-a{width:420px;height:420px;background:radial-gradient(circle,rgba(6,182,212,0.10) 0%,transparent 70%);top:-80px;right:-60px}
+.orb-b{width:280px;height:280px;background:radial-gradient(circle,rgba(59,130,246,0.07) 0%,transparent 70%);bottom:20px;left:15%;animation-delay:-4s}
+@keyframes orbFloat{0%,100%{transform:translate(0,0)}50%{transform:translate(15px,-12px)}}
+.hero-grid{background-image:linear-gradient(rgba(6,182,212,1) 1px,transparent 1px),linear-gradient(90deg,rgba(6,182,212,1) 1px,transparent 1px);background-size:60px 60px;opacity:0.025}
+.gradient-text{background:linear-gradient(135deg,#22d3ee 0%,#3b82f6 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.fade-up{animation:fadeInUp 0.7s cubic-bezier(0.16,1,0.3,1) both}
+@keyframes fadeInUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+</style>

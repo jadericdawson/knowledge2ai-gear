@@ -124,6 +124,30 @@ const confirmed = [
       </div>
     </div>
 
+    <!-- Build Bundle -->
+    <div class="rounded-xl border border-k2-primary/30 bg-gradient-to-br from-k2-primary/10 to-k2-card overflow-hidden not-prose">
+      <div class="h-0.5 bg-gradient-to-r from-k2-primary to-k2-blue"></div>
+      <div class="p-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5">
+        <div>
+          <div class="text-xs font-bold text-k2-primary uppercase tracking-widest mb-1">One Click</div>
+          <h3 class="text-lg font-extrabold text-white mb-1">Add complete build to Amazon cart</h3>
+          <p class="text-sm text-slate-400">All 8 parts from this guide added at once. Review quantities before checkout — motors come in 4-packs; buy 2 packs for 5 total (4 + 1 spare).</p>
+        </div>
+        <a
+          href="https://www.amazon.com/gp/aws/cart/add.html?ASIN.1=B0C69X1G41&Quantity.1=1&ASIN.2=B0BZJTQ5YP&Quantity.2=1&ASIN.3=B07NBPNWNZ&Quantity.3=1&ASIN.4=B0BBQT3TTS&Quantity.4=1&ASIN.5=B09XTR2KFX&Quantity.5=2&ASIN.6=B0972ZKNT2&Quantity.6=1&ASIN.7=B0BGL73623&Quantity.7=1&ASIN.8=B099F921DM&Quantity.8=2&tag=knowledge2ai-20"
+          target="_blank"
+          rel="noopener nofollow"
+          class="flex-shrink-0 inline-flex items-center gap-2 bg-k2-primary hover:bg-k2-hover text-white font-bold px-6 py-3 rounded-xl text-sm whitespace-nowrap
+                 transition-all duration-300 hover:shadow-[0_0_25px_rgba(6,182,212,0.4)] hover:-translate-y-0.5"
+        >
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/>
+          </svg>
+          Add All to Cart →
+        </a>
+      </div>
+    </div>
+
     <!-- Hardware -->
     <div>
       <h2 class="text-2xl font-bold text-white mb-6">Hardware Stack</h2>
@@ -170,10 +194,10 @@ const confirmed = [
 
     <!-- Warning -->
     <div class="rounded-xl border border-amber-500/25 bg-amber-900/10 p-5 text-sm flex items-start gap-3">
-      <span class="text-amber-400 text-lg flex-shrink-0">⚠</span>
-      <div class="text-slate-400">
-        <strong class="text-amber-400">Motor Mapping (non-obvious):</strong> S1 (Front Left) = MAVLink motor idx=4, not idx=0.
-        S2 is 3.3V tolerant only. USB power alone will NOT spin motors — battery must be connected (&gt;10V).
+      <span class="text-amber-400 text-xl flex-shrink-0">⚠</span>
+      <div class="text-slate-400 space-y-2">
+        <p><strong class="text-amber-400">AI payload changes your power budget:</strong> The Jetson Orin Nano Super draws ~10W at idle and up to 25W under full YOLOv8 + SLAM inference. At 6S (22V), that's an extra 1.1A of continuous draw your battery sizing estimate must include. On a 1300mAh pack averaging 35A total, AI inference alone cuts flight time by roughly 8–12%. If patrol time matters, disable unused Isaac ROS nodes between detection events to reduce idle draw.</p>
+        <p><strong class="text-amber-400">MAVLink 2 is required:</strong> The Jetson companion connects via SERIAL1. Set <code class="bg-k2-bg px-1 py-0.5 rounded text-xs text-k2-light">SERIAL1_BAUD=921</code> (921600) and <code class="bg-k2-bg px-1 py-0.5 rounded text-xs text-k2-light">SERIAL1_PROTOCOL=2</code> (MAVLink 2). MAVLink 1 drops critical message types needed by MAVROS2. Mismatch here is the most common reason ROS2 topics appear empty on first boot.</p>
       </div>
     </div>
 

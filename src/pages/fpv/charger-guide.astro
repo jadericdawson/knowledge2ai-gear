@@ -1,0 +1,201 @@
+---
+import Base from '../../layouts/Base.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+import AffiliateCard from '../../components/AffiliateCard.astro';
+
+const chargeRates = [
+  { rate:'0.5C', label:'Storage', time:'~2 hours', safe:'Always safe', use:'Store packs at 3.85V/cell for long-term. Charge to this if not flying within 24h.', highlight:false },
+  { rate:'1C',   label:'Standard', time:'~1 hour',  safe:'Always safe', use:'Default charge rate. 1300mAh pack at 1C = 1.3A charge. Zero extra stress on cells.', highlight:false },
+  { rate:'2C',   label:'Fast',     time:'~30 min',  safe:'Good packs only',use:'Our field rate on Tattu R-Line. 1300mAh at 2C = 2.6A. Slightly warm, no issues on quality packs.', highlight:true },
+  { rate:'3C+',  label:'Aggressive',time:'~20 min', safe:'Risky',        use:'Only on packs rated 5C+ charge rate. Shortens lifespan significantly. Not worth it.', highlight:false },
+];
+
+const ourChargers = [
+  { title:'HOTA D6 Pro AC/DC Smart Charger', asin:'B0CF9F8N94', rating:'4.7/5',
+    description:'AC direct input — no external power supply needed. Dual ports, 1S–6S, shows internal resistance per cell, fast charge up to 14A. The only charger you need for field and bench.',
+    badge:'We Use This' },
+  { title:'Tenergy LiPo Safe Charging Bags (2-Pack)', asin:'B09BDJQK53', rating:'4.6/5',
+    description:'Fire-retardant LiPo storage. Every charge session happens inside these. A 6S pack thermal event without containment is catastrophic — this is $14 insurance.',
+    badge:'Safety Essential' },
+];
+---
+<Base title="FPV Charger Guide — Charge Rates, Balance Charging & Parallel" description="How to charge LiPo batteries safely. Charge rate math, balance vs fast charge, parallel charging risks, and the exact charger on our AI drone bench.">
+  <Nav />
+
+  <section class="relative min-h-[55vh] flex items-center overflow-hidden border-b border-k2-border">
+    <div class="absolute inset-0 bg-k2-bg"></div>
+    <div class="orb orb-a"></div><div class="orb orb-b"></div>
+    <div class="hero-grid absolute inset-0"></div>
+    <div class="relative max-w-5xl mx-auto px-5 sm:px-8 py-20 w-full">
+      <a href="/fpv/" class="fade-up inline-flex items-center gap-1.5 text-xs text-slate-500 hover:text-k2-light transition-colors mb-6">← FPV Drones</a>
+      <div class="fade-up text-xs font-bold text-k2-primary uppercase tracking-widest mb-4" style="animation-delay:40ms">Component Guide</div>
+      <h1 class="fade-up text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white leading-tight mb-5" style="animation-delay:80ms">
+        Charge right,<br/><span class="gradient-text">fly more.</span>
+      </h1>
+      <p class="fade-up text-lg text-slate-400 max-w-xl leading-relaxed" style="animation-delay:130ms">
+        Charging is the most dangerous part of FPV. Wrong rate, skipped balance cycle, or an overcharged cell can end a session — or a house. Here's the full breakdown.
+      </p>
+      <div class="fade-up flex flex-wrap gap-6 mt-8" style="animation-delay:180ms">
+        {[['2C','Our field charge rate'],['Balance','Every charge'],['3.85V/cell','Storage voltage'],['HOTA D6','Our charger']].map(([v,l]) => (
+          <div><div class="text-xl font-extrabold text-k2-light">{v}</div><div class="text-xs text-slate-500">{l}</div></div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <main class="max-w-5xl mx-auto px-5 sm:px-8 py-14 space-y-16">
+
+    <!-- Charge rate math -->
+    <section>
+      <div class="text-xs font-bold text-k2-primary uppercase tracking-widest mb-2">The Basics</div>
+      <h2 class="text-3xl font-extrabold text-white mb-3">C rate math</h2>
+      <p class="text-slate-400 mb-8 leading-relaxed max-w-3xl">Charge rate in amps = <strong class="text-white">C × capacity(Ah)</strong>. For our 1300mAh pack: 1C = 1.3A, 2C = 2.6A. The C rating printed on your pack is the <em>discharge</em> rating — the safe <strong class="text-white">charge rate is usually 1–5C</strong>, specified separately in the pack datasheet. When in doubt, 1C is always safe.</p>
+      <div class="space-y-3">
+        {chargeRates.map((r, i) => (
+          <div class={`flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-0 rounded-2xl border p-5 fade-up transition-all ${r.highlight ? 'border-k2-primary/40 bg-gradient-to-r from-k2-primary/8 to-k2-card' : 'border-k2-border bg-k2-card'}`}
+               style={`animation-delay:${i*60}ms`}>
+            <div class="sm:w-24 flex-shrink-0">
+              <div class={`text-2xl font-extrabold ${r.highlight ? 'text-k2-light' : 'text-white'}`}>{r.rate}</div>
+              <div class="text-xs text-slate-500">{r.label}</div>
+            </div>
+            <div class="sm:w-28 flex-shrink-0 text-sm">
+              <div class="text-white font-semibold">{r.time}</div>
+              <div class={`text-xs ${r.highlight ? 'text-k2-light/70' : 'text-slate-500'}`}>{r.safe}</div>
+            </div>
+            <div class="flex-1 text-sm text-slate-400 sm:pl-6 border-slate-700/0 sm:border-l sm:border-k2-border/50">
+              {r.use}
+              {r.highlight && <span class="ml-2 text-[9px] font-bold bg-k2-primary text-white px-1.5 py-0.5 rounded">Our Rate</span>}
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- Balance charging -->
+    <section class="rounded-2xl border border-k2-primary/20 bg-k2-card overflow-hidden">
+      <div class="h-1 bg-gradient-to-r from-k2-primary to-k2-blue"></div>
+      <div class="p-7 sm:p-10">
+        <div class="text-xs font-bold text-k2-primary uppercase tracking-widest mb-3">Always Balance</div>
+        <h2 class="text-2xl font-bold text-white mb-5">Balance charging keeps your packs alive</h2>
+        <div class="grid sm:grid-cols-2 gap-8">
+          <div class="space-y-4 text-slate-400 text-sm leading-relaxed">
+            <p>A 6S LiPo is 6 individual cells in series. Even identical cells drift apart over charge cycles — one cell ends up at 4.22V while another is 4.17V. Unbalanced cells charge unevenly, leading to one cell overcharging while the pack reads nominal.</p>
+            <p>Balance charging connects to every individual cell through the balance lead (JST connector), equalizing each cell to within <strong class="text-white">±0.02V</strong>. It takes longer but dramatically extends pack life and prevents cell damage.</p>
+            <p><strong class="text-k2-light">Our rule:</strong> Every charge is a balance charge. Never skip the balance lead for convenience. The HOTA D6 Pro defaults to balance charge — correct behavior.</p>
+          </div>
+          <div class="space-y-3">
+            {[
+              { title:'Full balance charge', icon:'✓', desc:'Cells equalized to ±0.02V. Always use this.', good:true },
+              { title:'Storage balance charge', icon:'✓', desc:'To 3.85V/cell, balanced. Use before long storage.', good:true },
+              { title:'Fast charge (no balance)', icon:'✗', desc:'Fine once in a while if cells are already balanced. Not as a habit.', good:false },
+              { title:'Charging a puffed pack', icon:'✗', desc:'Never charge a visibly swollen pack. Dispose safely.', good:false },
+            ].map(r => (
+              <div class={`flex items-start gap-3 rounded-xl border p-4 ${r.good ? 'border-k2-primary/20 bg-k2-primary/5' : 'border-red-500/15 bg-red-900/8'}`}>
+                <span class={`text-lg flex-shrink-0 font-bold ${r.good ? 'text-k2-primary' : 'text-red-400'}`}>{r.icon}</span>
+                <div>
+                  <div class="text-sm font-semibold text-white">{r.title}</div>
+                  <div class="text-xs text-slate-400 mt-0.5">{r.desc}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Parallel charging -->
+    <section>
+      <div class="text-xs font-bold text-k2-primary uppercase tracking-widest mb-2">Advanced</div>
+      <h2 class="text-3xl font-extrabold text-white mb-3">Parallel charging — fast but risky</h2>
+      <p class="text-slate-400 mb-6 leading-relaxed max-w-3xl">Parallel charging lets you charge multiple packs simultaneously from one charger. The charger sees it as one big pack. The risk: if packs are at different voltages, current flows <em>between packs</em> before the charger even starts — potentially at hundreds of amps through thin wires.</p>
+      <div class="grid sm:grid-cols-2 gap-4">
+        <div>
+          <div class="text-sm font-bold text-white mb-3">Before you parallel charge:</div>
+          <ul class="space-y-2">
+            {[
+              'Check voltage on every pack — must be within 0.1V of each other',
+              'Feel each pack — never parallel charge a warm pack',
+              'Use a proper parallel board with fuse protection',
+              'Set charger to total mAh (sum of all packs)',
+              'Stay nearby during the session — never leave unattended',
+            ].map(item => (
+              <li class="flex items-start gap-2.5 text-sm text-slate-400">
+                <svg class="w-4 h-4 text-k2-primary flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd"/>
+                </svg>
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div class="rounded-xl border border-amber-500/25 bg-amber-900/10 p-5">
+          <div class="flex items-start gap-3">
+            <span class="text-amber-400 text-xl flex-shrink-0">⚠</span>
+            <div class="text-sm">
+              <strong class="text-amber-400 block mb-2">AI drone field ops:</strong>
+              <span class="text-slate-400">For autonomous patrol missions, you'll swap packs frequently. Parallel charging 2–3 packs at once works well with the HOTA D6 Pro's dual ports. Never parallel charge packs from different charge cycles — always group packs that came off the same mission together. Their voltages will match.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Storage voltage -->
+    <section>
+      <div class="text-xs font-bold text-k2-primary uppercase tracking-widest mb-2">Storage</div>
+      <h2 class="text-3xl font-extrabold text-white mb-3">Always store at 3.85V/cell</h2>
+      <p class="text-slate-400 mb-6 text-sm leading-relaxed max-w-3xl">Storing a fully charged or fully discharged LiPo accelerates cell degradation. <strong class="text-white">3.85V/cell (~50% charge)</strong> is the stable storage voltage. The HOTA D6 Pro has a dedicated storage charge mode — use it if you're not flying within 24 hours.</p>
+      <div class="grid grid-cols-3 gap-4">
+        {[
+          { label:'Discharged (<3.5V/cell)', note:'Cell damage if stored. Charge immediately.', bad:true },
+          { label:'Storage (3.85V/cell)', note:'Optimal. Stable, minimal degradation.', good:true },
+          { label:'Full charge (4.2V/cell)', note:'Fine for same-day fly. Damages cells if stored.', bad:true },
+        ].map(r => (
+          <div class={`rounded-xl border p-4 text-center ${r.good ? 'border-k2-primary/30 bg-k2-primary/8' : 'border-k2-border bg-k2-card'}`}>
+            <div class={`text-xs font-semibold mb-2 ${r.good ? 'text-k2-light' : 'text-slate-400'}`}>{r.label}</div>
+            <div class="text-xs text-slate-500 leading-snug">{r.note}</div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- Our charger -->
+    <section>
+      <div class="text-xs font-bold text-k2-primary uppercase tracking-widest mb-2">What We Run</div>
+      <h2 class="text-3xl font-extrabold text-white mb-6">Our charger setup</h2>
+      <div class="grid sm:grid-cols-2 gap-5">
+        {ourChargers.map(p => <AffiliateCard {...p} />)}
+      </div>
+    </section>
+
+    <div class="grid sm:grid-cols-2 gap-4">
+      <a href="/fpv/fc-guide/" class="group rounded-2xl border border-k2-border bg-k2-card p-6 hover:border-k2-primary/40 hover:-translate-y-1 transition-all duration-300">
+        <div class="text-xs font-bold text-slate-500 uppercase tracking-widest mb-2">Previous guide</div>
+        <div class="font-bold text-white group-hover:text-k2-light transition-colors">← Flight Stack Guide</div>
+      </a>
+      <a href="/fpv/7-inch-build/" class="group rounded-2xl border border-k2-primary/25 bg-k2-card p-6 hover:border-k2-primary/50 hover:-translate-y-1 transition-all duration-300">
+        <div class="text-xs font-bold text-k2-primary uppercase tracking-widest mb-2">Put it all together</div>
+        <div class="font-bold text-white group-hover:text-k2-light transition-colors">7″ Guard Drone Build →</div>
+        <div class="text-sm text-slate-500 mt-1">Every guide in one complete build</div>
+      </a>
+    </div>
+
+    <div class="p-5 bg-k2-card border border-k2-border rounded-xl text-sm text-slate-400">
+      <strong class="text-slate-300">Affiliate disclosure:</strong> As an Amazon Associate, KnowlEdge2 AI earns from qualifying purchases.
+      <a href="/about#disclosure" class="text-k2-light hover:underline ml-1">Full disclosure →</a>
+    </div>
+  </main>
+  <Footer />
+</Base>
+
+<style>
+.orb{position:absolute;border-radius:50%;filter:blur(70px);animation:orbFloat 9s ease-in-out infinite;pointer-events:none}
+.orb-a{width:420px;height:420px;background:radial-gradient(circle,rgba(6,182,212,0.10) 0%,transparent 70%);top:-80px;right:-60px}
+.orb-b{width:280px;height:280px;background:radial-gradient(circle,rgba(59,130,246,0.07) 0%,transparent 70%);bottom:20px;left:15%;animation-delay:-4s}
+@keyframes orbFloat{0%,100%{transform:translate(0,0)}50%{transform:translate(15px,-12px)}}
+.hero-grid{background-image:linear-gradient(rgba(6,182,212,1) 1px,transparent 1px),linear-gradient(90deg,rgba(6,182,212,1) 1px,transparent 1px);background-size:60px 60px;opacity:0.025}
+.gradient-text{background:linear-gradient(135deg,#22d3ee 0%,#3b82f6 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.fade-up{animation:fadeInUp 0.7s cubic-bezier(0.16,1,0.3,1) both}
+@keyframes fadeInUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+</style>

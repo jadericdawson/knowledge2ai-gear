@@ -84,13 +84,13 @@ import Footer from '../../components/Footer.astro';
     </a>
   </section>
 
-  <!-- Other guides -->
-  <section class="max-w-5xl mx-auto px-5 sm:px-8 pb-20">
-    <div class="text-xs font-bold text-slate-500 uppercase tracking-widest mb-6">More guides</div>
+  <!-- Other build guides -->
+  <section class="max-w-5xl mx-auto px-5 sm:px-8 pb-6">
+    <div class="text-xs font-bold text-slate-500 uppercase tracking-widest mb-6">Build guides</div>
     <div class="grid sm:grid-cols-3 gap-5">
       {[
         { href: '/fpv/beginner-kit/', icon: '🎮', label: 'Start Here', title: 'FPV Beginner Kit', desc: 'Everything you need to fly your first FPV drone in 2026. Complete kit with Amazon links.', time: '10 min' },
-        { href: '/fpv/4-inch-build/', icon: '🔧', label: 'Build Guide', title: '4″ FPV Build', desc: 'JHEMCU F745 stack, AM32 ESC, 2406 motors. The indoor urban build for tight spaces.', time: '25 min' },
+        { href: '/fpv/4-inch-build/', icon: '🔧', label: 'Build Guide', title: '4″ FPV Build', desc: 'JHEMCU F745 stack, AM32 ESC, 2809 motors. The indoor urban build for tight spaces.', time: '25 min' },
         { href: '/fpv/tools/', icon: '🛠️', label: 'Tools', title: "Builder's Tool Kit", desc: "Soldering stations, chargers, multimeters, smoke stoppers. What's actually on the bench.", time: '8 min' },
       ].map((g, i) => (
         <a href={g.href}
@@ -111,6 +111,43 @@ import Footer from '../../components/Footer.astro';
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
               </svg>
             </span>
+          </div>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <!-- Component Guides section -->
+  <section class="max-w-5xl mx-auto px-5 sm:px-8 pb-20">
+    <div class="border-t border-k2-border pt-12 mb-8">
+      <div class="text-xs font-bold text-k2-primary uppercase tracking-widest mb-2">Learn before you buy</div>
+      <h2 class="text-2xl sm:text-3xl font-extrabold text-white">Component selection guides</h2>
+      <p class="text-slate-500 text-sm mt-2 max-w-2xl">Every guide teaches one decision, then shows exactly what we chose and why — with the products that make the build work.</p>
+    </div>
+    <div class="grid sm:grid-cols-2 gap-5">
+      {[
+        { href: '/fpv/motor-guide/',   icon: '⚡', label: 'KV · Stator · Thrust',  title: 'Motor Selection',   desc: 'Stator size notation, KV vs cell count, thrust-to-weight math, and why we run 2809 1250KV on 6S for the AI drone.' },
+        { href: '/fpv/battery-guide/', icon: '🔋', label: 'Cells · C Rating · LiPo', title: 'Battery Guide',    desc: 'Cell count sets your voltage system. C rating determines whether your pack survives the draw. Size it wrong and you\'re grounded.' },
+        { href: '/fpv/fc-guide/',      icon: '🎛️', label: 'F4 · F7 · H7 · AM32',  title: 'Flight Stack',      desc: 'Why AI autonomous drones need H7 + 8 UARTs. AM32 vs BLHeli for ArduPilot. The exact Matek + Foxeer stack we run.' },
+        { href: '/fpv/charger-guide/', icon: '⚡', label: 'Rate · Balance · Storage', title: 'Charger Guide',  desc: 'Charge rate math, balance every time, parallel charging risks, and storage voltage — all explained for 6S field ops.' },
+      ].map((g, i) => (
+        <a href={g.href}
+           class="guide-card group flex gap-5 rounded-2xl border border-k2-border bg-k2-card p-6
+                  hover:border-k2-primary/40 hover:-translate-y-1
+                  transition-all duration-400
+                  hover:shadow-[0_16px_48px_rgba(0,0,0,0.45),0_0_0_1px_rgba(6,182,212,0.08)]"
+           style={`animation-delay:${i * 70}ms`}>
+          <div class="text-3xl flex-shrink-0 mt-0.5">{g.icon}</div>
+          <div class="flex-1">
+            <div class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">{g.label}</div>
+            <h3 class="font-bold text-white text-lg mb-2 group-hover:text-k2-light transition-colors">{g.title}</h3>
+            <p class="text-sm text-slate-400 leading-relaxed">{g.desc}</p>
+            <div class="mt-4 text-k2-light text-sm font-semibold flex items-center gap-1 group-hover:gap-2 transition-all">
+              Read guide
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+              </svg>
+            </div>
           </div>
         </a>
       ))}

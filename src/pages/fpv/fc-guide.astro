@@ -1,0 +1,195 @@
+---
+import Base from '../../layouts/Base.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+import AffiliateCard from '../../components/AffiliateCard.astro';
+
+const fcTiers = [
+  { mcu:'F4', speed:'168MHz', uarts:4, ardupilot:'Limited', ai:'No — not enough UARTs', highlight:false,
+    note:'Fine for racing/freestyle. Not enough serial ports for GPS + companion + RC + telemetry.' },
+  { mcu:'F7', speed:'216MHz', uarts:6, ardupilot:'Good',    ai:'Possible with planning',   highlight:false,
+    note:'6 UARTs covers most builds. Tighter if you need GPS + companion + ELRS + VTX + telemetry all at once.' },
+  { mcu:'H7', speed:'480MHz', uarts:8, ardupilot:'Best',    ai:'Yes — our choice',           highlight:true,
+    note:'ArduPilot\'s preferred processor. 8 UARTs = GPS + Jetson + ELRS + telemetry + VTX with ports to spare.' },
+];
+
+const uartMap = [
+  { port:'SERIAL1', connected:'Jetson Orin (MAVLink)',     protocol:'MAVLink2', baud:'921600' },
+  { port:'SERIAL3', connected:'ZED-F9P RTK GPS',           protocol:'GPS',      baud:'38400'  },
+  { port:'SERIAL4', connected:'Telemetry / GCS',           protocol:'MAVLink2', baud:'57600'  },
+  { port:'SERIAL7', connected:'RadioMaster RP3 ELRS',      protocol:'CRSF',     baud:'420000' },
+  { port:'SERIAL5', connected:'DJI O3 (optional)',         protocol:'DisplayPort','baud':'115200' },
+];
+
+const ourStack = [
+  { title:'Matek Systems H743-Slim V3 Flight Controller', asin:'B0C69X1G41', rating:'4.6/5',
+    description:'Our FC. STM32H743 at 480MHz. 8 UARTs fills every serial port on our build: Jetson companion, ZED-F9P GPS, ELRS receiver, telemetry, DJI O3. ArduPilot 4.6.2 native.', badge:'We Fly This' },
+  { title:'Foxeer Reaper F4 65A 4-in-1 ESC (AM32)', asin:'B0972ZKNT2', rating:'4.4/5',
+    description:'Our ESC. 65A continuous per channel on 3–8S. AM32 open-source firmware — bidirectional DSHOT works flawlessly with ArduPilot. Configure via esc-configurator.com (not BLHeli Suite 32).', badge:'We Use This' },
+];
+---
+<Base title="Flight Controller & ESC Guide — FC Stack for ArduPilot AI Drones" description="F4 vs F7 vs H7 explained. Why UARTs matter for AI drones. AM32 vs BLHeli. The exact Matek H743 + Foxeer Reaper stack we run on the guard drone.">
+  <Nav />
+
+  <section class="relative min-h-[55vh] flex items-center overflow-hidden border-b border-k2-border">
+    <div class="absolute inset-0 bg-k2-bg"></div>
+    <div class="orb orb-a"></div><div class="orb orb-b"></div>
+    <div class="hero-grid absolute inset-0"></div>
+    <div class="relative max-w-5xl mx-auto px-5 sm:px-8 py-20 w-full">
+      <a href="/fpv/" class="fade-up inline-flex items-center gap-1.5 text-xs text-slate-500 hover:text-k2-light transition-colors mb-6">← FPV Drones</a>
+      <div class="fade-up text-xs font-bold text-k2-primary uppercase tracking-widest mb-4" style="animation-delay:40ms">Component Guide</div>
+      <h1 class="fade-up text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white leading-tight mb-5" style="animation-delay:80ms">
+        Your flight<br/><span class="gradient-text">stack matters.</span>
+      </h1>
+      <p class="fade-up text-lg text-slate-400 max-w-xl leading-relaxed" style="animation-delay:130ms">
+        The FC is the nervous system. The ESC is the muscle. An AI autonomous drone needs more serial ports, faster processing, and open-source firmware than a racing quad. Here's why H7 + AM32 is the only real choice.
+      </p>
+      <div class="fade-up flex flex-wrap gap-6 mt-8" style="animation-delay:180ms">
+        {[['H743','MCU, 480MHz'],['8 UARTs','All occupied'],['AM32','Open-source ESC'],['30×30','Mounting size']].map(([v,l]) => (
+          <div><div class="text-xl font-extrabold text-k2-light">{v}</div><div class="text-xs text-slate-500">{l}</div></div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <main class="max-w-5xl mx-auto px-5 sm:px-8 py-14 space-y-16">
+
+    <!-- F4 vs F7 vs H7 -->
+    <section>
+      <div class="text-xs font-bold text-k2-primary uppercase tracking-widest mb-2">Processor Generation</div>
+      <h2 class="text-3xl font-extrabold text-white mb-3">F4 vs F7 vs H7</h2>
+      <p class="text-slate-400 mb-8 leading-relaxed max-w-3xl">The letter+number in every FC spec refers to the STM32 microcontroller generation. The key difference for AI autonomous builds isn't clock speed — it's <strong class="text-white">UART count</strong>. Every peripheral that talks to the FC needs a UART. Run out and your build can't have a companion computer.</p>
+      <div class="grid sm:grid-cols-3 gap-4">
+        {fcTiers.map((fc, i) => (
+          <div class={`rounded-2xl border p-6 fade-up relative overflow-hidden ${fc.highlight ? 'border-k2-primary/50 bg-gradient-to-br from-k2-primary/10 to-k2-card' : 'border-k2-border bg-k2-card'}`}
+               style={`animation-delay:${i*80}ms`}>
+            {fc.highlight && <div class="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-k2-primary to-k2-blue"></div>}
+            <div class="flex items-center justify-between mb-4">
+              <div class={`text-3xl font-extrabold ${fc.highlight ? 'text-k2-light' : 'text-white'}`}>{fc.mcu}</div>
+              {fc.highlight && <span class="text-[9px] font-bold bg-k2-primary text-white px-2 py-0.5 rounded">Our Pick</span>}
+            </div>
+            <div class="space-y-2 text-sm mb-4">
+              <div class="flex justify-between"><span class="text-slate-500">Speed</span><span class="font-mono text-white">{fc.speed}</span></div>
+              <div class="flex justify-between"><span class="text-slate-500">UARTs</span><span class={`font-bold ${fc.highlight ? 'text-k2-light' : 'text-white'}`}>{fc.uarts}</span></div>
+              <div class="flex justify-between"><span class="text-slate-500">ArduPilot</span><span class="text-white">{fc.ardupilot}</span></div>
+              <div class="flex justify-between"><span class="text-slate-500">AI drone?</span><span class={`text-xs font-semibold ${fc.highlight ? 'text-k2-light' : 'text-slate-400'}`}>{fc.ai}</span></div>
+            </div>
+            <p class="text-xs text-slate-500 leading-relaxed">{fc.note}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- Why UARTs matter -->
+    <section class="rounded-2xl border border-k2-primary/20 bg-k2-card overflow-hidden">
+      <div class="h-1 bg-gradient-to-r from-k2-primary to-k2-blue"></div>
+      <div class="p-7 sm:p-10">
+        <div class="text-xs font-bold text-k2-primary uppercase tracking-widest mb-3">The Constraint</div>
+        <h2 class="text-2xl font-bold text-white mb-3">Every device needs a UART — and AI drones use all of them</h2>
+        <p class="text-slate-400 text-sm leading-relaxed mb-6">A racing drone might need 3 UARTs: RC receiver, GPS, telemetry. An autonomous AI drone with a companion computer needs <strong class="text-white">5–6</strong>. The Matek H743 has 8 — every single one is occupied on our build.</p>
+        <div class="rounded-xl border border-k2-border overflow-hidden">
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="border-b border-k2-border bg-k2-bg/50">
+                <th class="text-left text-xs font-bold text-slate-500 uppercase tracking-wider px-4 py-3">UART Port</th>
+                <th class="text-left text-xs font-bold text-slate-500 uppercase tracking-wider px-4 py-3">Connected To</th>
+                <th class="text-left text-xs font-bold text-slate-500 uppercase tracking-wider px-4 py-3">Protocol</th>
+                <th class="text-left text-xs font-bold text-slate-500 uppercase tracking-wider px-4 py-3">Baud</th>
+              </tr>
+            </thead>
+            <tbody>
+              {uartMap.map((u, i) => (
+                <tr class={`border-b border-k2-border/50 ${i % 2 === 0 ? '' : 'bg-k2-panel/30'}`}>
+                  <td class="px-4 py-3 font-mono text-xs text-k2-light font-bold">{u.port}</td>
+                  <td class="px-4 py-3 text-white text-sm">{u.connected}</td>
+                  <td class="px-4 py-3 text-slate-400 font-mono text-xs">{u.protocol}</td>
+                  <td class="px-4 py-3 text-slate-400 font-mono text-xs">{u.baud}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ESC: AM32 vs BLHeli -->
+    <section>
+      <div class="text-xs font-bold text-k2-primary uppercase tracking-widest mb-2">ESC Firmware</div>
+      <h2 class="text-3xl font-extrabold text-white mb-3">AM32 is the right choice for ArduPilot</h2>
+      <p class="text-slate-400 mb-8 leading-relaxed max-w-3xl">ESC firmware determines how the FC communicates with your motors. For ArduPilot, this matters more than it does for Betaflight. Bidirectional DSHOT (RPM telemetry back to FC) enables RPM filtering and motor failure detection — critical for autonomous flight.</p>
+      <div class="grid sm:grid-cols-3 gap-4">
+        {[
+          { name:'AM32', note:'Open source. Best ArduPilot bidirectional DSHOT. Configured via esc-configurator.com. Active development. Our choice.', badge:'Our Choice', color:'border-k2-primary/40' },
+          { name:'BLHeli_32', note:'Closed source but excellent. Requires BLHeli Suite 32 for configuration. Bidirectional DSHOT works. Minor ArduPilot quirks.', badge:null, color:'border-k2-border' },
+          { name:'BLHeli_S', note:'Older protocol. Limited to DSHOT300, no bidirectional DSHOT on many hardware revisions. Not recommended for new builds.', badge:'Avoid', color:'border-k2-border' },
+        ].map((e, i) => (
+          <div class={`rounded-2xl border bg-k2-card p-6 fade-up ${e.color}`} style={`animation-delay:${i*80}ms`}>
+            <div class="flex items-center justify-between mb-3">
+              <div class="text-lg font-extrabold text-white">{e.name}</div>
+              {e.badge && <span class={`text-[9px] font-bold px-2 py-0.5 rounded ${e.badge === 'Avoid' ? 'bg-red-900/50 text-red-400' : 'bg-k2-primary text-white'}`}>{e.badge}</span>}
+            </div>
+            <p class="text-xs text-slate-400 leading-relaxed">{e.note}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- ESC Current rating -->
+    <section>
+      <div class="text-xs font-bold text-k2-primary uppercase tracking-widest mb-2">Sizing ESCs</div>
+      <h2 class="text-3xl font-extrabold text-white mb-3">Current rating: motor peak × 1.5</h2>
+      <p class="text-slate-400 mb-6 leading-relaxed max-w-3xl">Each ESC channel must handle your motor's peak current with a safety margin. Our 2809 motors peak at ~35A each. 35 × 1.5 = 52.5A minimum per channel. We use the Foxeer Reaper 65A — comfortable headroom. The rule: <strong class="text-white">never buy an ESC rated at exactly your motor's peak.</strong></p>
+      <div class="grid sm:grid-cols-4 gap-3">
+        {[
+          { rating:'30A', use:'1106–1408 micro motors', color:'text-slate-400' },
+          { rating:'45A', use:'2207 on 4–5S',           color:'text-slate-400' },
+          { rating:'65A', use:'2809 on 6S — our pick',   color:'text-k2-light', badge:true },
+          { rating:'80A+', use:'3115+ cinelifters',      color:'text-slate-400' },
+        ].map(r => (
+          <div class={`rounded-xl border bg-k2-card p-4 text-center ${r.badge ? 'border-k2-primary/40' : 'border-k2-border'}`}>
+            <div class={`text-2xl font-extrabold mb-1 ${r.color}`}>{r.rating}</div>
+            <div class="text-xs text-slate-500">{r.use}</div>
+            {r.badge && <div class="mt-2 text-[9px] font-bold bg-k2-primary text-white px-2 py-0.5 rounded inline-block">Our Pick</div>}
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- Our stack -->
+    <section>
+      <div class="text-xs font-bold text-k2-primary uppercase tracking-widest mb-2">What We Run</div>
+      <h2 class="text-3xl font-extrabold text-white mb-6">Our FC + ESC stack</h2>
+      <div class="grid sm:grid-cols-2 gap-5">
+        {ourStack.map(p => <AffiliateCard {...p} />)}
+      </div>
+    </section>
+
+    <div class="grid sm:grid-cols-2 gap-4">
+      <a href="/fpv/battery-guide/" class="group rounded-2xl border border-k2-border bg-k2-card p-6 hover:border-k2-primary/40 hover:-translate-y-1 transition-all duration-300">
+        <div class="text-xs font-bold text-slate-500 uppercase tracking-widest mb-2">Previous guide</div>
+        <div class="font-bold text-white group-hover:text-k2-light transition-colors">← Battery Selection</div>
+      </a>
+      <a href="/fpv/charger-guide/" class="group rounded-2xl border border-k2-border bg-k2-card p-6 hover:border-k2-primary/40 hover:-translate-y-1 transition-all duration-300">
+        <div class="text-xs font-bold text-slate-500 uppercase tracking-widest mb-2">Next guide</div>
+        <div class="font-bold text-white group-hover:text-k2-light transition-colors">Charger Guide →</div>
+      </a>
+    </div>
+
+    <div class="p-5 bg-k2-card border border-k2-border rounded-xl text-sm text-slate-400">
+      <strong class="text-slate-300">Affiliate disclosure:</strong> As an Amazon Associate, KnowlEdge2 AI earns from qualifying purchases.
+      <a href="/about#disclosure" class="text-k2-light hover:underline ml-1">Full disclosure →</a>
+    </div>
+  </main>
+  <Footer />
+</Base>
+
+<style>
+.orb{position:absolute;border-radius:50%;filter:blur(70px);animation:orbFloat 9s ease-in-out infinite;pointer-events:none}
+.orb-a{width:420px;height:420px;background:radial-gradient(circle,rgba(6,182,212,0.10) 0%,transparent 70%);top:-80px;right:-60px}
+.orb-b{width:280px;height:280px;background:radial-gradient(circle,rgba(59,130,246,0.07) 0%,transparent 70%);bottom:20px;left:15%;animation-delay:-4s}
+@keyframes orbFloat{0%,100%{transform:translate(0,0)}50%{transform:translate(15px,-12px)}}
+.hero-grid{background-image:linear-gradient(rgba(6,182,212,1) 1px,transparent 1px),linear-gradient(90deg,rgba(6,182,212,1) 1px,transparent 1px);background-size:60px 60px;opacity:0.025}
+.gradient-text{background:linear-gradient(135deg,#22d3ee 0%,#3b82f6 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.fade-up{animation:fadeInUp 0.7s cubic-bezier(0.16,1,0.3,1) both}
+@keyframes fadeInUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+</style>
