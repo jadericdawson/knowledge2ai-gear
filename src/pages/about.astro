@@ -5,76 +5,161 @@ import Footer from '../components/Footer.astro';
 ---
 <Base
   title="About KnowlEdge2 AI"
-  description="KnowlEdge2 AI LLC — autonomous AI drone systems, AI applications, and precision ag technology. Builder. Founder. Farmer."
+  description="KnowlEdge2 AI LLC — autonomous AI drone systems and AI applications. Builder. Founder."
 >
   <Nav />
 
-  <main class="max-w-3xl mx-auto px-4 sm:px-6 py-12">
-    <h1 class="text-3xl sm:text-4xl font-bold text-white mb-6">About KnowlEdge2 AI</h1>
+  <!-- Hero header -->
+  <section class="relative overflow-hidden border-b border-k2-border">
+    <div class="absolute inset-0 bg-gradient-to-br from-k2-primary/8 via-k2-bg to-k2-bg pointer-events-none"></div>
+    <div class="orb"></div>
+    <div class="max-w-5xl mx-auto px-5 sm:px-8 py-20 relative">
+      <div class="text-xs font-bold text-k2-primary uppercase tracking-widest mb-4 fade-up">About</div>
+      <h1 class="text-4xl sm:text-5xl font-extrabold text-white leading-tight mb-5 fade-up" style="animation-delay:60ms">
+        KnowlEdge2 AI LLC
+      </h1>
+      <p class="text-lg text-slate-400 max-w-2xl leading-relaxed fade-up" style="animation-delay:120ms">
+        We build autonomous AI-powered drone systems and AI software tools. This is the gear guide
+        for the hardware stack behind those products — every link is something we've soldered, flashed, or deployed.
+      </p>
+    </div>
+  </section>
 
-    <div class="space-y-6 text-slate-300 leading-relaxed">
+  <main class="max-w-5xl mx-auto px-5 sm:px-8 py-14 space-y-16">
 
-      <div class="bg-slate-900 border border-orange-500/20 rounded-xl p-6">
-        <p class="text-base">
-          KnowlEdge2 AI LLC builds autonomous AI-powered drone systems, AI software tools, and precision agriculture technology. We're the team deploying 7-inch autonomous guard drones with on-board Jetson Orin edge compute, running YOLOv8 vision models for real-time property surveillance — and then applying the same AI stack to agriculture, federal contracting tools, and enterprise software.
-        </p>
-      </div>
-
-      <h2 class="text-2xl font-bold text-white">What We're Building</h2>
-      <div class="grid sm:grid-cols-2 gap-4 not-prose text-sm">
+    <!-- What we build -->
+    <section>
+      <div class="text-xs font-bold text-k2-primary uppercase tracking-widest mb-6">What We Build</div>
+      <div class="grid sm:grid-cols-2 gap-4 not-prose">
         {[
           {
-            icon: '🚁',
+            icon: '🛡️',
             title: 'Autonomous Guard Drones',
-            desc: 'AI-driven property patrol drones with auto-landing/charging, YOLOv8 detection, and ArduPilot autonomy. Sold under KnowlEdge2 AI.',
+            desc: 'AI-driven property patrol drones with auto-landing/charging, YOLOv8 detection, and ArduPilot autonomy. Jetson Orin Nano Super on-board.',
+            href: '/fpv/7-inch-build/',
+            cta: 'See the build →',
           },
           {
             icon: '🤖',
             title: 'KnowlEdge2 AI Platform',
-            desc: 'AI application suite — including SBIR Assistant, SETR Assistant, T1D-AI, and enterprise tools deployed to Azure.',
+            desc: 'AI application suite deployed to Azure — including SBIR Assistant, SETR Assistant, T1D-AI, and enterprise knowledge tools.',
+            href: 'https://knowledge2-ai.com',
+            cta: 'knowledge2-ai.com ↗',
+            external: true,
+          },
+          {
+            icon: '🧠',
+            title: 'AI Developer Gear',
+            desc: 'The hardware stack behind our products — Jetson Orin Nano, NVMe upgrades, development workstation accessories reviewed and recommended.',
+            href: '/ai-gear/',
+            cta: 'Browse gear →',
           },
           {
             icon: '🌾',
             title: 'Dawson Family Farm',
-            desc: 'Real farm operations in Ohio — testing precision agriculture sensors, weather stations, and eventually drone-based crop monitoring.',
-          },
-          {
-            icon: '⚙️',
-            title: 'SBIR Contracting',
-            desc: 'Federal R&D proposals through Dawson Family Farm & Services LLC. The SBIR tools on this site come from that experience.',
+            desc: 'Real farm operations in Ohio. Testing precision ag sensors, weather stations, and eventually autonomous drone-based crop monitoring.',
+            href: null,
+            cta: null,
           },
         ].map(item => (
-          <div class="bg-slate-900 border border-slate-700 rounded-xl p-5">
-            <div class="text-2xl mb-2">{item.icon}</div>
-            <h3 class="font-semibold text-white mb-1">{item.title}</h3>
-            <p class="text-slate-400">{item.desc}</p>
+          <div class="rounded-2xl border border-k2-border bg-k2-card p-6 hover:border-k2-primary/35 transition-all duration-300">
+            <div class="text-2xl mb-3">{item.icon}</div>
+            <h3 class="font-bold text-white mb-2">{item.title}</h3>
+            <p class="text-sm text-slate-400 leading-relaxed mb-4">{item.desc}</p>
+            {item.href && (
+              <a
+                href={item.href}
+                target={item.external ? '_blank' : undefined}
+                rel={item.external ? 'noopener' : undefined}
+                class="text-sm text-k2-light hover:text-white font-semibold transition-colors"
+              >
+                {item.cta}
+              </a>
+            )}
           </div>
         ))}
       </div>
+    </section>
 
-      <h2 class="text-2xl font-bold text-white" id="disclosure">Affiliate Disclosure</h2>
-      <div class="bg-slate-900 border border-slate-700 rounded-xl p-5 text-sm space-y-3">
+    <!-- What's on this site -->
+    <section>
+      <div class="text-xs font-bold text-k2-primary uppercase tracking-widest mb-4">This Site</div>
+      <div class="rounded-2xl border border-k2-primary/20 bg-k2-card overflow-hidden">
+        <div class="h-1 bg-gradient-to-r from-k2-primary to-k2-blue"></div>
+        <div class="p-6 sm:p-8">
+          <h2 class="text-2xl font-bold text-white mb-4">Gear guides for builders</h2>
+          <div class="prose prose-sm prose-invert max-w-none text-slate-400 space-y-3">
+            <p>k2ai.shop is where we document the hardware stack behind KnowlEdge2 AI products. If we've built it, flown it, or deployed it, it's on here.</p>
+            <p>The primary focus is <strong class="text-white">autonomous FPV drone builds</strong> — particularly the 7-inch guard drone platform running Jetson Orin + ArduPilot + ROS2. Secondary focus is <strong class="text-white">AI developer gear</strong> — the Jetson, NVMe, cooling, and accessories needed to run real edge AI workloads.</p>
+            <p>Links to Amazon use our Associates tag <code class="text-k2-light bg-k2-bg px-1.5 py-0.5 rounded text-xs">knowledge2ai-20</code>. We earn a small commission at no cost to you.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Disclosure -->
+    <section id="disclosure">
+      <div class="text-xs font-bold text-k2-primary uppercase tracking-widest mb-4">Affiliate Disclosure</div>
+      <div class="rounded-2xl border border-k2-border bg-k2-card p-6 sm:p-8 space-y-4 text-sm text-slate-400">
         <p>
-          KnowlEdge2 AI is a participant in the <strong class="text-white">Amazon Services LLC Associates Program</strong>, an affiliate advertising program designed to provide a means for sites to earn advertising fees by advertising and linking to Amazon.com.
+          KnowlEdge2 AI is a participant in the <strong class="text-white">Amazon Services LLC Associates Program</strong>,
+          an affiliate advertising program designed to provide a means for sites to earn advertising fees by advertising
+          and linking to Amazon.com.
         </p>
         <p>
-          When you click an Amazon link on this site and make a purchase, we may earn a small commission at <strong class="text-white">no additional cost to you</strong>. Our affiliate store ID is <code class="text-orange-400 bg-slate-800 px-1.5 py-0.5 rounded">knowledge2ai-20</code>.
+          When you click an Amazon link on this site and make a purchase, we may earn a small commission at
+          <strong class="text-white">no additional cost to you</strong>. Our affiliate store ID is
+          <code class="text-k2-light bg-k2-bg px-1.5 py-0.5 rounded">knowledge2ai-20</code>.
         </p>
         <p>
-          <strong class="text-white">Our policy:</strong> We only recommend products we have personally purchased and used. Affiliate income does not influence our recommendations. If a product is on this site, we've tested it in actual builds, deployments, or farm operations. We will explicitly note when a product is something we haven't personally used.
-        </p>
-        <p>
-          <strong class="text-white">Prices:</strong> Amazon prices change frequently. Prices shown are approximations at time of writing. Always verify current price before purchasing.
+          <strong class="text-white">Our policy:</strong> We only recommend products we have personally purchased and used.
+          Affiliate income does not influence our recommendations. If a product is on this site, we've tested it in actual
+          builds, deployments, or operations.
         </p>
       </div>
+    </section>
 
-      <h2 class="text-2xl font-bold text-white">Contact</h2>
-      <p class="text-sm">
-        For partnerships, drone system inquiries, or technical questions: reach out via <a href="https://knowledge2-ai.com" target="_blank" rel="noopener" class="text-orange-400 hover:underline">knowledge2-ai.com</a>. For SBIR proposal assistance, see <a href="https://sbirassistant.com" target="_blank" rel="noopener" class="text-orange-400 hover:underline">sbirassistant.com</a>.
-      </p>
+    <!-- Contact -->
+    <section>
+      <div class="text-xs font-bold text-k2-primary uppercase tracking-widest mb-4">Contact</div>
+      <div class="flex flex-wrap gap-4 not-prose">
+        <a href="https://knowledge2-ai.com" target="_blank" rel="noopener"
+           class="inline-flex items-center gap-2 border border-k2-border hover:border-k2-primary/50 bg-k2-card hover:bg-k2-panel text-slate-300 hover:text-white font-semibold px-5 py-2.5 rounded-xl text-sm transition-all">
+          <img src="/k2-symbol.png" alt="" class="w-4 h-4 object-contain" />
+          knowledge2-ai.com ↗
+        </a>
+        <a href="https://sbirassistant.com" target="_blank" rel="noopener"
+           class="inline-flex items-center gap-2 border border-k2-border hover:border-k2-primary/50 bg-k2-card hover:bg-k2-panel text-slate-300 hover:text-white font-semibold px-5 py-2.5 rounded-xl text-sm transition-all">
+          SBIR Assistant ↗
+        </a>
+      </div>
+    </section>
 
-    </div>
   </main>
 
   <Footer />
 </Base>
+
+<style>
+.orb {
+  position: absolute;
+  width: 400px; height: 400px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(6,182,212,0.08) 0%, transparent 70%);
+  filter: blur(60px);
+  top: -80px; right: -60px;
+  pointer-events: none;
+  animation: float 8s ease-in-out infinite;
+}
+@keyframes float {
+  0%, 100% { transform: translate(0,0); }
+  50% { transform: translate(12px, -10px); }
+}
+.fade-up {
+  animation: fadeInUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+</style>

@@ -96,47 +96,52 @@ const aiComparison = [
   breadcrumb={breadcrumb}
   lastUpdated="March 2026"
 >
-  <div class="space-y-6 text-slate-300">
-    <div class="bg-slate-900 border border-orange-500/20 rounded-xl p-5">
-      <p class="text-sm leading-relaxed">
-        <strong class="text-white">Context:</strong> KnowlEdge2 AI builds autonomous drone systems and AI applications deployed to Azure and edge hardware. This page covers the physical gear behind those deployments — Jetson Orin for drone edge compute and desktop AI workstation accessories.
-      </p>
+  <div class="space-y-10 text-slate-300">
+
+    <div>
+      <h2 class="text-2xl font-bold text-white mb-6">Jetson Edge Compute</h2>
+      <div class="grid sm:grid-cols-2 gap-5 not-prose">
+        {jetsonGear.map(p => (
+          <AffiliateCard {...p} />
+        ))}
+      </div>
     </div>
 
-    <h2 class="text-2xl font-bold text-white">Jetson Edge Compute</h2>
-    <div class="grid sm:grid-cols-2 gap-5 not-prose">
-      {jetsonGear.map(p => (
-        <AffiliateCard {...p} />
-      ))}
+    <div>
+      <h2 class="text-2xl font-bold text-white mb-6">Dev Workstation Accessories</h2>
+      <div class="grid sm:grid-cols-2 gap-5 not-prose">
+        {devGear.map(p => (
+          <AffiliateCard {...p} />
+        ))}
+      </div>
     </div>
 
-    <h2 class="text-2xl font-bold text-white pt-4">Dev Workstation Accessories</h2>
-    <div class="grid sm:grid-cols-2 gap-5 not-prose">
-      {devGear.map(p => (
-        <AffiliateCard {...p} />
-      ))}
+    <div>
+      <h2 class="text-2xl font-bold text-white mb-4">Quick Comparison</h2>
+      <ProductTable caption="AI Gear Quick Reference" products={aiComparison} />
     </div>
 
-    <h2 class="text-2xl font-bold text-white pt-4">Quick Comparison</h2>
-    <ProductTable caption="AI Gear Quick Reference" products={aiComparison} />
-
-    <h2 class="text-2xl font-bold text-white pt-4">Our Deployed Stack</h2>
-    <div class="grid sm:grid-cols-2 gap-4 text-sm not-prose">
-      {[
-        { label: 'Edge inference', value: 'Jetson Orin Nano Super — YOLOv8n TRT FP16' },
-        { label: 'Simulation', value: 'Isaac Sim 4.5 + Pegasus 5.1 on RTX 3070' },
-        { label: 'Cloud', value: 'Azure East US 2 — Static Web Apps, App Service' },
-        { label: 'AI apps', value: 'KnowlEdge2 AI, SBIR Assistant, SETR Assistant' },
-      ].map(item => (
-        <div class="bg-slate-900 border border-slate-700 rounded-lg px-4 py-3">
-          <div class="text-xs text-slate-500 mb-1">{item.label}</div>
-          <div class="font-medium text-white">{item.value}</div>
-        </div>
-      ))}
+    <div>
+      <h2 class="text-2xl font-bold text-white mb-4">Our Deployed Stack</h2>
+      <div class="grid sm:grid-cols-2 gap-3 not-prose">
+        {[
+          { label: 'Edge inference', value: 'Jetson Orin Nano Super — YOLOv8n TRT FP16' },
+          { label: 'Simulation', value: 'Isaac Sim 4.5 + Pegasus 5.1 on RTX 3070' },
+          { label: 'Cloud', value: 'Azure East US 2 — Static Web Apps, App Service' },
+          { label: 'AI apps', value: 'KnowlEdge2 AI, SBIR Assistant, SETR Assistant' },
+        ].map(item => (
+          <div class="rounded-lg border border-k2-border bg-k2-card px-4 py-3 flex items-center justify-between gap-3">
+            <span class="text-xs text-slate-500 flex-shrink-0">{item.label}</span>
+            <span class="text-sm font-semibold text-white text-right">{item.value}</span>
+          </div>
+        ))}
+      </div>
     </div>
 
-    <div class="bg-amber-900/20 border border-amber-500/30 rounded-xl p-4 text-sm">
-      <strong class="text-amber-400">⚠ GPU + surge protectors:</strong> Heavy GPU load (Isaac Sim, training) on a desktop RTX 3070 can trip basic surge strips. Use a UPS like the APC BX1500M — not a $15 power bar.
+    <div class="rounded-xl border border-amber-500/25 bg-amber-900/10 p-5 text-sm flex items-start gap-3">
+      <span class="text-amber-400 text-lg flex-shrink-0">⚠</span>
+      <span class="text-slate-400"><strong class="text-amber-400">GPU + surge protectors:</strong> Heavy GPU load (Isaac Sim, training) on a desktop RTX 3070 can trip basic surge strips. Use a UPS like the APC BX1500M — not a $15 power bar.</span>
     </div>
+
   </div>
 </ArticleLayout>

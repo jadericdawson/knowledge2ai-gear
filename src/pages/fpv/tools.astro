@@ -9,7 +9,6 @@ const tools = [
   {
     title: 'Pinecil Smart Soldering Iron V2',
     asin: 'B096X6SG13',
-    price: '~$26',
     rating: '4.8/5',
     description: 'RISC-V processor, USB-C PD power, reaches working temp in 6 seconds. Better than irons costing 4× more. Best value purchase for any builder.',
     badge: 'Best Buy',
@@ -17,7 +16,6 @@ const tools = [
   {
     title: 'Hakko FX-888D Digital Soldering Station',
     asin: 'B00ANZRT4M',
-    price: '~$99',
     rating: '4.8/5',
     description: 'The professional bench standard. Analog feel with precise digital temp control. If you solder daily, get this. If occasionally, get the Pinecil.',
     badge: 'Best Station',
@@ -25,7 +23,6 @@ const tools = [
   {
     title: 'HOTA D6 Pro AC/DC LiPo Charger',
     asin: 'B0CF9F8N94',
-    price: '~$152',
     rating: '4.7/5',
     description: 'AC direct dual-port charger, 1S–6S, displays cell IR. The only LiPo charger worth owning. We have two on our build bench.',
     badge: 'We Use This',
@@ -33,7 +30,6 @@ const tools = [
   {
     title: 'Klein Tools MM400 Auto-Ranging Multimeter',
     asin: 'B018EXZO8M',
-    price: '~$40',
     rating: '4.7/5',
     description: 'Auto-ranging, True RMS, CAT III 600V rated. Use it to trace shorts, verify voltage rails, and check motor continuity before first spinup.',
     badge: null,
@@ -41,15 +37,13 @@ const tools = [
   {
     title: 'iFlight Smoke Stopper / Current Limiter',
     asin: 'B08MT4YKJY',
-    price: '~$12',
     rating: '4.4/5',
-    description: 'In-line power limiter — cuts current if there\'s a short. Saved us from a fried ESC at least twice. Wire this between battery and build on first powerup.',
+    description: 'In-line power limiter — cuts current if there\'s a short. Saved us from a fried ESC at least twice. Wire between battery and build on first powerup.',
     badge: 'Safety Essential',
   },
   {
     title: 'MG Chemicals 835 No-Clean Flux',
     asin: 'B008UH4DT4',
-    price: '~$10',
     rating: '4.7/5',
     description: 'No-clean rosin flux for motor wires to ESC pads. Makes soldering thick gauge wire dramatically easier. Tiny bottle lasts a long time.',
     badge: null,
@@ -57,7 +51,6 @@ const tools = [
   {
     title: 'KOOWIN Heat Shrink Tubing Kit (720-pc)',
     asin: 'B098LB9LTJ',
-    price: '~$10',
     rating: '4.5/5',
     description: '3:1 dual-wall shrink tubing in multiple diameters. Use on battery leads, motor wires, and XT60 connectors. Massive kit, buy once.',
     badge: null,
@@ -65,7 +58,6 @@ const tools = [
   {
     title: 'Tenergy LiPo Safe Charging Bags (2-Pack)',
     asin: 'B09BDJQK53',
-    price: '~$14',
     rating: '4.6/5',
     description: 'Always charge LiPos in these. Always store LiPos in these. A thermal event in a 6S pack will burn your house down. This is not optional.',
     badge: 'Safety Essential',
@@ -73,7 +65,6 @@ const tools = [
   {
     title: 'SkyRC B6 Mini V2 Balance Charger',
     asin: 'B0822RM9VJ',
-    price: '~$35',
     rating: '4.5/5',
     description: 'Compact 60W balance charger for 1S–6S. Good secondary charger or portable field option. Requires 12V DC input (car adapter or bench PSU).',
     badge: null,
@@ -81,47 +72,91 @@ const tools = [
 ];
 
 const chargerComparison = [
-  { title: 'HOTA D6 Pro', asin: 'B0CF9F8N94', price: '~$152', highlight: 'AC direct, dual, IR display', badge: 'Our Pick' },
-  { title: 'SkyRC B6 Mini V2', asin: 'B0822RM9VJ', price: '~$35', highlight: '60W, DC only, portable', badge: 'Budget/Field' },
-  { title: 'ISDT Q8 Max', searchQuery: 'ISDT Q8 Max LiPo charger 500W', price: '~$79', highlight: '500W, needs PSU', badge: null },
-  { title: 'Junsi iCharger 4010 Duo', searchQuery: 'Junsi iCharger 4010 Duo', price: '~$319', highlight: '1000W dual, pro-grade', badge: null },
+  { title: 'HOTA D6 Pro', asin: 'B0CF9F8N94', highlight: 'AC direct, dual, IR display', badge: 'Our Pick' },
+  { title: 'SkyRC B6 Mini V2', asin: 'B0822RM9VJ', highlight: '60W, DC only, portable', badge: 'Budget/Field' },
+  { title: 'ISDT Q8 Max', searchQuery: 'ISDT Q8 Max LiPo charger 500W', highlight: '500W, needs PSU', badge: null },
+  { title: 'Junsi iCharger 4010 Duo', searchQuery: 'Junsi iCharger 4010 Duo', highlight: '1000W dual, pro-grade', badge: null },
 ];
 ---
 <ArticleLayout
   title="FPV Builder's Tool Kit — What's Actually on My Bench"
-  description="Every tool we use building autonomous drones at KnowlEdge2 AI. Soldering stations, LiPo chargers, multimeters, safety gear. What matters vs. what YouTube sells you."
+  description="Every tool we use building autonomous drones at KnowlEdge2 AI. Soldering stations, LiPo chargers, multimeters, safety gear."
   breadcrumb={breadcrumb}
   lastUpdated="March 2026"
 >
-  <div class="space-y-6 text-slate-300">
-    <div class="bg-slate-900 border border-orange-500/20 rounded-xl p-5">
-      <p class="text-sm leading-relaxed">
-        <strong class="text-white">The short version:</strong> You need a soldering iron, a LiPo charger, a multimeter, and a smoke stopper. Everything else is nice-to-have. This list covers the exact tools on our build bench — including what we've broken and replaced.
-      </p>
+  <div class="space-y-8 text-slate-300">
+
+    <!-- TL;DR -->
+    <div class="rounded-xl border border-k2-primary/20 bg-k2-card p-6">
+      <div class="flex items-start gap-3">
+        <svg class="w-5 h-5 text-k2-primary flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+          <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a.75.75 0 000 1.5h.253a.25.25 0 01.244.304l-.459 2.066A1.75 1.75 0 0010.747 15H11a.75.75 0 000-1.5h-.253a.25.25 0 01-.244-.304l.459-2.066A1.75 1.75 0 009.253 9H9z" clip-rule="evenodd"/>
+        </svg>
+        <p class="text-sm leading-relaxed">
+          <strong class="text-white">The short version:</strong> You need a soldering iron, a LiPo charger, a multimeter, and a smoke stopper.
+          Everything else is nice-to-have. This list covers the exact tools on our build bench — including what we've broken and replaced.
+        </p>
+      </div>
     </div>
 
-    <h2 class="text-2xl font-bold text-white">Bench Tools</h2>
-    <div class="grid sm:grid-cols-2 gap-5 not-prose">
-      {tools.map(t => (
-        <AffiliateCard {...t} />
-      ))}
+    <!-- Tools grid -->
+    <div>
+      <h2 class="text-2xl font-bold text-white mb-6">Bench Tools</h2>
+      <div class="grid sm:grid-cols-2 gap-5 not-prose">
+        {tools.map(t => (
+          <AffiliateCard {...t} />
+        ))}
+      </div>
     </div>
 
-    <h2 class="text-2xl font-bold text-white pt-4">LiPo Charger Comparison</h2>
-    <p class="text-sm">The HOTA D6 Pro is the buy-once option. The SkyRC is fine if you're budget-constrained and only charge 1-2 packs at a time in the field.</p>
-    <ProductTable caption="LiPo Charger Comparison (2026)" products={chargerComparison} />
+    <!-- Charger comparison -->
+    <div>
+      <h2 class="text-2xl font-bold text-white mb-3">LiPo Charger Comparison</h2>
+      <p class="text-sm text-slate-400 mb-4">The HOTA D6 Pro is the buy-once option. The SkyRC is fine if you're budget-constrained and only charge 1-2 packs at a time in the field.</p>
+      <ProductTable caption="LiPo Charger Comparison (2026)" products={chargerComparison} />
+    </div>
 
-    <h2 class="text-2xl font-bold text-white pt-4">What You Don't Need</h2>
-    <ul class="list-disc list-inside space-y-2 text-sm">
-      <li><strong class="text-white">Hot air rework station</strong> — useful but not required for first 10 builds.</li>
-      <li><strong class="text-white">Oscilloscope</strong> — not needed for drone builds. MAVLink telemetry gives you all the diagnostics you need.</li>
-      <li><strong class="text-white">$200+ soldering station</strong> — the Pinecil does 95% of what the Hakko does at 25% the cost.</li>
-      <li><strong class="text-white">Lab power supply</strong> — use the smoke stopper instead for first powerup testing.</li>
-    </ul>
+    <!-- What you don't need -->
+    <div class="rounded-xl border border-k2-border bg-k2-card p-6">
+      <h2 class="text-xl font-bold text-white mb-4">What You Don't Need</h2>
+      <ul class="space-y-3 text-sm text-slate-400">
+        {[
+          ['Hot air rework station', 'Useful but not required for first 10 builds.'],
+          ['Oscilloscope', 'Not needed for drone builds. MAVLink telemetry gives you all the diagnostics you need.'],
+          ['$200+ soldering station', 'The Pinecil does 95% of what the Hakko does at 25% the cost.'],
+          ['Lab power supply', 'Use the smoke stopper instead for first powerup testing.'],
+        ].map(([item, reason]) => (
+          <li class="flex items-start gap-3">
+            <svg class="w-4 h-4 text-slate-600 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.28 7.22a.75.75 0 00-1.06 1.06L8.94 10l-1.72 1.72a.75.75 0 101.06 1.06L10 11.06l1.72 1.72a.75.75 0 101.06-1.06L11.06 10l1.72-1.72a.75.75 0 00-1.06-1.06L10 8.94 8.28 7.22z" clip-rule="evenodd"/>
+            </svg>
+            <span><strong class="text-white">{item}:</strong> {reason}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
 
-    <h2 class="text-2xl font-bold text-white pt-4">Build With These</h2>
-    <p class="text-sm">
-      Ready to solder? Start with the <a href="/fpv/4-inch-build/" class="text-orange-400 hover:underline">4-inch build guide</a>, or go straight to the <a href="/fpv/7-inch-build/" class="text-orange-400 hover:underline">7-inch autonomous guard drone</a>.
-    </p>
+    <!-- CTA to builds -->
+    <div class="grid sm:grid-cols-2 gap-4 not-prose">
+      <a href="/fpv/4-inch-build/" class="rounded-xl border border-k2-border bg-k2-card hover:border-k2-primary/40 hover:-translate-y-0.5 transition-all duration-300 p-5 flex items-center justify-between group">
+        <div>
+          <div class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">Build Guide</div>
+          <div class="font-bold text-white group-hover:text-k2-light transition-colors">4" FPV Build →</div>
+        </div>
+        <svg class="w-5 h-5 text-k2-light group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+        </svg>
+      </a>
+      <a href="/fpv/7-inch-build/" class="rounded-xl border border-k2-primary/25 bg-k2-card hover:border-k2-primary/50 hover:-translate-y-0.5 transition-all duration-300 p-5 flex items-center justify-between group">
+        <div>
+          <div class="text-xs font-bold text-k2-primary uppercase tracking-wider mb-1">Flagship</div>
+          <div class="font-bold text-white group-hover:text-k2-light transition-colors">7" Guard Drone →</div>
+        </div>
+        <svg class="w-5 h-5 text-k2-light group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+        </svg>
+      </a>
+    </div>
+
   </div>
 </ArticleLayout>

@@ -9,7 +9,6 @@ const partsList = [
   {
     title: 'JHEMCU F745 NOXE Stack (FC + 60A BL32 ESC)',
     asin: 'B0DSJZXSC9',
-    price: '~$89',
     rating: '4.4/5',
     description: 'H7 processor flight controller + 60A 4-in-1 ESC stack. Solid UART count for GPS + companion + RC + telemetry simultaneously. 30×30mm.',
     badge: 'We Fly This',
@@ -17,7 +16,6 @@ const partsList = [
   {
     title: 'iFlight Xing2 2809 1250KV Motors (4-Pack)',
     asin: 'B09XTR2KFX',
-    price: '~$68',
     rating: '4.5/5',
     description: 'Our motors. Cinelifter-grade 2809 stators. Smooth, quiet, efficient on 6S. Handles 4" × 4.5" tri-blade props well.',
     badge: 'We Use These',
@@ -25,7 +23,6 @@ const partsList = [
   {
     title: 'SparkFun GPS-RTK2 Board (ZED-F9P)',
     asin: 'B07NBPNWNZ',
-    price: '~$245',
     rating: '4.6/5',
     description: 'RTK GPS with centimeter-level accuracy. UART interface to FC SERIAL3. ArduPilot GPS_TYPE=17. Essential for precision auto-landing testing.',
     badge: 'Our GPS',
@@ -33,7 +30,6 @@ const partsList = [
   {
     title: 'RadioMaster RP3 ELRS 2.4GHz Receiver',
     asin: 'B0BGL73623',
-    price: '~$19',
     rating: '4.7/5',
     description: 'The exact receiver on our build. Diversity nano, UFL antennas. Binds with SERIAL7_PROTOCOL=23, RC_PROTOCOLS=512 (ELRS). Confirmed working.',
     badge: 'We Use This',
@@ -41,7 +37,6 @@ const partsList = [
   {
     title: 'Matek Systems H743-Slim V3 Flight Controller',
     asin: 'B0C69X1G41',
-    price: '~$75',
     rating: '4.6/5',
     description: 'Alternative FC option — our 7" build runs this. STM32H743, 8 UARTs, 30×30. More UARTs than JHEMCU if you need extra serial ports.',
     badge: null,
@@ -49,7 +44,6 @@ const partsList = [
   {
     title: 'DJI O3 Air Unit',
     asin: 'B0BBQT3TTS',
-    price: '~$229',
     rating: '4.5/5',
     description: 'HD digital FPV — 1080p/60fps, ultra-low latency, on-board video storage. Pairs with DJI Goggles 2. Step up from analog.',
     badge: null,
@@ -57,7 +51,6 @@ const partsList = [
   {
     title: 'Tattu R-Line V4.0 6S 1300mAh 130C (2-Pack)',
     asin: 'B099F921DM',
-    price: '~$64',
     rating: '4.6/5',
     description: 'Premium 6S packs with consistent IR. Our choice for the 4" build. ~6 min flight time at 50% throttle. Buy two packs minimum.',
     badge: null,
@@ -65,7 +58,6 @@ const partsList = [
   {
     title: 'Tenergy LiPo Safe Bags (2-Pack)',
     asin: 'B09BDJQK53',
-    price: '~$14',
     rating: '4.6/5',
     description: 'Always charge and store 6S packs in fire-retardant bags. Non-negotiable. A thermal event on a 6S pack is catastrophic without containment.',
     badge: 'Safety Essential',
@@ -73,10 +65,10 @@ const partsList = [
 ];
 
 const stackComparison = [
-  { title: 'JHEMCU F745 NOXE Stack', asin: 'B0DSJZXSC9', price: '~$89', highlight: 'H7, 60A, 30×30', badge: 'Our Pick' },
-  { title: 'Matek H743-Slim V3', asin: 'B0C69X1G41', price: '~$75', highlight: 'H743, 8 UARTs, 30×30', badge: null },
-  { title: 'SparkFun ZED-F9P RTK GPS', asin: 'B07NBPNWNZ', price: '~$245', highlight: '1cm accuracy, UART', badge: 'RTK GPS' },
-  { title: 'RadioMaster RP3 ELRS RX', asin: 'B0BGL73623', price: '~$19', highlight: 'Diversity nano, 2.4GHz', badge: null },
+  { title: 'JHEMCU F745 NOXE Stack', asin: 'B0DSJZXSC9', highlight: 'H7, 60A, 30×30', badge: 'Our Pick' },
+  { title: 'Matek H743-Slim V3', asin: 'B0C69X1G41', highlight: 'H743, 8 UARTs, 30×30', badge: null },
+  { title: 'SparkFun ZED-F9P RTK GPS', asin: 'B07NBPNWNZ', highlight: '1cm accuracy, UART', badge: 'RTK GPS' },
+  { title: 'RadioMaster RP3 ELRS RX', asin: 'B0BGL73623', highlight: 'Diversity nano, 2.4GHz', badge: null },
 ];
 ---
 <ArticleLayout
@@ -85,53 +77,87 @@ const stackComparison = [
   breadcrumb={breadcrumb}
   lastUpdated="March 2026"
 >
-  <div class="space-y-6 text-slate-300">
-    <div class="bg-slate-900 border border-orange-500/20 rounded-xl p-5 grid sm:grid-cols-3 gap-4 text-center text-sm">
-      <div>
-        <div class="text-2xl font-bold text-orange-400">~$620</div>
-        <div class="text-slate-400">Total parts cost</div>
-      </div>
-      <div>
-        <div class="text-2xl font-bold text-orange-400">6S / 24V</div>
-        <div class="text-slate-400">Battery configuration</div>
-      </div>
-      <div>
-        <div class="text-2xl font-bold text-orange-400">6–8 min</div>
-        <div class="text-slate-400">Flight time (estimate)</div>
-      </div>
-    </div>
+  <div class="space-y-8 text-slate-300">
 
-    <h2 class="text-2xl font-bold text-white">Why This Build</h2>
-    <p>
-      The 4" build is our testbed for new flight controller firmware, ArduPilot params, and ELRS configurations before committing to the 7" autonomous platform. The JHEMCU F745 runs <strong class="text-white">ArduPilot Copter 4.6.2</strong> — same firmware as our 7" build. Everything tuned here transfers directly.
-    </p>
-
-    <h2 class="text-2xl font-bold text-white pt-4">Parts List</h2>
-    <div class="grid sm:grid-cols-2 gap-5 not-prose">
-      {partsList.map(p => (
-        <AffiliateCard {...p} />
+    <!-- Build specs -->
+    <div class="grid grid-cols-3 gap-3 not-prose">
+      {[
+        ['6S / 24V', 'Power system'],
+        ['6–8 min', 'Flight time'],
+        ['ArduPilot 4.6', 'Firmware'],
+      ].map(([val, label]) => (
+        <div class="rounded-xl border border-k2-border bg-k2-card p-4 text-center">
+          <div class="text-lg sm:text-2xl font-extrabold text-k2-light leading-tight">{val}</div>
+          <div class="text-xs text-slate-500 mt-1">{label}</div>
+        </div>
       ))}
     </div>
 
-    <h2 class="text-2xl font-bold text-white pt-4">Key Components at a Glance</h2>
-    <ProductTable caption="4-Inch Build Core Components" products={stackComparison} />
-
-    <h2 class="text-2xl font-bold text-white pt-4">Key Wiring Notes</h2>
-    <ul class="list-disc list-inside space-y-2 text-sm">
-      <li><strong class="text-white">SERIAL7 (T6/R6 pads):</strong> RadioMaster RP3 — SERIAL7_PROTOCOL=23, RC_PROTOCOLS=512 (ELRS, NOT 1024)</li>
-      <li><strong class="text-white">SERIAL3 (TX2/RX2):</strong> ZED-F9P UART1 — SERIAL3_PROTOCOL=5, SERIAL3_BAUD=38, GPS_TYPE=17</li>
-      <li><strong class="text-white">ESC signal:</strong> S1–S4 pads → AM32 ESC. S2 is 3.3V tolerant only</li>
-      <li><strong class="text-white">Power:</strong> No BEC on ESC — use FC 4V5 pad for GPS and receiver power</li>
-      <li><strong class="text-white">USB power:</strong> Motors will NOT spin on USB alone — battery must be connected (&gt;10V)</li>
-    </ul>
-
-    <div class="bg-amber-900/20 border border-amber-500/30 rounded-xl p-5 text-sm">
-      <strong class="text-amber-400">⚠ Motor Mapping (non-obvious):</strong> S1 (Front Left) is MAVLink motor idx=4, NOT idx=0. Confirmed empirically 2026-03-20. See the <a href="/fpv/7-inch-build/" class="text-orange-400 hover:underline">7" build guide</a> for the complete ArduPilot motor mapping table.
+    <!-- Why this build -->
+    <div>
+      <h2 class="text-2xl font-bold text-white mb-3">Why This Build</h2>
+      <p class="text-slate-400 leading-relaxed">
+        The 4" build is our testbed for new flight controller firmware, ArduPilot params, and ELRS configurations before
+        committing to the 7" autonomous platform. The JHEMCU F745 runs <strong class="text-white">ArduPilot Copter 4.6.2</strong> —
+        same firmware as our 7" build. Everything tuned here transfers directly.
+      </p>
     </div>
 
-    <h2 class="text-2xl font-bold text-white pt-4">Next Step</h2>
-    <p>
-      Once this is tuned and flying autonomously, step up to the <a href="/fpv/7-inch-build/" class="text-orange-400 hover:underline">7" autonomous guard drone</a> — the flagship platform with Jetson Orin Nano, full ROS2 stack, and auto-landing.
-    </p>
+    <!-- Parts list -->
+    <div>
+      <h2 class="text-2xl font-bold text-white mb-6">Parts List</h2>
+      <div class="grid sm:grid-cols-2 gap-5 not-prose">
+        {partsList.map(p => (
+          <AffiliateCard {...p} />
+        ))}
+      </div>
+    </div>
+
+    <!-- Quick reference -->
+    <div>
+      <h2 class="text-2xl font-bold text-white mb-4">Key Components at a Glance</h2>
+      <ProductTable caption="4-Inch Build Core Components" products={stackComparison} />
+    </div>
+
+    <!-- Wiring notes -->
+    <div class="rounded-xl border border-k2-border bg-k2-card p-6">
+      <h2 class="text-xl font-bold text-white mb-4">Key Wiring Notes</h2>
+      <ul class="space-y-3 text-sm">
+        {[
+          ['SERIAL7 (T6/R6 pads)', 'RadioMaster RP3 — SERIAL7_PROTOCOL=23, RC_PROTOCOLS=512 (ELRS, NOT 1024)'],
+          ['SERIAL3 (TX2/RX2)', 'ZED-F9P UART1 — SERIAL3_PROTOCOL=5, SERIAL3_BAUD=38, GPS_TYPE=17'],
+          ['ESC signal', 'S1–S4 pads → AM32 ESC. S2 is 3.3V tolerant only'],
+          ['Power', 'No BEC on ESC — use FC 4V5 pad for GPS and receiver power'],
+          ['USB power', 'Motors will NOT spin on USB alone — battery must be connected (>10V)'],
+        ].map(([label, note]) => (
+          <li class="flex items-start gap-3">
+            <span class="flex-shrink-0 font-mono text-xs bg-k2-bg border border-k2-border text-k2-light px-2 py-0.5 rounded mt-0.5">{label}</span>
+            <span class="text-slate-400">{note}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    <!-- Warning -->
+    <div class="rounded-xl border border-amber-500/25 bg-amber-900/10 p-5 text-sm flex items-start gap-3">
+      <span class="text-amber-400 text-lg flex-shrink-0">⚠</span>
+      <div>
+        <strong class="text-amber-400">Motor Mapping (non-obvious):</strong>
+        <span class="text-slate-400"> S1 (Front Left) is MAVLink motor idx=4, NOT idx=0. Confirmed empirically 2026-03-20.
+        See the <a href="/fpv/7-inch-build/" class="text-k2-light hover:text-white transition-colors">7" build guide</a> for the complete ArduPilot motor mapping table.</span>
+      </div>
+    </div>
+
+    <!-- Next step -->
+    <div class="rounded-xl border border-k2-primary/20 bg-k2-card p-6 flex items-center justify-between gap-4 flex-wrap">
+      <div>
+        <div class="text-xs font-bold text-k2-primary uppercase tracking-widest mb-1">Next Step</div>
+        <p class="text-sm text-slate-400">Once this is tuned and flying autonomously, step up to the 7" guard drone.</p>
+      </div>
+      <a href="/fpv/7-inch-build/" class="inline-flex items-center gap-2 bg-k2-primary hover:bg-k2-hover text-white font-bold px-5 py-2.5 rounded-xl text-sm transition-all hover:shadow-[0_0_20px_rgba(6,182,212,0.35)] whitespace-nowrap">
+        7" Build Guide →
+      </a>
+    </div>
+
   </div>
 </ArticleLayout>

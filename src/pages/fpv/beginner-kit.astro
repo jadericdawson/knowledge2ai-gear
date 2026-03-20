@@ -9,7 +9,6 @@ const starterProducts = [
   {
     title: 'BetaFPV Cetus X ELRS FPV Kit (RTF)',
     asin: 'B0BJVP3XW7',
-    price: '~$299',
     rating: '4.3/5',
     description: 'Best ready-to-fly starter kit. Includes LiteRadio 3 controller, VR03 goggles, 3 batteries, and charger. Brushless motors, stable hover. Best way to learn before you solder.',
     badge: 'Best for Beginners',
@@ -17,7 +16,6 @@ const starterProducts = [
   {
     title: 'DJI Goggles 2 (HD Digital FPV)',
     asin: 'B0B21H1V77',
-    price: '~$399',
     rating: '4.5/5',
     description: 'Step up to HD digital FPV. Micro OLED displays, ultra-low latency, works with DJI O3 Air Unit used in our 7" guard drone build. This is the upgrade path from analog.',
     badge: null,
@@ -25,7 +23,6 @@ const starterProducts = [
   {
     title: 'RadioMaster Boxer ELRS Radio Controller',
     asin: 'B0BTN1KXMT',
-    price: '~$109',
     rating: '4.6/5',
     description: 'Best value EdgeTX radio in 2026. ELRS 2.4GHz built-in, hall gimbals, compact gamepad form factor. Use this instead of the kit radio when you\'re ready to upgrade.',
     badge: 'Best Value Radio',
@@ -33,7 +30,6 @@ const starterProducts = [
   {
     title: 'HOTA D6 Pro LiPo Charger (AC/DC)',
     asin: 'B0CF9F8N94',
-    price: '~$152',
     rating: '4.7/5',
     description: 'AC direct dual-port smart charger. Charges 1S–6S, displays IR values, no external power supply needed. The last charger you\'ll ever buy.',
     badge: 'We Use This',
@@ -41,7 +37,6 @@ const starterProducts = [
   {
     title: 'Tattu R-Line V4.0 6S 1300mAh 130C LiPo',
     asin: 'B099F921DM',
-    price: '~$32',
     rating: '4.6/5',
     description: '6S packs for 5" and 7" builds. High-C rating, consistent capacity from a trusted brand. Buy two — you always need more batteries than you think.',
     badge: null,
@@ -49,7 +44,6 @@ const starterProducts = [
   {
     title: 'Tenergy LiPo Safe Charging Bags (2-Pack)',
     asin: 'B09BDJQK53',
-    price: '~$14',
     rating: '4.6/5',
     description: 'Fire-retardant bags for LiPo charging and storage. Non-negotiable safety item. Cheap insurance against a house fire. Always charge inside these.',
     badge: 'Safety Essential',
@@ -57,7 +51,6 @@ const starterProducts = [
   {
     title: 'Pinecil Smart Soldering Iron V2',
     asin: 'B096X6SG13',
-    price: '~$26',
     rating: '4.8/5',
     description: 'When you\'re ready to solder your first build — this is the iron. USB-C powered, 6-second heat-up, open source firmware. Better than $100 stations for drone work.',
     badge: 'Upgrade Path',
@@ -65,7 +58,6 @@ const starterProducts = [
   {
     title: 'iFlight Smoke Stopper / Current Limiter',
     asin: 'B08MT4YKJY',
-    price: '~$12',
     rating: '4.4/5',
     description: 'In-line safety device for first power-up of any new build. Limits current if there\'s a short, saving your ESC and FC from a magic smoke event.',
     badge: 'Safety Essential',
@@ -73,10 +65,10 @@ const starterProducts = [
 ];
 
 const comparisonProducts = [
-  { title: 'BetaFPV Cetus X ELRS Kit', asin: 'B0BJVP3XW7', price: '~$299', highlight: 'RTF, ELRS, brushless', badge: 'Best RTF' },
-  { title: 'Pinecil V2 Soldering Iron', asin: 'B096X6SG13', price: '~$26', highlight: 'USB-C, 6s heat-up', badge: 'Best Tool Value' },
-  { title: 'RadioMaster Boxer ELRS', asin: 'B0BTN1KXMT', price: '~$109', highlight: 'EdgeTX, hall gimbals', badge: 'Best Radio' },
-  { title: 'HOTA D6 Pro Charger', asin: 'B0CF9F8N94', price: '~$152', highlight: 'AC direct, dual port', badge: 'Best Charger' },
+  { title: 'BetaFPV Cetus X ELRS Kit', asin: 'B0BJVP3XW7', highlight: 'RTF, ELRS, brushless', badge: 'Best RTF' },
+  { title: 'Pinecil V2 Soldering Iron', asin: 'B096X6SG13', highlight: 'USB-C, 6s heat-up', badge: 'Best Tool Value' },
+  { title: 'RadioMaster Boxer ELRS', asin: 'B0BTN1KXMT', highlight: 'EdgeTX, hall gimbals', badge: 'Best Radio' },
+  { title: 'HOTA D6 Pro Charger', asin: 'B0CF9F8N94', highlight: 'AC direct, dual port', badge: 'Best Charger' },
 ];
 ---
 <ArticleLayout
@@ -85,39 +77,72 @@ const comparisonProducts = [
   breadcrumb={breadcrumb}
   lastUpdated="March 2026"
 >
-  <div class="space-y-6 text-slate-300">
-    <div class="bg-slate-900 border border-orange-500/20 rounded-xl p-5">
-      <p class="text-sm leading-relaxed">
-        <strong class="text-white">Who this is for:</strong> You want to fly FPV but haven't bought anything yet. This list gets you airborne safely, with a clear upgrade path to the autonomous AI drones we build at KnowlEdge2 AI. Total cost: <strong class="text-orange-400">~$350–$450</strong> for a complete setup.
+  <div class="space-y-8 text-slate-300">
+
+    <!-- Who this is for callout -->
+    <div class="rounded-xl border border-k2-primary/20 bg-k2-card p-6">
+      <div class="flex items-start gap-3">
+        <svg class="w-5 h-5 text-k2-primary flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+          <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a.75.75 0 000 1.5h.253a.25.25 0 01.244.304l-.459 2.066A1.75 1.75 0 0010.747 15H11a.75.75 0 000-1.5h-.253a.25.25 0 01-.244-.304l.459-2.066A1.75 1.75 0 009.253 9H9z" clip-rule="evenodd"/>
+        </svg>
+        <p class="text-sm leading-relaxed">
+          <strong class="text-white">Who this is for:</strong> You want to fly FPV but haven't bought anything yet. This list gets you airborne safely, with a clear upgrade path to the autonomous AI drones we build at KnowlEdge2 AI.
+        </p>
+      </div>
+    </div>
+
+    <!-- Short answer -->
+    <div>
+      <h2 class="text-2xl font-bold text-white mb-3">The Short Answer</h2>
+      <p class="text-slate-400 leading-relaxed">
+        Buy the <strong class="text-white">BetaFPV Cetus X Kit</strong> to learn. Add the <strong class="text-white">HOTA D6 Pro charger</strong> immediately — the included charger is slow and unsafe for field use. Everything else below is the upgrade path once you're hooked.
       </p>
     </div>
 
-    <h2 class="text-2xl font-bold text-white">The Short Answer</h2>
-    <p>
-      Buy the <strong class="text-white">BetaFPV Cetus X Kit</strong> to learn. Add the <strong class="text-white">HOTA D6 Pro charger</strong> immediately — the included charger is slow and unsafe for field use. Everything else below is the upgrade path once you're hooked.
-    </p>
-
-    <h2 class="text-2xl font-bold text-white pt-4">Starter Kit Products</h2>
-    <div class="grid sm:grid-cols-2 gap-5 not-prose">
-      {starterProducts.map(p => (
-        <AffiliateCard {...p} />
-      ))}
+    <!-- Products grid -->
+    <div>
+      <h2 class="text-2xl font-bold text-white mb-6">Starter Kit Products</h2>
+      <div class="grid sm:grid-cols-2 gap-5 not-prose">
+        {starterProducts.map(p => (
+          <AffiliateCard {...p} />
+        ))}
+      </div>
     </div>
 
-    <h2 class="text-2xl font-bold text-white pt-4">Top Picks at a Glance</h2>
-    <ProductTable caption="FPV Beginner Essentials (2026)" products={comparisonProducts} />
+    <!-- Comparison table -->
+    <div>
+      <h2 class="text-2xl font-bold text-white mb-4">Top Picks at a Glance</h2>
+      <ProductTable caption="FPV Beginner Essentials (2026)" products={comparisonProducts} />
+    </div>
 
-    <h2 class="text-2xl font-bold text-white pt-4">What NOT to Buy First</h2>
-    <ul class="list-disc list-inside space-y-2 text-sm">
-      <li><strong class="text-white">Don't buy DJI FPV Combo ($999)</strong> — too expensive to crash as a beginner, not upgradeable toward autonomous builds.</li>
-      <li><strong class="text-white">Don't buy a 5" freestyle quad first</strong> — too fast, too powerful, guaranteed immediate crash damage.</li>
-      <li><strong class="text-white">Don't buy iSDT charger</strong> — requires a separate DC power supply. The HOTA is AC-direct.</li>
-      <li><strong class="text-white">Don't skip LiPo bags</strong> — LiPos can and do catch fire. $14 is cheap insurance.</li>
-    </ul>
+    <!-- What NOT to buy -->
+    <div class="rounded-xl border border-k2-border bg-k2-card p-6">
+      <h2 class="text-xl font-bold text-white mb-4">What NOT to Buy First</h2>
+      <ul class="space-y-3 text-sm">
+        {[
+          ['Don\'t buy DJI FPV Combo', 'Too expensive to crash as a beginner, not upgradeable toward autonomous builds.'],
+          ['Don\'t buy a 5" freestyle quad first', 'Too fast, too powerful, guaranteed immediate crash damage.'],
+          ['Don\'t buy an iSDT charger', 'Requires a separate DC power supply. The HOTA is AC-direct.'],
+          ['Don\'t skip LiPo bags', 'LiPos can and do catch fire. $14 is cheap insurance.'],
+        ].map(([title, desc]) => (
+          <li class="flex items-start gap-3">
+            <svg class="w-4 h-4 text-red-400 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.28 7.22a.75.75 0 00-1.06 1.06L8.94 10l-1.72 1.72a.75.75 0 101.06 1.06L10 11.06l1.72 1.72a.75.75 0 101.06-1.06L11.06 10l1.72-1.72a.75.75 0 00-1.06-1.06L10 8.94 8.28 7.22z" clip-rule="evenodd"/>
+            </svg>
+            <span><strong class="text-white">{title}:</strong> {desc}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
 
-    <h2 class="text-2xl font-bold text-white pt-4">The Upgrade Path</h2>
-    <p class="text-sm">
-      Once you can hover and fly basic lines: build a <a href="/fpv/4-inch-build/" class="text-orange-400 hover:underline">4" custom build</a>. Once you can fly that confidently: step up to the <a href="/fpv/7-inch-build/" class="text-orange-400 hover:underline">7" autonomous guard drone</a> — the KnowlEdge2 AI flagship with Jetson Orin edge compute.
-    </p>
+    <!-- Upgrade path -->
+    <div>
+      <h2 class="text-2xl font-bold text-white mb-3">The Upgrade Path</h2>
+      <p class="text-sm text-slate-400 leading-relaxed">
+        Once you can hover and fly basic lines: build a <a href="/fpv/4-inch-build/" class="text-k2-light hover:text-white transition-colors font-medium">4" custom build →</a>.
+        Once you can fly that confidently: step up to the <a href="/fpv/7-inch-build/" class="text-k2-light hover:text-white transition-colors font-medium">7" autonomous guard drone →</a> — the KnowlEdge2 AI flagship with Jetson Orin edge compute.
+      </p>
+    </div>
+
   </div>
 </ArticleLayout>

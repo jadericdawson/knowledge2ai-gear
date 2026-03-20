@@ -9,7 +9,6 @@ const partsList = [
   {
     title: 'Matek Systems H743-Slim V3 Flight Controller',
     asin: 'B0C69X1G41',
-    price: '~$75',
     rating: '4.6/5',
     description: 'Our flight controller. STM32H743, 8 UARTs, 30×30mm. Runs ArduPilot Copter 4.6.2. Enough serial ports for GPS + companion + RC + telemetry simultaneously.',
     badge: 'We Fly This',
@@ -17,15 +16,13 @@ const partsList = [
   {
     title: 'NVIDIA Jetson Orin Nano Super Developer Kit (8GB)',
     asin: 'B0BZJTQ5YP',
-    price: '~$499',
     rating: '4.7/5',
-    description: 'The brain. 67 TOPS AI inference, JetPack 6.2, CUDA 12.6, TensorRT 10.3. Runs YOLOv8 real-time, ROS2 Humble, Isaac ROS SLAM. The autonomy engine on our guard drone.',
+    description: 'The brain. 67 TOPS AI inference, JetPack 6.2, CUDA 12.6, TensorRT 10.3. Runs YOLOv8 real-time, ROS2 Humble, Isaac ROS SLAM. The autonomy engine.',
     badge: 'Edge AI Core',
   },
   {
     title: 'SparkFun GPS-RTK2 Board (ZED-F9P)',
     asin: 'B07NBPNWNZ',
-    price: '~$245',
     rating: '4.6/5',
     description: 'RTK GPS with centimeter-level accuracy. UART to FC SERIAL3. ArduPilot GPS_TYPE=17. Essential for precision auto-landing on charging pad.',
     badge: 'Our GPS',
@@ -33,50 +30,61 @@ const partsList = [
   {
     title: 'DJI O3 Air Unit',
     asin: 'B0BBQT3TTS',
-    price: '~$229',
     rating: '4.5/5',
-    description: '1080p/60fps digital FPV video link, ultra-low latency, on-board storage. Used for pilot override monitoring. Pairs with DJI Goggles 2.',
+    description: '1080p/60fps digital FPV, ultra-low latency, on-board storage. Used for operator monitoring. Pairs with DJI Goggles 2.',
     badge: null,
   },
   {
     title: 'iFlight Xing2 2809 1250KV Motors (4-Pack)',
     asin: 'B09XTR2KFX',
-    price: '~$68',
     rating: '4.5/5',
     description: 'Our motors. Cinelifter-grade for heavy payload (Jetson). Buy 5 total — one spare is mandatory on a build this complex. 6S optimized.',
     badge: 'We Use These',
   },
   {
-    title: 'Foxeer Reaper F4 65A 4-in-1 ESC (BL32)',
+    title: 'Foxeer Reaper F4 65A 4-in-1 ESC (AM32)',
     asin: 'B0972ZKNT2',
-    price: '~$64',
     rating: '4.4/5',
-    description: '65A continuous on 3-8S, 30×30mm. Configure via esc-configurator.com (not BLHeli Suite 32 for AM32 variant). No BEC — power GPS/receiver from FC 4V5 pad.',
+    description: '65A continuous on 3-8S, 30×30mm. Configure via esc-configurator.com (not BLHeli Suite 32). No BEC — power GPS/receiver from FC 4V5 pad.',
     badge: 'We Use This',
   },
   {
     title: 'RadioMaster RP3 ELRS 2.4GHz Receiver',
     asin: 'B0BGL73623',
-    price: '~$19',
     rating: '4.7/5',
-    description: 'The exact receiver on our build. Diversity nano, UFL antennas, T6/R6 pad wiring. SERIAL7_PROTOCOL=23, RC_PROTOCOLS=512. Confirmed working.',
+    description: 'The exact receiver on our build. Diversity nano, UFL antennas, T6/R6 pads. SERIAL7_PROTOCOL=23, RC_PROTOCOLS=512. Confirmed working.',
     badge: 'We Use This',
   },
   {
     title: 'Tattu R-Line V4.0 6S 1300mAh 130C (2-Pack)',
     asin: 'B099F921DM',
-    price: '~$64',
     rating: '4.6/5',
-    description: 'High-C 6S packs for the 7" + Jetson payload. ~8-12 min patrol time depending on payload. Buy two packs minimum for meaningful patrol sessions.',
+    description: 'High-C 6S packs for the 7" + Jetson payload. ~8-12 min patrol time per pack. Buy two minimum for meaningful patrol sessions.',
     badge: null,
   },
 ];
 
 const aiStack = [
-  { title: 'Jetson Orin Nano Super (8GB)', asin: 'B0BZJTQ5YP', price: '~$499', highlight: '67 TOPS, JetPack 6.2', badge: 'Our Choice' },
-  { title: 'Matek H743-Slim V3', asin: 'B0C69X1G41', price: '~$75', highlight: 'H743, 8 UARTs, 30×30', badge: 'Our FC' },
-  { title: 'SparkFun ZED-F9P GPS', asin: 'B07NBPNWNZ', price: '~$245', highlight: 'RTK, 1cm accuracy', badge: 'Our GPS' },
-  { title: 'DJI O3 Air Unit', asin: 'B0BBQT3TTS', price: '~$229', highlight: '1080p, ultra-low latency', badge: null },
+  { title: 'Jetson Orin Nano Super (8GB)', asin: 'B0BZJTQ5YP', highlight: '67 TOPS, JetPack 6.2', badge: 'Our Choice' },
+  { title: 'Matek H743-Slim V3', asin: 'B0C69X1G41', highlight: 'H743, 8 UARTs, 30×30', badge: 'Our FC' },
+  { title: 'SparkFun ZED-F9P GPS', asin: 'B07NBPNWNZ', highlight: 'RTK, 1cm accuracy', badge: 'Our GPS' },
+  { title: 'DJI O3 Air Unit', asin: 'B0BBQT3TTS', highlight: '1080p, ultra-low latency', badge: null },
+];
+
+const softwareStack = [
+  ['Flight Controller', 'ArduPilot Copter 4.6.2'],
+  ['Companion OS', 'JetPack 6.2 (Ubuntu 22.04)'],
+  ['Middleware', 'ROS2 Humble + MAVROS2'],
+  ['AI Vision', 'YOLOv8n TRT FP16 (8.8MB engine)'],
+  ['SLAM', 'Isaac ROS Visual SLAM 3.2.6'],
+  ['Simulator', 'Isaac Sim 4.5 + Pegasus 5.1'],
+];
+
+const confirmed = [
+  'Isaac Sim + Pegasus SITL: Full autonomous mission PASSED — arm → 5m → 5-waypoint box → land (2026-03-19)',
+  'All 4 motors spinning at 30% throttle confirmed (2026-03-20)',
+  'YOLOv8n TRT engine: 8.8MB FP16, real-time on Jetson Orin Nano Super',
+  'Battery voltage: ~22.6V on 6S confirmed via MAVLink',
 ];
 ---
 <ArticleLayout
@@ -85,71 +93,89 @@ const aiStack = [
   breadcrumb={breadcrumb}
   lastUpdated="March 2026"
 >
-  <div class="space-y-6 text-slate-300">
-    <div class="bg-slate-900 border border-orange-500/20 rounded-xl p-5 grid grid-cols-2 sm:grid-cols-4 gap-4 text-center text-sm">
-      <div>
-        <div class="text-2xl font-bold text-orange-400">~$1,500</div>
-        <div class="text-slate-400">Build cost</div>
-      </div>
-      <div>
-        <div class="text-2xl font-bold text-orange-400">6S / 24V</div>
-        <div class="text-slate-400">Power system</div>
-      </div>
-      <div>
-        <div class="text-2xl font-bold text-orange-400">8–12 min</div>
-        <div class="text-slate-400">Patrol time</div>
-      </div>
-      <div>
-        <div class="text-2xl font-bold text-orange-400">67 TOPS</div>
-        <div class="text-slate-400">On-board AI</div>
-      </div>
-    </div>
+  <div class="space-y-8 text-slate-300">
 
-    <div class="bg-slate-900 border border-orange-500/20 rounded-xl p-6">
-      <h2 class="font-bold text-white text-xl mb-3">🛡️ What This Drone Does</h2>
-      <div class="space-y-2 text-sm leading-relaxed">
-        <p>This is the KnowlEdge2 AI guard drone — autonomous AI-powered property patrol. The <strong class="text-white">Jetson Orin Nano Super</strong> runs Isaac ROS Visual SLAM for navigation and YOLOv8n TensorRT (8.8MB FP16) for real-time object detection. MAVROS2 bridges ArduPilot to ROS2.</p>
-        <p>The <strong class="text-white">ZED-F9P RTK GPS</strong> provides centimeter-level landing accuracy on the charging pad. The pilot holds an RC transmitter only as a safety override — the drone arms, takes off, patrols, detects, and lands autonomously.</p>
-      </div>
-    </div>
-
-    <h2 class="text-2xl font-bold text-white">Hardware Stack</h2>
-    <div class="grid sm:grid-cols-2 gap-5 not-prose">
-      {partsList.map(p => (
-        <AffiliateCard {...p} />
-      ))}
-    </div>
-
-    <h2 class="text-2xl font-bold text-white pt-4">Core Components at a Glance</h2>
-    <ProductTable caption="7-Inch Guard Drone Core Stack" products={aiStack} />
-
-    <h2 class="text-2xl font-bold text-white pt-4">Software Stack (Open Source)</h2>
-    <div class="grid sm:grid-cols-2 gap-4 text-sm not-prose">
+    <!-- Build specs -->
+    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 not-prose">
       {[
-        { label: 'Flight Controller', value: 'ArduPilot Copter 4.6.2' },
-        { label: 'Companion OS', value: 'JetPack 6.2 (Ubuntu 22.04)' },
-        { label: 'Middleware', value: 'ROS2 Humble + MAVROS2' },
-        { label: 'AI Vision', value: 'YOLOv8n TRT FP16 (8.8MB engine)' },
-        { label: 'SLAM', value: 'Isaac ROS Visual SLAM 3.2.6' },
-        { label: 'Simulator', value: 'Isaac Sim 4.5 + Pegasus 5.1' },
-      ].map(item => (
-        <div class="bg-slate-900 border border-slate-700 rounded-lg px-4 py-3">
-          <div class="text-xs text-slate-500 mb-1">{item.label}</div>
-          <div class="font-medium text-white">{item.value}</div>
+        ['6S / 24V', 'Power'],
+        ['8–12 min', 'Patrol time'],
+        ['67 TOPS', 'On-board AI'],
+        ['ArduPilot 4.6', 'Firmware'],
+      ].map(([val, label]) => (
+        <div class="rounded-xl border border-k2-primary/20 bg-k2-card p-4 text-center">
+          <div class="text-base sm:text-xl font-extrabold text-k2-light leading-tight">{val}</div>
+          <div class="text-xs text-slate-500 mt-1">{label}</div>
         </div>
       ))}
     </div>
 
-    <h2 class="text-2xl font-bold text-white pt-4">Confirmed Test Results</h2>
-    <ul class="list-disc list-inside space-y-2 text-sm">
-      <li>✅ Isaac Sim + Pegasus SITL: Full autonomous mission PASSED — arm → 5m → 5-waypoint box → land (2026-03-19)</li>
-      <li>✅ All 4 motors spinning at 30% throttle confirmed (2026-03-20)</li>
-      <li>✅ YOLOv8n TRT engine: 8.8MB FP16, real-time on Jetson Orin Nano Super</li>
-      <li>✅ Battery voltage: ~22.6V on 6S confirmed via MAVLink</li>
-    </ul>
-
-    <div class="bg-amber-900/20 border border-amber-500/30 rounded-xl p-5 text-sm">
-      <strong class="text-amber-400">⚠ Motor Mapping (non-obvious):</strong> S1 (Front Left) = MAVLink motor idx=4, not idx=0. S2 is 3.3V tolerant only. USB power alone will NOT spin motors — battery must be connected (&gt;10V).
+    <!-- What this drone does -->
+    <div class="rounded-xl border border-k2-primary/20 bg-k2-card overflow-hidden">
+      <div class="h-1 bg-gradient-to-r from-k2-primary to-k2-blue"></div>
+      <div class="p-6">
+        <h2 class="text-xl font-bold text-white mb-3 flex items-center gap-2">
+          <span>🛡️</span> What This Drone Does
+        </h2>
+        <div class="space-y-3 text-sm leading-relaxed text-slate-400">
+          <p>This is the KnowlEdge2 AI guard drone — autonomous AI-powered property patrol. The <strong class="text-white">Jetson Orin Nano Super</strong> runs Isaac ROS Visual SLAM for navigation and YOLOv8n TensorRT (8.8MB FP16) for real-time object detection. MAVROS2 bridges ArduPilot to ROS2.</p>
+          <p>The <strong class="text-white">ZED-F9P RTK GPS</strong> provides centimeter-level landing accuracy on the charging pad. The pilot holds RC only as a safety override — the drone arms, takes off, patrols, detects, and lands autonomously.</p>
+        </div>
+      </div>
     </div>
+
+    <!-- Hardware -->
+    <div>
+      <h2 class="text-2xl font-bold text-white mb-6">Hardware Stack</h2>
+      <div class="grid sm:grid-cols-2 gap-5 not-prose">
+        {partsList.map(p => (
+          <AffiliateCard {...p} />
+        ))}
+      </div>
+    </div>
+
+    <!-- Quick reference -->
+    <div>
+      <h2 class="text-2xl font-bold text-white mb-4">Core Components at a Glance</h2>
+      <ProductTable caption="7-Inch Guard Drone Core Stack" products={aiStack} />
+    </div>
+
+    <!-- Software stack -->
+    <div>
+      <h2 class="text-2xl font-bold text-white mb-4">Software Stack (All Open Source)</h2>
+      <div class="grid sm:grid-cols-2 gap-3 not-prose">
+        {softwareStack.map(([label, value]) => (
+          <div class="rounded-lg border border-k2-border bg-k2-card px-4 py-3 flex items-center justify-between gap-3">
+            <span class="text-xs text-slate-500 flex-shrink-0">{label}</span>
+            <span class="text-sm font-semibold text-white text-right">{value}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- Confirmed results -->
+    <div class="rounded-xl border border-k2-border bg-k2-card p-6">
+      <h2 class="text-xl font-bold text-white mb-4">Confirmed Test Results</h2>
+      <ul class="space-y-2.5">
+        {confirmed.map(item => (
+          <li class="flex items-start gap-3 text-sm">
+            <svg class="w-4 h-4 text-k2-primary flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd"/>
+            </svg>
+            <span class="text-slate-400">{item}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    <!-- Warning -->
+    <div class="rounded-xl border border-amber-500/25 bg-amber-900/10 p-5 text-sm flex items-start gap-3">
+      <span class="text-amber-400 text-lg flex-shrink-0">⚠</span>
+      <div class="text-slate-400">
+        <strong class="text-amber-400">Motor Mapping (non-obvious):</strong> S1 (Front Left) = MAVLink motor idx=4, not idx=0.
+        S2 is 3.3V tolerant only. USB power alone will NOT spin motors — battery must be connected (&gt;10V).
+      </div>
+    </div>
+
   </div>
 </ArticleLayout>
