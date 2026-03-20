@@ -2,125 +2,308 @@
 import Base from '../layouts/Base.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
-
-const categories = [
-  {
-    title: 'Autonomous Drone Builds',
-    description: 'AI edge compute drones — from 4" racers to 7" guard drones with Jetson Orin, SLAM, and auto-landing. Hardware guides for everything we actually fly.',
-    href: '/fpv/',
-    icon: '🚁',
-    badge: 'Core',
-  },
-  {
-    title: 'AI Developer Gear',
-    description: 'Jetson Orin Nano, NVMe upgrades, dev workstation accessories. The hardware stack behind KnowlEdge2 AI products.',
-    href: '/ai-gear/',
-    icon: '🧠',
-    badge: null,
-  },
-];
-
-const featuredProducts = [
-  { title: 'Jetson Orin Nano Super', href: '/ai-gear/' },
-  { title: 'DJI O3 Air Unit', href: '/fpv/7-inch-build/' },
-  { title: 'HOTA D6 Pro Charger', href: '/fpv/tools/' },
-  { title: 'Matek H743-Slim V3', href: '/fpv/4-inch-build/' },
-];
 ---
-<Base title="KnowlEdge2 AI" description="AI-driven drone hardware guides, edge compute gear, and precision ag tools — built by the team behind KnowlEdge2 AI.">
+<Base title="KnowlEdge2 AI" description="Autonomous AI drone build guides and edge compute gear — built by KnowlEdge2 AI. Real hardware, real builds.">
   <Nav />
 
-  <!-- Hero -->
-  <section class="relative overflow-hidden border-b border-k2-border">
-    <div class="absolute inset-0 bg-gradient-to-br from-k2-primary/10 via-k2-bg to-k2-bg pointer-events-none"></div>
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-20 sm:py-28 relative">
-      <div class="max-w-3xl">
-        <div class="inline-flex items-center gap-2 bg-k2-primary/10 border border-k2-primary/20 text-k2-light text-xs font-semibold px-3 py-1.5 rounded-full mb-6">
-          <span class="w-1.5 h-1.5 bg-k2-light rounded-full animate-pulse"></span>
-          KnowlEdge2 AI LLC
-        </div>
-        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
-          Autonomous AI Drones.<br/>
-          <span class="text-transparent bg-clip-text bg-gradient-to-r from-k2-primary to-k2-blue">
-            Edge Compute. Real Builds.
-          </span>
-        </h1>
-        <p class="text-xl text-slate-300 mb-8 leading-relaxed max-w-2xl">
-          We build autonomous AI-driven drones that auto-land, auto-charge, and guard properties using on-board Jetson edge compute. These are the parts and tools behind real builds — every product link is something we've flown, soldered, or deployed.
-        </p>
-        <div class="flex flex-wrap gap-4">
-          <a href="/fpv/" class="inline-flex items-center gap-2 bg-k2-primary hover:bg-k2-hover text-white font-semibold px-6 py-3 rounded-xl transition-colors text-base">
-            Explore Drone Builds
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
-            </svg>
-          </a>
-          <a href="/about/" class="inline-flex items-center gap-2 bg-k2-card hover:bg-k2-panel border border-k2-border text-slate-200 font-semibold px-6 py-3 rounded-xl transition-colors text-base">
-            Our Story
-          </a>
+  <!-- ═══ HERO ═══ -->
+  <section class="relative min-h-[92vh] flex items-center overflow-hidden">
+    <!-- Animated background -->
+    <div class="absolute inset-0 bg-k2-bg"></div>
+    <div class="absolute inset-0 hero-grid opacity-[0.04]"></div>
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+
+    <div class="relative max-w-6xl mx-auto px-6 sm:px-8 py-24 w-full">
+      <div class="fade-up" style="animation-delay:0ms">
+        <div class="inline-flex items-center gap-2.5 border border-k2-primary/30 bg-k2-primary/5 backdrop-blur-sm text-k2-light text-xs font-semibold px-4 py-2 rounded-full mb-8 tracking-wide uppercase">
+          <span class="w-1.5 h-1.5 rounded-full bg-k2-primary animate-pulse"></span>
+          KnowlEdge2 AI — Gear Guides
         </div>
       </div>
-    </div>
-  </section>
 
-  <!-- Categories -->
-  <section class="max-w-6xl mx-auto px-4 sm:px-6 py-16">
-    <h2 class="text-2xl font-bold text-white mb-2">Gear Guides by Category</h2>
-    <p class="text-slate-400 mb-8">Curated hardware for builders, founders, and farmers.</p>
-    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
-      {categories.map(cat => (
-        <a href={cat.href} class="group bg-k2-card border border-k2-border rounded-xl p-6 hover:border-k2-primary/50 hover:bg-k2-panel transition-all">
-          <div class="text-3xl mb-3">{cat.icon}</div>
-          <div class="flex items-center gap-2 mb-2">
-            <h3 class="font-semibold text-white text-base group-hover:text-k2-light transition-colors">{cat.title}</h3>
-            {cat.badge && (
-              <span class="bg-k2-primary text-white text-xs font-bold px-2 py-0.5 rounded">{cat.badge}</span>
-            )}
-          </div>
-          <p class="text-sm text-slate-400 leading-relaxed">{cat.description}</p>
-          <div class="mt-4 text-k2-light text-sm font-medium flex items-center gap-1">
-            Browse guides <span>→</span>
-          </div>
+      <h1 class="fade-up text-5xl sm:text-6xl lg:text-7xl font-extrabold text-white leading-[1.05] tracking-tight mb-6" style="animation-delay:80ms">
+        Autonomous<br/>
+        <span class="gradient-text">Guard Drones.</span><br/>
+        <span class="text-slate-400 font-light">Built with real gear.</span>
+      </h1>
+
+      <p class="fade-up text-lg sm:text-xl text-slate-400 max-w-xl leading-relaxed mb-10" style="animation-delay:160ms">
+        We build drones that patrol properties, detect threats via on-board YOLOv8,
+        auto-land on charging pads, and report back — no pilot required.
+        Every product on this site is hardware we've soldered, flashed, and flown.
+      </p>
+
+      <div class="fade-up flex flex-wrap gap-4" style="animation-delay:240ms">
+        <a href="/fpv/" class="cta-primary group inline-flex items-center gap-2.5 bg-k2-primary hover:bg-k2-hover text-white font-bold px-7 py-3.5 rounded-xl text-base transition-all duration-300 hover:shadow-[0_0_30px_rgba(6,182,212,0.4)] hover:-translate-y-0.5">
+          Explore Builds
+          <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+          </svg>
         </a>
-      ))}
-    </div>
-  </section>
+        <a href="/about/" class="inline-flex items-center gap-2 border border-k2-border hover:border-k2-primary/50 bg-k2-card/50 hover:bg-k2-card text-slate-300 hover:text-white font-semibold px-7 py-3.5 rounded-xl text-base transition-all duration-300">
+          About K2AI
+        </a>
+      </div>
 
-  <!-- Featured products strip -->
-  <section class="border-y border-k2-border bg-k2-card/40">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-10">
-      <h2 class="text-lg font-semibold text-slate-300 mb-6">What We're Building With Right Now</h2>
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-        {featuredProducts.map(p => (
-          <a href={p.href} class="group bg-k2-card border border-k2-border rounded-lg p-4 hover:border-k2-primary/40 transition-colors">
-            <div class="text-sm font-medium text-white group-hover:text-k2-light transition-colors">{p.title}</div>
-            <div class="text-xs text-k2-light mt-1">See guide →</div>
-          </a>
+      <!-- Specs strip -->
+      <div class="fade-up mt-16 flex flex-wrap gap-x-8 gap-y-3" style="animation-delay:320ms">
+        {[
+          ['67 TOPS', 'Jetson Orin Nano'],
+          ['YOLOv8n FP16', '8.8ms inference'],
+          ['ArduPilot 4.6', 'autonomous flight'],
+          ['ROS2 Humble', 'Isaac ROS SLAM'],
+        ].map(([val, label]) => (
+          <div class="text-sm">
+            <span class="font-bold text-k2-light">{val}</span>
+            <span class="text-slate-500 ml-1.5">{label}</span>
+          </div>
         ))}
       </div>
     </div>
+
+    <!-- Scroll indicator -->
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-40">
+      <span class="text-xs text-slate-500 tracking-widest uppercase">scroll</span>
+      <div class="w-px h-8 bg-gradient-to-b from-k2-primary to-transparent"></div>
+    </div>
   </section>
 
-  <!-- Value props -->
-  <section class="max-w-6xl mx-auto px-4 sm:px-6 py-16">
-    <div class="grid md:grid-cols-3 gap-8">
-      <div class="text-center">
-        <div class="text-4xl mb-3">🔧</div>
-        <h3 class="font-semibold text-white mb-2">Actually Built</h3>
-        <p class="text-sm text-slate-400">Every product has been soldered, flashed, and flown. No spec-sheet reviews — only hands-on experience.</p>
+  <!-- ═══ FLAGSHIP BUILD ═══ -->
+  <section class="relative overflow-hidden border-t border-k2-border">
+    <div class="max-w-6xl mx-auto px-6 sm:px-8 py-20">
+      <div class="grid lg:grid-cols-2 gap-12 items-center">
+        <!-- Left: text -->
+        <div class="scroll-reveal">
+          <div class="text-xs font-bold text-k2-primary uppercase tracking-widest mb-4">Flagship Build</div>
+          <h2 class="text-4xl sm:text-5xl font-extrabold text-white leading-tight mb-5">
+            The 7″ AI<br/>Guard Drone
+          </h2>
+          <p class="text-slate-400 text-lg leading-relaxed mb-6">
+            Jetson Orin Nano Super edge compute. ZED-F9P RTK GPS. DJI O3 video.
+            iFlight Xing2 2809 motors. This is the platform behind KnowlEdge2 AI's
+            autonomous property patrol product.
+          </p>
+          <ul class="space-y-2 mb-8">
+            {[
+              'Matek H743-Slim V3 flight controller + ArduPilot 4.6',
+              'YOLOv8n TRT FP16 — 8.8ms per frame on Jetson',
+              'Isaac ROS Visual SLAM + AprilTag landing',
+              'Auto-land, auto-charge on ground pad',
+            ].map(item => (
+              <li class="flex items-start gap-3 text-sm text-slate-300">
+                <svg class="w-4 h-4 text-k2-primary flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd"/>
+                </svg>
+                {item}
+              </li>
+            ))}
+          </ul>
+          <a href="/fpv/7-inch-build/" class="inline-flex items-center gap-2 bg-k2-primary hover:bg-k2-hover text-white font-bold px-6 py-3 rounded-xl transition-all duration-300 hover:shadow-[0_0_25px_rgba(6,182,212,0.35)] hover:-translate-y-0.5">
+            Full Build Guide
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+            </svg>
+          </a>
+        </div>
+
+        <!-- Right: card -->
+        <div class="scroll-reveal lg:justify-self-end w-full">
+          <div class="relative rounded-2xl border border-k2-primary/20 bg-gradient-to-br from-k2-card to-k2-bg overflow-hidden hover:border-k2-primary/50 transition-all duration-500 hover:shadow-[0_0_60px_rgba(6,182,212,0.12)] group">
+            <div class="absolute inset-0 bg-gradient-to-br from-k2-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+            <div class="p-8">
+              <div class="flex items-center justify-between mb-6">
+                <span class="text-xs font-bold text-k2-primary uppercase tracking-widest">What you'll need</span>
+                <span class="bg-k2-primary/10 text-k2-light text-xs font-semibold px-3 py-1 rounded-full border border-k2-primary/20">8 core parts</span>
+              </div>
+              {[
+                ['Matek H743-Slim V3', 'B0C69X1G41', 'Flight controller'],
+                ['Jetson Orin Nano Super', 'B0BZJTQ5YP', 'Edge AI compute'],
+                ['SparkFun ZED-F9P', 'B07NBPNWNZ', 'RTK GPS'],
+                ['DJI O3 Air Unit', 'B0BBQT3TTS', 'HD video link'],
+                ['iFlight Xing2 2809 ×4', 'B09XTR2KFX', '1250KV cinelifter'],
+              ].map(([name, asin, role]) => (
+                <a href={`https://www.amazon.com/dp/${asin}?tag=knowledge2ai-20`} target="_blank" rel="noopener nofollow"
+                   class="flex items-center justify-between py-2.5 border-b border-k2-border/50 last:border-0 hover:text-k2-light transition-colors group/item">
+                  <div>
+                    <div class="text-sm font-semibold text-white group-hover/item:text-k2-light transition-colors">{name}</div>
+                    <div class="text-xs text-slate-500">{role}</div>
+                  </div>
+                  <svg class="w-3.5 h-3.5 text-slate-600 group-hover/item:text-k2-primary transition-colors flex-shrink-0 ml-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+                  </svg>
+                </a>
+              ))}
+            </div>
+            <div class="px-8 py-4 border-t border-k2-border bg-k2-bg/50">
+              <a href="/fpv/7-inch-build/" class="text-sm text-k2-light hover:text-white font-semibold flex items-center gap-1.5 transition-colors">
+                See complete parts list + build notes
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="text-center">
-        <div class="text-4xl mb-3">🤖</div>
-        <h3 class="font-semibold text-white mb-2">AI-First</h3>
-        <p class="text-sm text-slate-400">Our drone builds run YOLOv8 on Jetson Orin with ArduPilot autonomy and ROS2. These aren't toys.</p>
+    </div>
+  </section>
+
+  <!-- ═══ BUILD GUIDES ═══ -->
+  <section class="border-t border-k2-border">
+    <div class="max-w-6xl mx-auto px-6 sm:px-8 py-20">
+      <div class="flex items-end justify-between mb-12">
+        <div>
+          <div class="text-xs font-bold text-k2-primary uppercase tracking-widest mb-2">FPV Drone Builds</div>
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-white">Start building.</h2>
+        </div>
+        <a href="/fpv/" class="hidden sm:flex items-center gap-1.5 text-sm text-k2-light hover:text-white font-semibold transition-colors">
+          All guides
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+          </svg>
+        </a>
       </div>
-      <div class="text-center">
-        <div class="text-4xl mb-3">🎯</div>
-        <h3 class="font-semibold text-white mb-2">Honest Links</h3>
-        <p class="text-sm text-slate-400">We earn a small commission if you buy through our Amazon links. It doesn't change our recommendations.</p>
+
+      <div class="grid md:grid-cols-3 gap-5">
+        <!-- Starter guide — accent -->
+        <a href="/fpv/beginner-kit/" class="guide-card group relative rounded-2xl border border-k2-border bg-k2-card overflow-hidden hover:border-k2-primary/40 transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_20px_60px_rgba(0,0,0,0.4)] flex flex-col">
+          <div class="h-2 bg-gradient-to-r from-k2-primary to-k2-blue"></div>
+          <div class="p-6 flex flex-col flex-1">
+            <div class="text-3xl mb-4">🎮</div>
+            <div class="text-xs font-bold text-k2-primary uppercase tracking-wider mb-2">Start Here</div>
+            <h3 class="text-xl font-bold text-white mb-3 group-hover:text-k2-light transition-colors">FPV Beginner Kit</h3>
+            <p class="text-sm text-slate-400 leading-relaxed flex-1">Everything you need to fly your first FPV drone in 2026. Complete kit list — goggles, controller, quad, charger.</p>
+            <div class="mt-5 flex items-center gap-1.5 text-k2-light text-sm font-semibold">
+              See kit <svg class="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
+            </div>
+          </div>
+        </a>
+
+        <!-- 4" build -->
+        <a href="/fpv/4-inch-build/" class="guide-card group relative rounded-2xl border border-k2-border bg-k2-card overflow-hidden hover:border-k2-primary/40 transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_20px_60px_rgba(0,0,0,0.4)] flex flex-col" style="animation-delay:60ms">
+          <div class="h-2 bg-gradient-to-r from-slate-700 to-slate-600"></div>
+          <div class="p-6 flex flex-col flex-1">
+            <div class="text-3xl mb-4">🔧</div>
+            <div class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Build Guide</div>
+            <h3 class="text-xl font-bold text-white mb-3 group-hover:text-k2-light transition-colors">4″ FPV Build</h3>
+            <p class="text-sm text-slate-400 leading-relaxed flex-1">JHEMCU F745 stack, AM32 ESC, 2406 motors. The indoor urban build — tight corridors, full power.</p>
+            <div class="mt-5 flex items-center gap-1.5 text-k2-light text-sm font-semibold">
+              Full parts list <svg class="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
+            </div>
+          </div>
+        </a>
+
+        <!-- Tools -->
+        <a href="/fpv/tools/" class="guide-card group relative rounded-2xl border border-k2-border bg-k2-card overflow-hidden hover:border-k2-primary/40 transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_20px_60px_rgba(0,0,0,0.4)] flex flex-col" style="animation-delay:120ms">
+          <div class="h-2 bg-gradient-to-r from-slate-700 to-slate-600"></div>
+          <div class="p-6 flex flex-col flex-1">
+            <div class="text-3xl mb-4">🛠️</div>
+            <div class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Essential Gear</div>
+            <h3 class="text-xl font-bold text-white mb-3 group-hover:text-k2-light transition-colors">Builder's Tool Kit</h3>
+            <p class="text-sm text-slate-400 leading-relaxed flex-1">Soldering stations, LiPo chargers, multimeters, smoke stoppers. What you actually need vs. what YouTube tells you.</p>
+            <div class="mt-5 flex items-center gap-1.5 text-k2-light text-sm font-semibold">
+              See tools <svg class="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ AI GEAR BRIDGE ═══ -->
+  <section class="border-t border-k2-border bg-gradient-to-b from-k2-card/30 to-transparent">
+    <div class="max-w-6xl mx-auto px-6 sm:px-8 py-20">
+      <div class="rounded-2xl border border-k2-primary/20 bg-k2-card overflow-hidden hover:border-k2-primary/35 transition-all duration-500 group">
+        <div class="grid md:grid-cols-[1fr_auto] items-center gap-8 p-8 md:p-10">
+          <div>
+            <div class="text-xs font-bold text-k2-primary uppercase tracking-widest mb-3">Edge Compute</div>
+            <h2 class="text-3xl font-extrabold text-white mb-3">AI Developer Gear</h2>
+            <p class="text-slate-400 leading-relaxed max-w-xl">
+              The hardware stack running our drones — Jetson Orin Nano Super, NVMe boot drives,
+              active cooling, and the dev workstation accessories behind KnowlEdge2 AI products.
+            </p>
+            <div class="mt-5 flex flex-wrap gap-2">
+              {['Jetson Orin Nano Super 8GB', 'Samsung NVMe 1TB', 'Noctua 40mm 5V Fan', 'Anker 65W GaN'].map(tag => (
+                <span class="text-xs bg-k2-bg border border-k2-border text-slate-400 px-3 py-1 rounded-full">{tag}</span>
+              ))}
+            </div>
+          </div>
+          <a href="/ai-gear/" class="flex-shrink-0 inline-flex items-center gap-2 bg-k2-primary hover:bg-k2-hover text-white font-bold px-6 py-3 rounded-xl transition-all duration-300 hover:shadow-[0_0_25px_rgba(6,182,212,0.35)] hover:-translate-y-0.5 whitespace-nowrap">
+            View Gear
+            <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+            </svg>
+          </a>
+        </div>
       </div>
     </div>
   </section>
 
   <Footer />
 </Base>
+
+<style>
+/* ─── Animated background ─── */
+.hero-grid {
+  background-image:
+    linear-gradient(rgba(6,182,212,1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(6,182,212,1) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+.orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  animation: orbFloat 8s ease-in-out infinite;
+  pointer-events: none;
+}
+.orb-1 {
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(6,182,212,0.12) 0%, transparent 70%);
+  top: -100px; right: -100px;
+  animation-delay: 0s;
+}
+.orb-2 {
+  width: 350px; height: 350px;
+  background: radial-gradient(circle, rgba(59,130,246,0.10) 0%, transparent 70%);
+  bottom: 50px; left: 10%;
+  animation-delay: -3s;
+}
+.orb-3 {
+  width: 250px; height: 250px;
+  background: radial-gradient(circle, rgba(6,182,212,0.07) 0%, transparent 70%);
+  top: 40%; left: 50%;
+  animation-delay: -6s;
+}
+@keyframes orbFloat {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(20px, -15px) scale(1.05); }
+  66% { transform: translate(-10px, 10px) scale(0.97); }
+}
+
+/* ─── Typography ─── */
+.gradient-text {
+  background: linear-gradient(135deg, #22d3ee 0%, #3b82f6 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ─── Entrance animations ─── */
+.fade-up {
+  animation: fadeInUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.scroll-reveal {
+  animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both;
+}
+.guide-card {
+  animation: fadeInUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+</style>
