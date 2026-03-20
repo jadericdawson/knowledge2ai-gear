@@ -1,0 +1,122 @@
+---
+import ArticleLayout from '../../layouts/ArticleLayout.astro';
+import AffiliateCard from '../../components/AffiliateCard.astro';
+import ProductTable from '../../components/ProductTable.astro';
+
+const breadcrumb = [{ label: 'SBIR Tools', href: '/sbir-tools/' }];
+
+const sbirProducts = [
+  {
+    title: 'Lenovo ThinkPad X1 Carbon Gen 12',
+    asin: 'B0CMT3SKPJ',
+    price: '~$1,299',
+    rating: '4.6/5',
+    description: 'The SBIR proposal laptop. Business-class reliability, US keyboard, 3-year warranty, MIL-SPEC tested. What proposal writers and technical directors actually use.',
+    badge: 'Top Pick',
+  },
+  {
+    title: 'Canon DR-C230 Document Scanner',
+    asin: 'B07JFDKTTM',
+    price: '~$229',
+    rating: '4.5/5',
+    description: '30ppm duplex scanner. Federal proposals require scanned signatures, forms, and supporting documents. This is the fastest sub-$300 scanner available.',
+    badge: 'We Use This',
+  },
+  {
+    title: 'LG 27" 4K UHD USB-C Monitor (27UK850-W)',
+    asin: 'B078GVTD9H',
+    price: '~$349',
+    rating: '4.6/5',
+    description: 'External monitor for proposal drafting. 4K lets you have a full SAM.gov proposal form + reference document open side-by-side without scrolling. USB-C powers the laptop.',
+    badge: null,
+  },
+  {
+    title: 'APC 1500VA UPS (BX1500M)',
+    asin: 'B00429N19W',
+    price: '~$229',
+    rating: '4.7/5',
+    description: 'Battery backup for workstation. SBIR proposals are due at a specific time — a power blip at 4:57pm on submission day is catastrophic. This prevents that.',
+    badge: 'Risk Mitigation',
+  },
+  {
+    title: 'Seagate IronWolf Pro 4TB NAS Drive',
+    asin: 'B07H3TQ7HG',
+    price: '~$89',
+    rating: '4.5/5',
+    description: 'NAS storage for proposal archives. CUI (Controlled Unclassified Information) requirements mean you should not store proposal data in consumer cloud. Local NAS + encryption is the compliant path.',
+    badge: null,
+  },
+  {
+    title: 'YubiKey 5 NFC Security Key',
+    asin: 'B07HBD71HL',
+    price: '~$50',
+    rating: '4.7/5',
+    description: 'Hardware MFA for SAM.gov, grants.gov, and DoD portals. Required for CMMC compliance track. Tap-to-auth with NFC on phones and USB on desktop.',
+    badge: 'Compliance',
+  },
+  {
+    title: 'Logitech MX Master 3S Mouse',
+    asin: 'B09HM94VDS',
+    price: '~$99',
+    rating: '4.8/5',
+    description: 'Precision mouse for long document editing sessions. Quiet clicks (important for late-night proposal sessions), 8K DPI sensor, multi-device Bluetooth.',
+    badge: null,
+  },
+  {
+    title: 'Jabra Evolve2 55 Wireless Headset',
+    asin: 'B08PHJ5P72',
+    price: '~$279',
+    rating: '4.6/5',
+    description: 'Enterprise headset for SBIR technical meetings and proposal calls. Noise-canceling mic, meets UC-certified standards, 50hr battery.',
+    badge: null,
+  },
+];
+
+const laptopComparison = [
+  { title: 'ThinkPad X1 Carbon Gen 12', asin: 'B0CMT3SKPJ', price: '~$1,299', highlight: '3yr warranty, MIL-SPEC', badge: 'Top Pick' },
+  { title: 'Dell Latitude 5540', asin: 'B0CMT3SKPJ', price: '~$999', highlight: 'Business class, no fuss', badge: null },
+  { title: 'MacBook Pro 14" M4', asin: 'B0CL5KNB9M', price: '~$1,599', highlight: 'Best battery, macOS', badge: null },
+  { title: 'Framework 13 AMD', asin: 'B0CMT3SKPJ', price: '~$849', highlight: 'Repairable, modular', badge: null },
+];
+---
+<ArticleLayout
+  title="SBIR Contractor Home Office Setup"
+  description="Home office hardware for federal contractors and SBIR/STTR proposal writers. Laptops, scanners, UPS systems, and security keys for compliant remote work."
+  breadcrumb={breadcrumb}
+  lastUpdated="March 2026"
+>
+  <div class="space-y-6 text-slate-300">
+    <div class="bg-slate-900 border border-orange-500/20 rounded-xl p-5">
+      <p class="text-sm leading-relaxed">
+        <strong class="text-white">Context:</strong> KnowlEdge2 AI is a KnowlEdge2 AI LLC entity that has submitted SBIR proposals and built tools for the federal contracting ecosystem. This page covers the physical setup for a compliant, reliable home office for proposal work, BAA tracking, and technical reporting. See our <a href="https://sbirassistant.com" target="_blank" rel="noopener" class="text-orange-400 hover:underline">SBIR Assistant tool ↗</a> for proposal search and analysis.
+      </p>
+    </div>
+
+    <h2 class="text-2xl font-bold text-white">SBIR Home Office Gear</h2>
+    <div class="grid sm:grid-cols-2 gap-5 not-prose">
+      {sbirProducts.map(p => (
+        <AffiliateCard {...p} />
+      ))}
+    </div>
+
+    <h2 class="text-2xl font-bold text-white pt-4">Laptop Comparison for Federal Contractors</h2>
+    <p class="text-sm">Business-class laptops only. Consumer laptops lack warranty support and MIL-SPEC certification often required for CMMC environments.</p>
+    <ProductTable caption="Business Laptops for Federal Contractors" products={laptopComparison} />
+
+    <h2 class="text-2xl font-bold text-white pt-4">Compliance Notes</h2>
+    <ul class="list-disc list-inside space-y-2 text-sm">
+      <li><strong class="text-white">CUI storage:</strong> Use encrypted local NAS (IronWolf + QNAP/Synology + BitLocker/VeraCrypt), not iCloud or Google Drive, for proposal-related documents.</li>
+      <li><strong class="text-white">MFA:</strong> YubiKey hardware token for SAM.gov, grants.gov, and any DoD portal. Authenticator apps are acceptable for SBIR portals; hard tokens are better practice.</li>
+      <li><strong class="text-white">Software:</strong> Microsoft 365 Government plans are required for CUI handling in CMMC Level 2 environments.</li>
+      <li><strong class="text-white">VPN:</strong> NordLayer or Cisco Secure Client for connecting to agency systems. Consumer VPNs are not appropriate for federal work.</li>
+    </ul>
+
+    <div class="mt-6 p-4 bg-slate-800 rounded-xl text-sm">
+      <strong class="text-white">KnowlEdge2 AI Tools for SBIR:</strong>
+      <ul class="mt-2 space-y-1 text-slate-400">
+        <li>→ <a href="https://sbirassistant.com" target="_blank" rel="noopener" class="text-orange-400 hover:underline">SBIR Assistant</a> — AI-powered BAA search and analysis</li>
+        <li>→ <a href="https://setrassistant.com" target="_blank" rel="noopener" class="text-orange-400 hover:underline">SETR Assistant</a> — Systems Engineering Technical Review tool</li>
+      </ul>
+    </div>
+  </div>
+</ArticleLayout>

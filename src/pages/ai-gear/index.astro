@@ -1,0 +1,134 @@
+---
+import ArticleLayout from '../../layouts/ArticleLayout.astro';
+import AffiliateCard from '../../components/AffiliateCard.astro';
+import ProductTable from '../../components/ProductTable.astro';
+
+const breadcrumb = [{ label: 'AI Gear', href: '/ai-gear/' }];
+
+const jetsonGear = [
+  {
+    title: 'NVIDIA Jetson Orin Nano Super Developer Kit',
+    asin: 'B0CQMWRP7S',
+    price: '~$499',
+    rating: '4.7/5',
+    description: 'Our primary edge compute platform. 67 TOPS, JetPack 6.2, CUDA 12.6, TensorRT 10.3. Runs YOLOv8n at real-time, Isaac ROS SLAM, and full ROS2 stack. IP: jetson.local on our network.',
+    badge: 'We Run This',
+  },
+  {
+    title: 'Samsung 970 EVO Plus 1TB NVMe',
+    asin: 'B08QB93S6R',
+    price: '~$79',
+    rating: '4.8/5',
+    description: 'Boot drive for Jetson via M.2 slot. Dramatically faster than microSD for Isaac ROS container pulls and dataset storage.',
+    badge: 'Upgrade Essential',
+  },
+  {
+    title: 'Noctua NF-A4x10 5V Fan (Jetson cooling)',
+    asin: 'B071J8BBND',
+    price: '~$16',
+    rating: '4.7/5',
+    description: 'Silent 40mm 5V fan for Jetson heatsink upgrade. The stock fan is loud and undersized for sustained GPU load. GPU load trips power; active cooling is mandatory.',
+    badge: null,
+  },
+  {
+    title: 'Anker 65W GaN USB-C Charger',
+    asin: 'B08T5QVTKW',
+    price: '~$22',
+    rating: '4.7/5',
+    description: 'Jetson USB-C power supply. GaN chargers provide cleaner power than barrel-jack adapters. Supports 65W negotiation.',
+    badge: null,
+  },
+];
+
+const devGear = [
+  {
+    title: 'ASUS ProArt PA278QV 27" Monitor',
+    asin: 'B08FMKSKYL',
+    price: '~$299',
+    rating: '4.6/5',
+    description: '1440p IPS, 75Hz, factory-calibrated sRGB. Ideal for code + terminal work. Wide enough for side-by-side Isaac Sim and terminal windows.',
+    badge: null,
+  },
+  {
+    title: 'Logitech MX Keys Wireless Keyboard',
+    asin: 'B07W6SJKQN',
+    price: '~$119',
+    rating: '4.6/5',
+    description: 'Multi-device Bluetooth, backlit, near-silent. Switch between Jetson, desktop, and laptop with one key. What we type on daily.',
+    badge: 'Daily Driver',
+  },
+  {
+    title: 'Crucial 64GB DDR5-5600 RAM (2×32GB)',
+    asin: 'B0BYFKQTGB',
+    price: '~$119',
+    rating: '4.8/5',
+    description: 'For desktop AI workstations. Enough memory to run Isaac Sim locally alongside a full Linux dev environment. Minimum 32GB for serious AI work.',
+    badge: null,
+  },
+  {
+    title: 'Samsung T7 Shield 2TB Portable SSD',
+    asin: 'B09VL9QXD5',
+    price: '~$139',
+    rating: '4.7/5',
+    description: 'Dataset and model storage. IP65 rated for field use. We carry build logs, flight telemetry, and model weights between lab and field on this.',
+    badge: null,
+  },
+];
+
+const gpuComparison = [
+  { title: 'Jetson Orin Nano Super (8GB)', asin: 'B0CQMWRP7S', price: '~$499', highlight: '67 TOPS, edge compute', badge: 'Our Pick' },
+  { title: 'RTX 4070 Super (desktop)', asin: 'B0CTQRQ8XV', price: '~$599', highlight: '519 TOPS, desktop only', badge: null },
+  { title: 'RTX 3070 (desktop)', asin: 'B08WKP8FBJ', price: '~$350', highlight: '163 TOPS, great value', badge: null },
+  { title: 'Jetson AGX Orin 64GB', asin: 'B09ZKZS1PT', price: '~$1,999', highlight: '275 TOPS, industrial', badge: null },
+];
+---
+<ArticleLayout
+  title="AI Developer Gear — Edge Compute & Dev Hardware"
+  description="The hardware stack powering KnowlEdge2 AI products. Jetson Orin, NVMe upgrades, development monitors, and the tools behind real AI deployments."
+  breadcrumb={breadcrumb}
+  lastUpdated="March 2026"
+>
+  <div class="space-y-6 text-slate-300">
+    <div class="bg-slate-900 border border-orange-500/20 rounded-xl p-5">
+      <p class="text-sm leading-relaxed">
+        <strong class="text-white">Context:</strong> KnowlEdge2 AI builds AI applications deployed to Azure and edge hardware. This page covers the physical gear behind those deployments — primarily Jetson Orin for drone edge compute and desktop AI workstations for training/simulation.
+      </p>
+    </div>
+
+    <h2 class="text-2xl font-bold text-white">Jetson Edge Compute</h2>
+    <div class="grid sm:grid-cols-2 gap-5 not-prose">
+      {jetsonGear.map(p => (
+        <AffiliateCard {...p} />
+      ))}
+    </div>
+
+    <h2 class="text-2xl font-bold text-white pt-4">AI Compute Comparison</h2>
+    <ProductTable caption="AI Compute Options by Use Case" products={gpuComparison} />
+
+    <h2 class="text-2xl font-bold text-white pt-4">Dev Workstation Gear</h2>
+    <div class="grid sm:grid-cols-2 gap-5 not-prose">
+      {devGear.map(p => (
+        <AffiliateCard {...p} />
+      ))}
+    </div>
+
+    <h2 class="text-2xl font-bold text-white pt-4">Our Deployed Stack</h2>
+    <div class="grid sm:grid-cols-2 gap-4 text-sm not-prose">
+      {[
+        { label: 'Edge inference', value: 'Jetson Orin Nano Super — YOLOv8n TRT FP16' },
+        { label: 'Simulation', value: 'Isaac Sim 4.5 + Pegasus 5.1 on RTX 3070 desktop' },
+        { label: 'Cloud', value: 'Azure (East US 2) — existing subscription 4151f5f9' },
+        { label: 'AI apps', value: 'KnowlEdge2 AI, SBIR Assistant, SETR Assistant' },
+      ].map(item => (
+        <div class="bg-slate-900 border border-slate-700 rounded-lg px-4 py-3">
+          <div class="text-xs text-slate-500 mb-1">{item.label}</div>
+          <div class="font-medium text-white">{item.value}</div>
+        </div>
+      ))}
+    </div>
+
+    <div class="bg-amber-900/20 border border-amber-500/30 rounded-xl p-4 text-sm">
+      <strong class="text-amber-400">⚠ RTX GPU + surge protectors:</strong> Running Isaac Sim and heavy GPU workloads on the desktop RTX 3070 trips power surge protectors. Use a power conditioner, not a basic surge strip.
+    </div>
+  </div>
+</ArticleLayout>

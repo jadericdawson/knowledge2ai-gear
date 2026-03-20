@@ -1,0 +1,77 @@
+---
+export interface Props {
+  title: string;
+  asin: string;
+  price?: string;
+  rating?: string;
+  image?: string;
+  description: string;
+  badge?: string; // e.g. "Best Value", "Editor's Pick", "We Use This"
+  tag?: string;   // override affiliate tag; defaults to knowledge2ai-20
+}
+
+const {
+  title,
+  asin,
+  price,
+  rating,
+  image,
+  description,
+  badge,
+  tag = 'knowledge2ai-20',
+} = Astro.props;
+
+const affiliateUrl = `https://www.amazon.com/dp/${asin}?tag=${tag}`;
+---
+<div class="bg-slate-900 border border-slate-700 rounded-xl overflow-hidden hover:border-orange-500/50 transition-colors group">
+  {badge && (
+    <div class="bg-orange-500 text-white text-xs font-bold px-3 py-1 text-center">
+      {badge}
+    </div>
+  )}
+
+  <div class="p-5">
+    <div class="flex gap-4 mb-4">
+      {image ? (
+        <div class="flex-shrink-0 w-24 h-24 bg-slate-800 rounded-lg overflow-hidden">
+          <img src={image} alt={title} class="w-full h-full object-contain p-2" loading="lazy" />
+        </div>
+      ) : (
+        <div class="flex-shrink-0 w-24 h-24 bg-slate-800 rounded-lg flex items-center justify-center">
+          <svg class="w-10 h-10 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
+          </svg>
+        </div>
+      )}
+
+      <div class="flex-1 min-w-0">
+        <h3 class="font-semibold text-white text-sm leading-snug mb-1 group-hover:text-orange-300 transition-colors">
+          {title}
+        </h3>
+        {rating && (
+          <div class="flex items-center gap-1 mb-1">
+            <span class="text-amber-400 text-xs">★</span>
+            <span class="text-xs text-slate-400">{rating}</span>
+          </div>
+        )}
+        {price && (
+          <div class="text-orange-400 font-bold text-base">{price}</div>
+        )}
+      </div>
+    </div>
+
+    <p class="text-sm text-slate-400 leading-relaxed mb-4">{description}</p>
+
+    <a
+      href={affiliateUrl}
+      target="_blank"
+      rel="noopener nofollow"
+      class="flex items-center justify-center gap-2 w-full bg-orange-500 hover:bg-orange-400 text-white font-semibold text-sm py-2.5 px-4 rounded-lg transition-colors"
+    >
+      <svg class="w-4 h-4 flex-shrink-0" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M13.22 19.03a.75.75 0 0 1 0-1.06L18.19 13H3.75a.75.75 0 0 1 0-1.5h14.44l-4.97-4.97a.75.75 0 0 1 1.06-1.06l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0z"/>
+      </svg>
+      View on Amazon
+    </a>
+  </div>
+</div>

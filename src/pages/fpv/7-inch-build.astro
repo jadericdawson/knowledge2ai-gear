@@ -1,0 +1,164 @@
+---
+import ArticleLayout from '../../layouts/ArticleLayout.astro';
+import AffiliateCard from '../../components/AffiliateCard.astro';
+import ProductTable from '../../components/ProductTable.astro';
+
+const breadcrumb = [{ label: 'FPV Drones', href: '/fpv/' }];
+
+const partsList = [
+  {
+    title: 'Matek H743-Slim V3 Flight Controller',
+    asin: 'B09KCJVTVN',
+    price: '~$75',
+    rating: '4.6/5',
+    description: 'Our flight controller. STM32H743, 8 UARTs, 30×30mm. Runs ArduPilot Copter 4.6.2. Enough serial ports for GPS, companion, RC, and telemetry simultaneously.',
+    badge: 'We Fly This',
+  },
+  {
+    title: 'Foxeer Reaper F4 AM32 65A 4-in-1 ESC',
+    asin: 'B0BVWNWHQB',
+    price: '~$64',
+    rating: '4.4/5',
+    description: 'AM32 open-source ESC firmware (configure via am32.ca or esc-configurator.com — NOT BLHeli Suite 32). 65A continuous on 3-8S, 30×30mm. No BEC.',
+    badge: 'We Use This',
+  },
+  {
+    title: 'Jetson Orin Nano Super Developer Kit',
+    asin: 'B0CQMWRP7S',
+    price: '~$499',
+    rating: '4.7/5',
+    description: 'The brain. 67 TOPS AI inference, Jetpack 6.2, CUDA 12.6, TensorRT 10.3. Runs YOLOv8 at real-time, ROS2 Humble, Isaac ROS SLAM. This is the autonomy engine.',
+    badge: 'Edge AI Core',
+  },
+  {
+    title: 'SparkFun GPS-RTK2 (ZED-F9P)',
+    asin: 'B07MCVT1L2',
+    price: '~$245',
+    rating: '4.6/5',
+    description: 'RTK GPS with centimeter-level accuracy. UART interface to FC SERIAL3. ArduPilot GPS_TYPE=17 for direct ZED-F9P support. Essential for precision auto-landing.',
+    badge: 'Our GPS',
+  },
+  {
+    title: 'DJI O3 Air Unit',
+    asin: 'B0BPRB9XNR',
+    price: '~$229',
+    rating: '4.5/5',
+    description: 'HD digital FPV video link — 1080p/60fps, <30ms latency. On-board video storage. Used for pilot override monitoring. Pairs with DJI Goggles 2/3.',
+    badge: null,
+  },
+  {
+    title: 'iFlight Xing2 2809 1250KV Motors (×5 — 1 spare)',
+    asin: 'B09FXK6MHY',
+    price: '~$85',
+    rating: '4.5/5',
+    description: 'Our motors. Cinelifter-grade for heavy payload capacity. Buy 5 — one spare is mandatory on a build this complex. 6S optimized.',
+    badge: 'We Use These',
+  },
+  {
+    title: 'TBS Source One V5 7" Frame',
+    asin: 'B09F4HQMLL',
+    price: '~$32',
+    rating: '4.5/5',
+    description: 'Open-source community frame. 7" prop clearance, full payload bay for Jetson mount, 30×30 FC stack, massive wire routing space. Designed for heavy builds.',
+    badge: 'Recommended Frame',
+  },
+  {
+    title: 'Tattu 6S 3300mAh 45C LiPo (2-pack)',
+    asin: 'B09TM14BCP',
+    price: '~$109',
+    rating: '4.5/5',
+    description: '3300mAh 6S for the 7" platform with Jetson payload. ~12–15 min flight time. Buy two for meaningful patrol duration.',
+    badge: null,
+  },
+];
+
+const aiStack = [
+  { title: 'Jetson Orin Nano Super (8GB)', asin: 'B0CQMWRP7S', price: '~$499', highlight: '67 TOPS, JetPack 6.2', badge: 'Our Choice' },
+  { title: 'Jetson Orin Nano (4GB)', asin: 'B0CQMWRP7S', price: '~$249', highlight: '20 TOPS, lower power', badge: null },
+  { title: 'Raspberry Pi 5 (8GB)', asin: 'B0CTJHLXJH', price: '~$80', highlight: 'No GPU, lightweight', badge: null },
+  { title: 'NVIDIA Jetson AGX Orin', asin: 'B09ZKZS1PT', price: '~$999', highlight: '275 TOPS, overkill for 7"', badge: null },
+];
+---
+<ArticleLayout
+  title="7-Inch Autonomous AI Guard Drone Build"
+  description="KnowlEdge2 AI's flagship autonomous drone. Jetson Orin Nano, ArduPilot, RTK GPS, auto-landing, YOLOv8 on-board. Full hardware guide."
+  breadcrumb={breadcrumb}
+  lastUpdated="March 2026"
+>
+  <div class="space-y-6 text-slate-300">
+
+    <!-- Stats banner -->
+    <div class="bg-slate-900 border border-orange-500/20 rounded-xl p-5 grid grid-cols-2 sm:grid-cols-4 gap-4 text-center text-sm">
+      <div>
+        <div class="text-2xl font-bold text-orange-400">~$1,500</div>
+        <div class="text-slate-400">Build cost</div>
+      </div>
+      <div>
+        <div class="text-2xl font-bold text-orange-400">6S / 24V</div>
+        <div class="text-slate-400">Power system</div>
+      </div>
+      <div>
+        <div class="text-2xl font-bold text-orange-400">12–15 min</div>
+        <div class="text-slate-400">Patrol time</div>
+      </div>
+      <div>
+        <div class="text-2xl font-bold text-orange-400">67 TOPS</div>
+        <div class="text-slate-400">On-board AI</div>
+      </div>
+    </div>
+
+    <!-- Mission callout -->
+    <div class="bg-slate-900 border border-orange-500/20 rounded-xl p-6">
+      <h2 class="font-bold text-white text-xl mb-3">🛡️ What This Drone Does</h2>
+      <div class="space-y-2 text-sm leading-relaxed">
+        <p>This is the KnowlEdge2 AI guard drone — an autonomous AI-powered system designed to <strong class="text-white">patrol properties, detect persons of interest using on-board YOLOv8 vision, auto-land on a charging pad, and report detections</strong> — with no pilot required during normal operation.</p>
+        <p>The <strong class="text-white">Jetson Orin Nano Super</strong> runs Isaac ROS Visual SLAM for navigation, YOLOv8n TensorRT (8.8MB FP16 engine) for real-time object detection, and MAVROS2 for ArduPilot integration. The <strong class="text-white">ZED-F9P RTK GPS</strong> provides centimeter-level precision landing accuracy.</p>
+        <p>The pilot holds an RC transmitter only as a safety override. The drone arms, takes off, executes patrol waypoints, detects, and lands on its own.</p>
+      </div>
+    </div>
+
+    <h2 class="text-2xl font-bold text-white">Hardware Stack</h2>
+    <div class="grid sm:grid-cols-2 gap-5 not-prose">
+      {partsList.map(p => (
+        <AffiliateCard {...p} />
+      ))}
+    </div>
+
+    <h2 class="text-2xl font-bold text-white pt-4">Edge Compute Options</h2>
+    <p class="text-sm">The Jetson Orin Nano Super is the minimum viable AI compute for real-time YOLOv8 TRT inference. The Pi 5 works for waypoint missions but cannot handle real-time vision.</p>
+    <ProductTable caption="Edge Compute Comparison for Autonomous Drones" products={aiStack} />
+
+    <h2 class="text-2xl font-bold text-white pt-4">Software Stack (Open Source)</h2>
+    <div class="grid sm:grid-cols-2 gap-4 text-sm not-prose">
+      {[
+        { label: 'Flight Controller', value: 'ArduPilot Copter 4.6.2', link: null },
+        { label: 'Companion OS', value: 'JetPack 6.2 (Ubuntu 22.04)', link: null },
+        { label: 'Middleware', value: 'ROS2 Humble + MAVROS2', link: null },
+        { label: 'AI Vision', value: 'Ultralytics YOLOv8 + TensorRT', link: null },
+        { label: 'SLAM', value: 'Isaac ROS Visual SLAM 3.2.6', link: null },
+        { label: 'Simulator', value: 'Isaac Sim 4.5 + Pegasus 5.1', link: null },
+      ].map(item => (
+        <div class="bg-slate-900 border border-slate-700 rounded-lg px-4 py-3">
+          <div class="text-xs text-slate-500 mb-1">{item.label}</div>
+          <div class="font-medium text-white">{item.value}</div>
+        </div>
+      ))}
+    </div>
+
+    <h2 class="text-2xl font-bold text-white pt-4">Confirmed Test Results</h2>
+    <ul class="list-disc list-inside space-y-2 text-sm">
+      <li>✅ Isaac Sim + Pegasus SITL: Full autonomous mission PASSED — arm → takeoff 5m → 5-waypoint box → land (2026-03-19)</li>
+      <li>✅ All 4 motors confirmed spinning individually at 30% throttle (2026-03-20)</li>
+      <li>✅ YOLOv8n TRT engine: 8.8MB FP16, real-time on Jetson Orin Nano Super</li>
+      <li>✅ Battery voltage: ~22.6V on 6S (confirmed via MAVLink)</li>
+      <li>⏳ Pending: Accelerometer calibration, compass, RC/ELRS bind, prop installation</li>
+    </ul>
+
+    <div class="bg-amber-900/20 border border-amber-500/30 rounded-xl p-5 text-sm">
+      <strong class="text-amber-400">⚠ Motor Mapping (non-obvious):</strong> On the Matek H743, S1 (Front Left) = MAVLink motor idx=4, not idx=0. S2 is 3.3V tolerant only. Confirmed empirically 2026-03-20. If motors don't spin on USB power — that's expected. Battery must be connected (&gt;10V).
+    </div>
+
+    <h2 class="text-2xl font-bold text-white pt-4">Tools You'll Need</h2>
+    <p>See the complete <a href="/fpv/tools/" class="text-orange-400 hover:underline">FPV builder's tool kit</a> — soldering station, LiPo charger, multimeter, smoke stopper. Don't start soldering without a smoke stopper in circuit.</p>
+  </div>
+</ArticleLayout>

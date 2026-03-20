@@ -1,0 +1,110 @@
+---
+import ArticleLayout from '../../layouts/ArticleLayout.astro';
+import AffiliateCard from '../../components/AffiliateCard.astro';
+import ProductTable from '../../components/ProductTable.astro';
+
+const breadcrumb = [{ label: 'Farm Tech', href: '/farm-tech/' }];
+
+const farmProducts = [
+  {
+    title: 'Ambient Weather WS-2902 Weather Station',
+    asin: 'B01N5TEHLI',
+    price: '~$189',
+    rating: '4.4/5',
+    description: 'Full professional weather station with WiFi upload to AmbientWeather.net and Weather Underground. Wind speed/direction, rain gauge, UV/solar, soil temp sensors. What we run at Dawson Family Farm.',
+    badge: 'We Run This',
+  },
+  {
+    title: 'Govee 4-Sensor Soil Moisture Monitor',
+    asin: 'B09FVTBQLX',
+    price: '~$35',
+    rating: '4.3/5',
+    description: 'Bluetooth soil moisture sensors with app history. 4-pack covers multiple beds or field locations. Battery-powered, IP67 rated.',
+    badge: null,
+  },
+  {
+    title: 'Orbit B-hyve Smart Irrigation Controller',
+    asin: 'B01MFDBKND',
+    price: '~$89',
+    rating: '4.2/5',
+    description: 'WiFi irrigation controller with weather skip. Connects to weather station data to skip watering after rain. 12-zone for larger operations.',
+    badge: null,
+  },
+  {
+    title: 'INKBIRD IBS-TH3 Greenhouse Sensor (4-pack)',
+    asin: 'B09FVTBQLX',
+    price: '~$42',
+    rating: '4.4/5',
+    description: 'Bluetooth temp + humidity sensors with data logging. Perfect for greenhouse, cold storage, or chicken house monitoring. Export CSV data.',
+    badge: null,
+  },
+  {
+    title: 'Apogee Instruments SQ-522-SS PAR Sensor',
+    asin: 'B07YWJZ895',
+    price: '~$345',
+    rating: '4.8/5',
+    description: 'Professional quantum light sensor for crop light measurement. Use to optimize greenhouse lighting and determine supplemental light needs.',
+    badge: 'Professional Grade',
+  },
+  {
+    title: 'Raspberry Pi 4 Model B 4GB (Farm Automation)',
+    asin: 'B07TC2BK1X',
+    price: '~$75',
+    rating: '4.5/5',
+    description: 'Brain for farm automation. Runs Node-RED for sensor aggregation, MQTT broker, and our Home Assistant integration. Low power, fanless.',
+    badge: 'DIY Hub',
+  },
+  {
+    title: 'Rain Bird 5000 Series Rotary Sprinkler (6-pack)',
+    asin: 'B000BRT5G0',
+    price: '~$35',
+    rating: '4.6/5',
+    description: 'Reliable gear-driven rotor sprinklers for field irrigation. 15-50 ft radius, 40-360° arc adjustment. What we use on the farm.',
+    badge: null,
+  },
+  {
+    title: 'Sonkir Soil pH/Moisture/Light 3-in-1 Tester',
+    asin: 'B07JNFDTH9',
+    price: '~$18',
+    rating: '4.2/5',
+    description: 'No-battery analog sensor — just stick in soil. Good for quick field checks of moisture, pH, and light levels. Buy 3 and spread them around.',
+    badge: 'Best Value',
+  },
+];
+
+const comparison = [
+  { title: 'Ambient Weather WS-2902', asin: 'B01N5TEHLI', price: '~$189', highlight: 'Full station, WiFi upload', badge: 'Our Pick' },
+  { title: 'Davis Vantage Vue', asin: 'B00C64PKZC', price: '~$425', highlight: 'Professional, very accurate', badge: null },
+  { title: 'AcuRite 01022M Pro', asin: 'B001HB9T6W', price: '~$99', highlight: 'Budget, no API', badge: 'Budget' },
+  { title: 'Netatmo Smart Weather Station', asin: 'B01HBT0ME0', price: '~$149', highlight: 'Nice app, limited sensors', badge: null },
+];
+---
+<ArticleLayout
+  title="Farm Tech — Precision Agriculture Gear"
+  description="Weather stations, soil sensors, irrigation controllers, and automation hardware for modern farm operations. From Dawson Family Farm & Services LLC."
+  breadcrumb={breadcrumb}
+  lastUpdated="March 2026"
+>
+  <div class="space-y-6 text-slate-300">
+    <div class="bg-slate-900 border border-orange-500/20 rounded-xl p-5">
+      <p class="text-sm leading-relaxed">
+        <strong class="text-white">From Dawson Family Farm & Services LLC:</strong> We operate a real farm and use real data. This page covers the monitoring and automation hardware we've deployed — weather stations, soil sensors, irrigation controllers, and the Raspberry Pi hub that ties it together.
+      </p>
+    </div>
+
+    <h2 class="text-2xl font-bold text-white">Farm Hardware</h2>
+    <div class="grid sm:grid-cols-2 gap-5 not-prose">
+      {farmProducts.map(p => (
+        <AffiliateCard {...p} />
+      ))}
+    </div>
+
+    <h2 class="text-2xl font-bold text-white pt-4">Weather Station Comparison</h2>
+    <ProductTable caption="Weather Station Options for Small Farms" products={comparison} />
+
+    <h2 class="text-2xl font-bold text-white pt-4">The Drone Connection</h2>
+    <p class="text-sm leading-relaxed">
+      Our <a href="/fpv/7-inch-build/" class="text-orange-400 hover:underline">autonomous guard drone</a> can overlay weather station data with patrol telemetry — wind speed affects flight envelope, and temperature affects battery performance. The same Jetson running YOLOv8 for security can run crop stress detection models for precision agriculture applications. This is the second product vertical for KnowlEdge2 AI drones.
+    </p>
+  </div>
+</ArticleLayout>

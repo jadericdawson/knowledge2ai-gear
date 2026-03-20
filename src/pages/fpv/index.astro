@@ -1,0 +1,100 @@
+---
+import Base from '../../layouts/Base.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+
+const guides = [
+  {
+    title: 'FPV Beginner Kit — Start Here',
+    description: 'Everything you need to fly your first FPV drone in 2026. Complete kit list with Amazon links — goggles, controller, quad, charger.',
+    href: '/fpv/beginner-kit/',
+    badge: 'Start Here',
+    icon: '🎮',
+    time: '10 min read',
+  },
+  {
+    title: '4" FPV Build Guide',
+    description: 'The exact 4-inch build we run for urban indoor flights. JHEMCU F745 stack, AM32 ESC, 2406 motors. Full part list with soldering notes.',
+    href: '/fpv/4-inch-build/',
+    badge: null,
+    icon: '🔧',
+    time: '25 min build',
+  },
+  {
+    title: '7" Autonomous Guard Drone',
+    description: 'Our flagship AI drone. Jetson Orin Nano edge compute, ZED-F9P RTK GPS, ArduPilot autonomy, auto-landing pad. This is the property guard dog.',
+    href: '/fpv/7-inch-build/',
+    badge: 'Flagship',
+    icon: '🤖',
+    time: '45 min build',
+  },
+  {
+    title: "Builder's Tool Kit",
+    description: 'Every tool on my bench — soldering stations, LiPo chargers, multimeters, smoke stoppers. What you actually need vs. what YouTube tells you.',
+    href: '/fpv/tools/',
+    badge: null,
+    icon: '🛠️',
+    time: '8 min read',
+  },
+];
+---
+<Base
+  title="Autonomous FPV Drone Builds"
+  description="AI edge compute drone build guides — from beginner FPV kits to autonomous 7-inch guard drones with Jetson Orin and RTK GPS. All hardware sourced from Amazon."
+>
+  <Nav />
+
+  <!-- Header -->
+  <section class="border-b border-slate-800 bg-gradient-to-b from-slate-900 to-slate-950">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 py-12">
+      <div class="text-xs font-semibold text-orange-400 uppercase tracking-wider mb-3">KnowlEdge2 AI → FPV Drones</div>
+      <h1 class="text-3xl sm:text-4xl font-bold text-white mb-4">Autonomous Drone Build Guides</h1>
+      <p class="text-lg text-slate-300 max-w-2xl leading-relaxed">
+        We build autonomous AI drones — not for racing, but for real work. Property surveillance, auto-landing/charging systems, edge AI vision. These guides cover the exact hardware stack behind KnowlEdge2 AI's drone products.
+      </p>
+    </div>
+  </section>
+
+  <!-- The vision callout -->
+  <section class="max-w-4xl mx-auto px-4 sm:px-6 py-8">
+    <div class="bg-slate-900 border border-orange-500/20 rounded-xl p-6">
+      <div class="flex items-start gap-4">
+        <span class="text-3xl">🛡️</span>
+        <div>
+          <h2 class="font-bold text-white text-lg mb-2">The Vision: AI Guard Dog Drones</h2>
+          <p class="text-slate-300 text-sm leading-relaxed">
+            We're building autonomous drones that patrol properties, detect intrusions via on-board YOLOv8 vision, auto-land on charging pads, and report back — with no pilot required. Think security cameras, but with altitude and range. Everything on these pages is hardware we've personally built, flown, and integrated into our AI systems. When you buy through our links, you're getting the same stack we trust with our own builds.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Guide list -->
+  <section class="max-w-4xl mx-auto px-4 sm:px-6 pb-16">
+    <div class="grid sm:grid-cols-2 gap-5">
+      {guides.map(guide => (
+        <a href={guide.href} class="group bg-slate-900 border border-slate-700 rounded-xl p-6 hover:border-orange-500/50 hover:bg-slate-800/80 transition-all flex flex-col">
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-3xl">{guide.icon}</span>
+            {guide.badge && (
+              <span class="bg-orange-500 text-white text-xs font-bold px-2.5 py-1 rounded-lg">{guide.badge}</span>
+            )}
+          </div>
+          <h2 class="font-bold text-white text-lg mb-2 group-hover:text-orange-300 transition-colors">{guide.title}</h2>
+          <p class="text-sm text-slate-400 leading-relaxed flex-1">{guide.description}</p>
+          <div class="mt-4 flex items-center justify-between text-xs text-slate-500">
+            <span>{guide.time}</span>
+            <span class="text-orange-400 group-hover:translate-x-1 transition-transform inline-block">Read guide →</span>
+          </div>
+        </a>
+      ))}
+    </div>
+
+    <div class="mt-8 p-4 bg-slate-900 border border-slate-700 rounded-lg text-sm text-slate-400">
+      <strong class="text-slate-300">Affiliate disclosure:</strong> Links below are Amazon affiliate links (tag: knowledge2ai-20). We earn a small commission at no cost to you.
+    </div>
+  </section>
+
+  <Footer />
+</Base>

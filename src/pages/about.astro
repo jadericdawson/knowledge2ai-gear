@@ -1,0 +1,80 @@
+---
+import Base from '../layouts/Base.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+---
+<Base
+  title="About KnowlEdge2 AI"
+  description="KnowlEdge2 AI LLC — autonomous AI drone systems, AI applications, and precision ag technology. Builder. Founder. Farmer."
+>
+  <Nav />
+
+  <main class="max-w-3xl mx-auto px-4 sm:px-6 py-12">
+    <h1 class="text-3xl sm:text-4xl font-bold text-white mb-6">About KnowlEdge2 AI</h1>
+
+    <div class="space-y-6 text-slate-300 leading-relaxed">
+
+      <div class="bg-slate-900 border border-orange-500/20 rounded-xl p-6">
+        <p class="text-base">
+          KnowlEdge2 AI LLC builds autonomous AI-powered drone systems, AI software tools, and precision agriculture technology. We're the team deploying 7-inch autonomous guard drones with on-board Jetson Orin edge compute, running YOLOv8 vision models for real-time property surveillance — and then applying the same AI stack to agriculture, federal contracting tools, and enterprise software.
+        </p>
+      </div>
+
+      <h2 class="text-2xl font-bold text-white">What We're Building</h2>
+      <div class="grid sm:grid-cols-2 gap-4 not-prose text-sm">
+        {[
+          {
+            icon: '🚁',
+            title: 'Autonomous Guard Drones',
+            desc: 'AI-driven property patrol drones with auto-landing/charging, YOLOv8 detection, and ArduPilot autonomy. Sold under KnowlEdge2 AI.',
+          },
+          {
+            icon: '🤖',
+            title: 'KnowlEdge2 AI Platform',
+            desc: 'AI application suite — including SBIR Assistant, SETR Assistant, T1D-AI, and enterprise tools deployed to Azure.',
+          },
+          {
+            icon: '🌾',
+            title: 'Dawson Family Farm',
+            desc: 'Real farm operations in Ohio — testing precision agriculture sensors, weather stations, and eventually drone-based crop monitoring.',
+          },
+          {
+            icon: '⚙️',
+            title: 'SBIR Contracting',
+            desc: 'Federal R&D proposals through Dawson Family Farm & Services LLC. The SBIR tools on this site come from that experience.',
+          },
+        ].map(item => (
+          <div class="bg-slate-900 border border-slate-700 rounded-xl p-5">
+            <div class="text-2xl mb-2">{item.icon}</div>
+            <h3 class="font-semibold text-white mb-1">{item.title}</h3>
+            <p class="text-slate-400">{item.desc}</p>
+          </div>
+        ))}
+      </div>
+
+      <h2 class="text-2xl font-bold text-white" id="disclosure">Affiliate Disclosure</h2>
+      <div class="bg-slate-900 border border-slate-700 rounded-xl p-5 text-sm space-y-3">
+        <p>
+          KnowlEdge2 AI is a participant in the <strong class="text-white">Amazon Services LLC Associates Program</strong>, an affiliate advertising program designed to provide a means for sites to earn advertising fees by advertising and linking to Amazon.com.
+        </p>
+        <p>
+          When you click an Amazon link on this site and make a purchase, we may earn a small commission at <strong class="text-white">no additional cost to you</strong>. Our affiliate store ID is <code class="text-orange-400 bg-slate-800 px-1.5 py-0.5 rounded">knowledge2ai-20</code>.
+        </p>
+        <p>
+          <strong class="text-white">Our policy:</strong> We only recommend products we have personally purchased and used. Affiliate income does not influence our recommendations. If a product is on this site, we've tested it in actual builds, deployments, or farm operations. We will explicitly note when a product is something we haven't personally used.
+        </p>
+        <p>
+          <strong class="text-white">Prices:</strong> Amazon prices change frequently. Prices shown are approximations at time of writing. Always verify current price before purchasing.
+        </p>
+      </div>
+
+      <h2 class="text-2xl font-bold text-white">Contact</h2>
+      <p class="text-sm">
+        For partnerships, drone system inquiries, or technical questions: reach out via <a href="https://knowledge2-ai.com" target="_blank" rel="noopener" class="text-orange-400 hover:underline">knowledge2-ai.com</a>. For SBIR proposal assistance, see <a href="https://sbirassistant.com" target="_blank" rel="noopener" class="text-orange-400 hover:underline">sbirassistant.com</a>.
+      </p>
+
+    </div>
+  </main>
+
+  <Footer />
+</Base>

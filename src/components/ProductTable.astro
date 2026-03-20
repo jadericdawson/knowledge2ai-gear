@@ -1,0 +1,63 @@
+---
+export interface Product {
+  title: string;
+  asin: string;
+  price?: string;
+  rating?: string;
+  highlight?: string;  // key spec or differentiator
+  badge?: string;
+}
+
+export interface Props {
+  products: Product[];
+  caption?: string;
+  tag?: string;
+}
+
+const { products, caption, tag = 'knowledge2ai-20' } = Astro.props;
+---
+<div class="my-6 overflow-x-auto rounded-xl border border-slate-700">
+  <table class="w-full text-sm">
+    {caption && (
+      <caption class="bg-slate-800 text-slate-300 font-semibold px-5 py-3 text-left text-base border-b border-slate-700">
+        {caption}
+      </caption>
+    )}
+    <thead class="bg-slate-900">
+      <tr>
+        <th class="px-4 py-3 text-left text-xs font-semibold text-slate-400 uppercase tracking-wider">Product</th>
+        <th class="px-4 py-3 text-left text-xs font-semibold text-slate-400 uppercase tracking-wider hidden sm:table-cell">Key Spec</th>
+        <th class="px-4 py-3 text-right text-xs font-semibold text-slate-400 uppercase tracking-wider">Price</th>
+        <th class="px-4 py-3 text-right text-xs font-semibold text-slate-400 uppercase tracking-wider">Buy</th>
+      </tr>
+    </thead>
+    <tbody class="divide-y divide-slate-800">
+      {products.map((product, i) => (
+        <tr class={`${i % 2 === 0 ? 'bg-slate-900/50' : 'bg-slate-950/50'} hover:bg-slate-800/60 transition-colors`}>
+          <td class="px-4 py-3">
+            <div class="flex items-center gap-2">
+              {product.badge && (
+                <span class="bg-orange-500/20 text-orange-400 text-xs font-medium px-2 py-0.5 rounded flex-shrink-0">
+                  {product.badge}
+                </span>
+              )}
+              <span class="font-medium text-white">{product.title}</span>
+            </div>
+          </td>
+          <td class="px-4 py-3 text-slate-400 hidden sm:table-cell">{product.highlight || '—'}</td>
+          <td class="px-4 py-3 text-right font-semibold text-orange-400">{product.price || '—'}</td>
+          <td class="px-4 py-3 text-right">
+            <a
+              href={`https://www.amazon.com/dp/${product.asin}?tag=${tag}`}
+              target="_blank"
+              rel="noopener nofollow"
+              class="inline-flex items-center gap-1 bg-orange-500 hover:bg-orange-400 text-white text-xs font-semibold px-3 py-1.5 rounded-lg transition-colors whitespace-nowrap"
+            >
+              Amazon ↗
+            </a>
+          </td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>
