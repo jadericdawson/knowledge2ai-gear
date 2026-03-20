@@ -1,11 +1,11 @@
 ---
 export interface Product {
   title: string;
-  asin?: string;         // ASIN for direct product link
-  searchQuery?: string;  // fallback: Amazon search query when no ASIN
+  asin?: string;
+  searchQuery?: string;
   price?: string;
   rating?: string;
-  highlight?: string;    // key spec or differentiator
+  highlight?: string;
   badge?: string;
 }
 
@@ -17,14 +17,14 @@ export interface Props {
 
 const { products, caption, tag = 'knowledge2ai-20' } = Astro.props;
 ---
-<div class="my-6 overflow-x-auto rounded-xl border border-slate-700">
+<div class="my-6 overflow-x-auto rounded-xl border border-k2-border">
   <table class="w-full text-sm">
     {caption && (
-      <caption class="bg-slate-800 text-slate-300 font-semibold px-5 py-3 text-left text-base border-b border-slate-700">
+      <caption class="bg-k2-card text-slate-300 font-semibold px-5 py-3 text-left text-base border-b border-k2-border">
         {caption}
       </caption>
     )}
-    <thead class="bg-slate-900">
+    <thead class="bg-k2-card">
       <tr>
         <th class="px-4 py-3 text-left text-xs font-semibold text-slate-400 uppercase tracking-wider">Product</th>
         <th class="px-4 py-3 text-left text-xs font-semibold text-slate-400 uppercase tracking-wider hidden sm:table-cell">Key Spec</th>
@@ -32,13 +32,13 @@ const { products, caption, tag = 'knowledge2ai-20' } = Astro.props;
         <th class="px-4 py-3 text-right text-xs font-semibold text-slate-400 uppercase tracking-wider">Buy</th>
       </tr>
     </thead>
-    <tbody class="divide-y divide-slate-800">
+    <tbody class="divide-y divide-k2-border">
       {products.map((product, i) => (
-        <tr class={`${i % 2 === 0 ? 'bg-slate-900/50' : 'bg-slate-950/50'} hover:bg-slate-800/60 transition-colors`}>
+        <tr class={`${i % 2 === 0 ? 'bg-k2-bg/60' : 'bg-k2-card/40'} hover:bg-k2-card transition-colors`}>
           <td class="px-4 py-3">
             <div class="flex items-center gap-2">
               {product.badge && (
-                <span class="bg-orange-500/20 text-orange-400 text-xs font-medium px-2 py-0.5 rounded flex-shrink-0">
+                <span class="bg-k2-primary/20 text-k2-light text-xs font-medium px-2 py-0.5 rounded flex-shrink-0">
                   {product.badge}
                 </span>
               )}
@@ -46,13 +46,13 @@ const { products, caption, tag = 'knowledge2ai-20' } = Astro.props;
             </div>
           </td>
           <td class="px-4 py-3 text-slate-400 hidden sm:table-cell">{product.highlight || '—'}</td>
-          <td class="px-4 py-3 text-right font-semibold text-orange-400">{product.price || '—'}</td>
+          <td class="px-4 py-3 text-right font-semibold text-k2-light">{product.price || '—'}</td>
           <td class="px-4 py-3 text-right">
             <a
               href={product.asin ? `https://www.amazon.com/dp/${product.asin}?tag=${tag}` : `https://www.amazon.com/s?k=${encodeURIComponent(product.searchQuery || product.title)}&tag=${tag}`}
               target="_blank"
               rel="noopener nofollow"
-              class="inline-flex items-center gap-1 bg-orange-500 hover:bg-orange-400 text-white text-xs font-semibold px-3 py-1.5 rounded-lg transition-colors whitespace-nowrap"
+              class="inline-flex items-center gap-1 bg-k2-primary hover:bg-k2-hover text-white text-xs font-semibold px-3 py-1.5 rounded-lg transition-colors whitespace-nowrap"
             >
               Amazon ↗
             </a>

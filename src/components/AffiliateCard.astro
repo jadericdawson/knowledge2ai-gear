@@ -6,8 +6,8 @@ export interface Props {
   rating?: string;
   image?: string;
   description: string;
-  badge?: string; // e.g. "Best Value", "Editor's Pick", "We Use This"
-  tag?: string;   // override affiliate tag; defaults to knowledge2ai-20
+  badge?: string;
+  tag?: string;
 }
 
 const {
@@ -22,35 +22,35 @@ const {
 } = Astro.props;
 
 const affiliateUrl = `https://www.amazon.com/dp/${asin}?tag=${tag}`;
-// Amazon Associates SiteStripe image URL — fetches the real product image for any valid ASIN
+// Amazon Associates SiteStripe image — auto-fetches real product image for any valid ASIN
 const amazonImage = `https://ws-na.amazon-adsystem.com/widgets/q?_encoding=UTF8&MarketPlace=US&ASIN=${asin}&ServiceVersion=20070822&ID=AsinImage&WS=1&Format=_SL250_&tag=${tag}`;
 const imgSrc = image || amazonImage;
 ---
-<div class="bg-slate-900 border border-slate-700 rounded-xl overflow-hidden hover:border-orange-500/50 transition-colors group">
+<div class="bg-k2-card border border-k2-border rounded-xl overflow-hidden hover:border-k2-primary/50 transition-colors group">
   {badge && (
-    <div class="bg-orange-500 text-white text-xs font-bold px-3 py-1 text-center">
+    <div class="bg-k2-primary text-white text-xs font-bold px-3 py-1 text-center">
       {badge}
     </div>
   )}
 
   <div class="p-5">
     <div class="flex gap-4 mb-4">
-      <div class="flex-shrink-0 w-24 h-24 bg-slate-800 rounded-lg overflow-hidden">
+      <div class="flex-shrink-0 w-24 h-24 bg-k2-panel rounded-lg overflow-hidden">
         <img src={imgSrc} alt={title} class="w-full h-full object-contain p-2" loading="lazy" />
       </div>
 
       <div class="flex-1 min-w-0">
-        <h3 class="font-semibold text-white text-sm leading-snug mb-1 group-hover:text-orange-300 transition-colors">
+        <h3 class="font-semibold text-white text-sm leading-snug mb-1 group-hover:text-k2-light transition-colors">
           {title}
         </h3>
         {rating && (
           <div class="flex items-center gap-1 mb-1">
-            <span class="text-amber-400 text-xs">★</span>
+            <span class="text-k2-light text-xs">★</span>
             <span class="text-xs text-slate-400">{rating}</span>
           </div>
         )}
         {price && (
-          <div class="text-orange-400 font-bold text-base">{price}</div>
+          <div class="text-k2-light font-bold text-base">{price}</div>
         )}
       </div>
     </div>
@@ -61,7 +61,7 @@ const imgSrc = image || amazonImage;
       href={affiliateUrl}
       target="_blank"
       rel="noopener nofollow"
-      class="flex items-center justify-center gap-2 w-full bg-orange-500 hover:bg-orange-400 text-white font-semibold text-sm py-2.5 px-4 rounded-lg transition-colors"
+      class="flex items-center justify-center gap-2 w-full bg-k2-primary hover:bg-k2-hover text-white font-semibold text-sm py-2.5 px-4 rounded-lg transition-colors"
     >
       <svg class="w-4 h-4 flex-shrink-0" viewBox="0 0 24 24" fill="currentColor">
         <path d="M13.22 19.03a.75.75 0 0 1 0-1.06L18.19 13H3.75a.75.75 0 0 1 0-1.5h14.44l-4.97-4.97a.75.75 0 0 1 1.06-1.06l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0z"/>

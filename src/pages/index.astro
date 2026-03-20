@@ -13,14 +13,14 @@ const categories = [
   },
   {
     title: 'AI Developer Gear',
-    description: 'Jetson Orin Nano, GPU rigs, edge compute accessories. The hardware stack behind KnowlEdge2 AI products.',
+    description: 'Jetson Orin Nano, NVMe upgrades, dev workstation accessories. The hardware stack behind KnowlEdge2 AI products.',
     href: '/ai-gear/',
     icon: '🧠',
     badge: null,
   },
   {
     title: 'Farm Tech',
-    description: 'Precision agriculture sensors, weather stations, soil monitoring, and irrigation controllers. For modern farm operations.',
+    description: 'Precision agriculture sensors, weather stations, soil monitoring, and irrigation controllers for modern farm operations.',
     href: '/farm-tech/',
     icon: '🌾',
     badge: null,
@@ -35,27 +35,27 @@ const categories = [
 ];
 
 const featuredProducts = [
-  { title: 'Jetson Orin Nano Super Dev Kit', price: '~$499', href: '/ai-gear/' },
+  { title: 'Jetson Orin Nano Super', price: '~$499', href: '/ai-gear/' },
   { title: 'DJI O3 Air Unit', price: '~$229', href: '/fpv/7-inch-build/' },
-  { title: 'HOTA D6 Pro LiPo Charger', price: '~$152', href: '/fpv/tools/' },
-  { title: 'JHEMCU F745 Stack', price: '~$89', href: '/fpv/4-inch-build/' },
+  { title: 'HOTA D6 Pro Charger', price: '~$152', href: '/fpv/tools/' },
+  { title: 'Matek H743-Slim V3', price: '~$75', href: '/fpv/4-inch-build/' },
 ];
 ---
 <Base title="KnowlEdge2 AI" description="AI-driven drone hardware guides, edge compute gear, and precision ag tools — built by the team behind KnowlEdge2 AI.">
   <Nav />
 
   <!-- Hero -->
-  <section class="relative overflow-hidden border-b border-slate-800">
-    <div class="absolute inset-0 bg-gradient-to-br from-orange-900/20 via-slate-950 to-slate-950 pointer-events-none"></div>
+  <section class="relative overflow-hidden border-b border-k2-border">
+    <div class="absolute inset-0 bg-gradient-to-br from-k2-primary/10 via-k2-bg to-k2-bg pointer-events-none"></div>
     <div class="max-w-6xl mx-auto px-4 sm:px-6 py-20 sm:py-28 relative">
       <div class="max-w-3xl">
-        <div class="inline-flex items-center gap-2 bg-orange-500/10 border border-orange-500/20 text-orange-400 text-xs font-semibold px-3 py-1.5 rounded-full mb-6">
-          <span class="w-1.5 h-1.5 bg-orange-400 rounded-full animate-pulse"></span>
+        <div class="inline-flex items-center gap-2 bg-k2-primary/10 border border-k2-primary/20 text-k2-light text-xs font-semibold px-3 py-1.5 rounded-full mb-6">
+          <span class="w-1.5 h-1.5 bg-k2-light rounded-full animate-pulse"></span>
           KnowlEdge2 AI LLC
         </div>
         <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
           Autonomous AI Drones.<br/>
-          <span class="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-amber-400">
+          <span class="text-transparent bg-clip-text bg-gradient-to-r from-k2-primary to-k2-blue">
             Edge Compute. Real Builds.
           </span>
         </h1>
@@ -63,13 +63,13 @@ const featuredProducts = [
           We build autonomous AI-driven drones that auto-land, auto-charge, and guard properties using on-board Jetson edge compute. These are the parts and tools behind real builds — every product link is something we've flown, soldered, or deployed.
         </p>
         <div class="flex flex-wrap gap-4">
-          <a href="/fpv/" class="inline-flex items-center gap-2 bg-orange-500 hover:bg-orange-400 text-white font-semibold px-6 py-3 rounded-xl transition-colors text-base">
+          <a href="/fpv/" class="inline-flex items-center gap-2 bg-k2-primary hover:bg-k2-hover text-white font-semibold px-6 py-3 rounded-xl transition-colors text-base">
             Explore Drone Builds
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
             </svg>
           </a>
-          <a href="/about/" class="inline-flex items-center gap-2 bg-slate-800 hover:bg-slate-700 text-slate-200 font-semibold px-6 py-3 rounded-xl transition-colors text-base">
+          <a href="/about/" class="inline-flex items-center gap-2 bg-k2-card hover:bg-k2-panel border border-k2-border text-slate-200 font-semibold px-6 py-3 rounded-xl transition-colors text-base">
             Our Story
           </a>
         </div>
@@ -83,16 +83,16 @@ const featuredProducts = [
     <p class="text-slate-400 mb-8">Curated hardware for builders, founders, and farmers.</p>
     <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
       {categories.map(cat => (
-        <a href={cat.href} class="group bg-slate-900 border border-slate-700 rounded-xl p-6 hover:border-orange-500/50 hover:bg-slate-800/80 transition-all">
+        <a href={cat.href} class="group bg-k2-card border border-k2-border rounded-xl p-6 hover:border-k2-primary/50 hover:bg-k2-panel transition-all">
           <div class="text-3xl mb-3">{cat.icon}</div>
           <div class="flex items-center gap-2 mb-2">
-            <h3 class="font-semibold text-white text-base group-hover:text-orange-300 transition-colors">{cat.title}</h3>
+            <h3 class="font-semibold text-white text-base group-hover:text-k2-light transition-colors">{cat.title}</h3>
             {cat.badge && (
-              <span class="bg-orange-500 text-white text-xs font-bold px-2 py-0.5 rounded">{cat.badge}</span>
+              <span class="bg-k2-primary text-white text-xs font-bold px-2 py-0.5 rounded">{cat.badge}</span>
             )}
           </div>
           <p class="text-sm text-slate-400 leading-relaxed">{cat.description}</p>
-          <div class="mt-4 text-orange-400 text-sm font-medium group-hover:gap-2 flex items-center gap-1 transition-all">
+          <div class="mt-4 text-k2-light text-sm font-medium flex items-center gap-1">
             Browse guides <span>→</span>
           </div>
         </a>
@@ -101,21 +101,21 @@ const featuredProducts = [
   </section>
 
   <!-- Featured products strip -->
-  <section class="border-y border-slate-800 bg-slate-900/40">
+  <section class="border-y border-k2-border bg-k2-card/40">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 py-10">
       <h2 class="text-lg font-semibold text-slate-300 mb-6">What We're Building With Right Now</h2>
       <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
         {featuredProducts.map(p => (
-          <a href={p.href} class="group bg-slate-900 border border-slate-700 rounded-lg p-4 hover:border-orange-500/40 transition-colors">
-            <div class="text-sm font-medium text-white group-hover:text-orange-300 mb-1 transition-colors">{p.title}</div>
-            <div class="text-xs text-orange-400 font-semibold">{p.price}</div>
+          <a href={p.href} class="group bg-k2-card border border-k2-border rounded-lg p-4 hover:border-k2-primary/40 transition-colors">
+            <div class="text-sm font-medium text-white group-hover:text-k2-light mb-1 transition-colors">{p.title}</div>
+            <div class="text-xs text-k2-light font-semibold">{p.price}</div>
           </a>
         ))}
       </div>
     </div>
   </section>
 
-  <!-- Value prop -->
+  <!-- Value props -->
   <section class="max-w-6xl mx-auto px-4 sm:px-6 py-16">
     <div class="grid md:grid-cols-3 gap-8">
       <div class="text-center">
@@ -126,12 +126,12 @@ const featuredProducts = [
       <div class="text-center">
         <div class="text-4xl mb-3">🤖</div>
         <h3 class="font-semibold text-white mb-2">AI-First</h3>
-        <p class="text-sm text-slate-400">Our drone builds run YOLOv8 on-board with Jetson Orin, ArduPilot autonomy, and ROS2. These aren't toys.</p>
+        <p class="text-sm text-slate-400">Our drone builds run YOLOv8 on Jetson Orin with ArduPilot autonomy and ROS2. These aren't toys.</p>
       </div>
       <div class="text-center">
         <div class="text-4xl mb-3">🎯</div>
         <h3 class="font-semibold text-white mb-2">Honest Links</h3>
-        <p class="text-sm text-slate-400">We earn a small commission if you buy through our Amazon links. It doesn't change our recommendations — only your wallet benefits from our bulk-buying experience.</p>
+        <p class="text-sm text-slate-400">We earn a small commission if you buy through our Amazon links. It doesn't change our recommendations.</p>
       </div>
     </div>
   </section>

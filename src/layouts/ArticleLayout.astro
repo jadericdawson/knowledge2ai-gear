@@ -20,11 +20,11 @@ const { title, description, breadcrumb = [], lastUpdated } = Astro.props;
     {breadcrumb.length > 0 && (
       <nav class="text-sm text-slate-400 mb-6" aria-label="Breadcrumb">
         <ol class="flex items-center gap-2 flex-wrap">
-          <li><a href="/" class="hover:text-orange-400 transition-colors">Home</a></li>
+          <li><a href="/" class="hover:text-k2-light transition-colors">Home</a></li>
           {breadcrumb.map((crumb) => (
             <>
               <li class="text-slate-600">/</li>
-              <li><a href={crumb.href} class="hover:text-orange-400 transition-colors">{crumb.label}</a></li>
+              <li><a href={crumb.href} class="hover:text-k2-light transition-colors">{crumb.label}</a></li>
             </>
           ))}
           <li class="text-slate-600">/</li>
@@ -37,20 +37,18 @@ const { title, description, breadcrumb = [], lastUpdated } = Astro.props;
       <h1 class="text-3xl sm:text-4xl font-bold text-white mb-3 leading-tight">{title}</h1>
       {description && <p class="text-lg text-slate-300 mb-6 leading-relaxed">{description}</p>}
       {lastUpdated && (
-        <p class="text-xs text-slate-500 mb-8 border-b border-slate-800 pb-6">
+        <p class="text-xs text-slate-500 mb-8 border-b border-k2-border pb-6">
           Last updated: {lastUpdated}
         </p>
       )}
-
-      <!-- Article content -->
-      <div class="prose-affiliate">
+      <div>
         <slot />
       </div>
     </article>
 
-    <!-- Affiliate disclosure reminder -->
-    <div class="mt-12 p-4 bg-slate-900 border border-slate-700 rounded-lg text-sm text-slate-400">
-      <strong class="text-slate-300">Affiliate disclosure:</strong> As an Amazon Associate, KnowlEdge2 AI earns from qualifying purchases. Links on this page may be affiliate links. <a href="/about#disclosure" class="text-orange-400 hover:underline">Full disclosure policy →</a>
+    <!-- Affiliate disclosure -->
+    <div class="mt-12 p-4 bg-k2-card border border-k2-border rounded-lg text-sm text-slate-400">
+      <strong class="text-slate-300">Affiliate disclosure:</strong> As an Amazon Associate, KnowlEdge2 AI earns from qualifying purchases. Links on this page may be affiliate links. <a href="/about#disclosure" class="text-k2-light hover:underline">Full disclosure policy →</a>
     </div>
   </main>
 
